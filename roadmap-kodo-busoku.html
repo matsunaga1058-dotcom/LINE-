@@ -4,123 +4,102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  @page {
-    size: A4;
-    margin: 0;
-  }
-  * { box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
-    margin: 0;
-    font-family: "Noto Serif CJK JP", serif;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
     color: #2b2b28;
-    background: #e8e4dc;
+    background: #ddd9d1;
+    -webkit-text-size-adjust: 100%;
   }
-  .page-wrap {
-    max-width: 210mm;
-    margin: 0 auto;
-  }
+
+  /* ── ページ共通 ── */
   .page {
     width: 100%;
-    min-height: 297mm;
-    position: relative;
-    page-break-after: always;
+    max-width: 540px;
+    margin: 0 auto;
     background: #f6f3ec;
-    padding: 14mm 16mm 20mm;
+    padding: 48px 28px 56px;
+    position: relative;
+    border-bottom: 1px solid #d5cfc4;
   }
-  .page:last-child { page-break-after: auto; }
+  .page:last-child { border-bottom: none; }
 
-  @media print {
-    body { background: #f6f3ec; }
-    .page-wrap { max-width: none; }
-    .page {
-      width: 210mm;
-      height: 297mm;
-      min-height: unset;
-      overflow: hidden;
-    }
-  }
-
+  /* 四隅マーク */
   .corner-tl, .corner-br {
     position: absolute;
-    width: 9mm;
-    height: 9mm;
+    width: 20px;
+    height: 20px;
     border-color: #c9a24b;
   }
-  .corner-tl { top: 8mm; left: 8mm; border-top: 1px solid; border-left: 1px solid; }
-  .corner-br { bottom: 8mm; right: 8mm; border-bottom: 1px solid; border-right: 1px solid; }
+  .corner-tl { top: 14px; left: 14px; border-top: 1px solid; border-left: 1px solid; }
+  .corner-br { bottom: 14px; right: 14px; border-bottom: 1px solid; border-right: 1px solid; }
 
-  .page-num {
+  /* フッター */
+  .footer {
     position: absolute;
-    bottom: 10mm;
-    right: 16mm;
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 9pt;
+    bottom: 16px;
+    left: 28px;
+    right: 28px;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 10px;
     letter-spacing: 0.15em;
-    color: #9c9485;
-  }
-  .brand-tag {
-    position: absolute;
-    bottom: 10mm;
-    left: 16mm;
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 8pt;
-    letter-spacing: 0.2em;
     color: #b7ab8e;
   }
 
+  /* ── テキスト要素 ── */
   .eyebrow {
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 9pt;
-    letter-spacing: 0.25em;
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
     color: #c9a24b;
-    margin-bottom: 4mm;
+    margin-bottom: 10px;
   }
   .rule {
-    width: 20mm;
+    width: 36px;
     height: 1px;
     background: #c9a24b;
-    margin: 4mm 0 5mm;
+    margin: 10px 0 14px;
   }
-
   h1.page-title {
-    font-size: 21pt;
+    font-size: 22px;
     font-weight: 700;
     color: #1c2733;
-    line-height: 1.45;
-    margin: 0 0 3mm 0;
+    line-height: 1.5;
   }
   .body-text {
-    font-size: 11pt;
-    line-height: 1.95;
+    font-size: 14px;
+    line-height: 1.9;
     color: #3a3a36;
   }
-  .body-text p { margin: 0 0 3.5mm 0; }
-  .strong-line {
-    font-weight: 700;
-    color: #1c2733;
-  }
+  .body-text p { margin-bottom: 12px; }
+  .body-text p:last-child { margin-bottom: 0; }
+  .strong-line { font-weight: 700; color: #1c2733; }
 
   .tag-diagnosis {
     display: inline-block;
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 9pt;
-    letter-spacing: 0.15em;
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
     color: #f6f3ec;
     background: #1c2733;
-    padding: 1.5mm 4mm;
-    margin-bottom: 4mm;
+    padding: 4px 10px;
+    margin-bottom: 10px;
   }
 
+  /* チェックリスト */
   .check-list {
     list-style: none;
-    margin: 4mm 0;
-    padding: 0;
+    margin: 12px 0;
   }
   .check-list li {
-    font-size: 11.5pt;
-    line-height: 1.75;
-    margin-bottom: 3mm;
-    padding-left: 8mm;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    padding-left: 20px;
     position: relative;
     color: #2b2b28;
   }
@@ -131,71 +110,71 @@
     color: #c9a24b;
     font-weight: 700;
   }
+  .check-list li .sub {
+    display: block;
+    font-size: 11px;
+    color: #7a7a70;
+    margin-top: 2px;
+    line-height: 1.5;
+  }
 
-  .flow { margin: 4mm 0; font-size: 11.5pt; line-height: 1.4; }
+  /* フロー */
+  .flow { margin: 12px 0; }
   .flow-step {
-    padding: 3.5mm 6mm;
+    padding: 10px 14px;
     background: #ffffff;
     border-left: 3px solid #c9a24b;
-    margin-bottom: 0;
+    font-size: 14px;
     color: #2b2b28;
+    line-height: 1.5;
   }
   .flow-arrow {
     text-align: center;
-    color: #b7ab8e;
-    font-size: 10.5pt;
-    margin: 1mm 0;
+    color: #c9a24b;
+    font-size: 14px;
+    padding: 3px 0;
   }
 
+  /* コールアウト */
   .callout {
     background: #ffffff;
     border: 1px solid #ddd4bf;
-    padding: 5mm 7mm;
-    margin-top: 5mm;
-    font-size: 10.5pt;
-    line-height: 1.85;
+    padding: 14px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.8;
     color: #4a4a44;
   }
   .callout .label {
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 8.5pt;
-    letter-spacing: 0.2em;
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
     color: #c9a24b;
-    margin-bottom: 2mm;
+    margin-bottom: 6px;
     display: block;
   }
 
-  .week-badge {
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 10pt;
-    letter-spacing: 0.2em;
-    color: #c9a24b;
-    margin-bottom: 2mm;
-  }
-
+  /* タスクボックス */
   .task-box {
     background: #ffffff;
     border: 1px solid #ddd4bf;
-    padding: 6mm 7mm;
-    margin: 5mm 0;
+    padding: 14px 16px;
+    margin: 14px 0;
   }
   .task-box .box-label {
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 9pt;
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 10px;
     letter-spacing: 0.15em;
     color: #9c9485;
-    margin-bottom: 3mm;
+    margin-bottom: 8px;
   }
 
-  .checkbox-list {
-    list-style: none;
-    margin: 3mm 0;
-    padding: 0;
-  }
+  /* チェックボックスリスト */
+  .checkbox-list { list-style: none; margin: 8px 0; }
   .checkbox-list li {
-    font-size: 11.5pt;
-    line-height: 1.85;
-    padding-left: 8mm;
+    font-size: 14px;
+    line-height: 1.8;
+    padding-left: 20px;
     position: relative;
     color: #2b2b28;
   }
@@ -206,185 +185,230 @@
     color: #1c2733;
   }
 
-  /* 表紙・最終ページ共通（ダークネイビー背景） */
-  .cover-page, .final-page {
-    background: #1c2733;
-    color: #f6f3ec;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .cover-page .eyebrow, .final-page .eyebrow { color: #c9a24b; }
-  .cover-page h1, .final-page h1.page-title { color: #f6f3ec; }
-  .cover-page .corner-tl, .cover-page .corner-br,
-  .final-page .corner-tl, .final-page .corner-br { border-color: #c9a24b; }
-  .cover-page .page-num, .cover-page .brand-tag,
-  .final-page .page-num, .final-page .brand-tag { color: #8a8170; }
-
-  .cover-page .diag-tag {
-    font-family: "Noto Sans CJK JP", sans-serif;
-    font-size: 10pt;
+  /* WEEKバッジ */
+  .week-badge {
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 11px;
     letter-spacing: 0.2em;
-    color: #1c2733;
-    background: #c9a24b;
-    display: inline-block;
-    padding: 2mm 5mm;
-    margin-bottom: 4mm;
-  }
-  .cover-page .diag-result {
-    font-size: 19pt;
-    font-weight: 700;
-    color: #f6f3ec;
-    margin: 2mm 0 10mm 0;
-  }
-  .cover-page .cover-rule {
-    width: 28mm;
-    height: 1px;
-    background: #c9a24b;
-    margin: 8mm 0;
-  }
-  .cover-page .cover-message {
-    font-size: 12.5pt;
-    line-height: 2.0;
-    color: #e7e2d4;
-  }
-
-  .final-page .check-list { margin: 4mm 0 6mm; }
-  .final-page .check-list li { color: #f6f3ec; }
-  .final-page .check-list li::before { color: #c9a24b; }
-  .final-page .closing-line {
-    font-size: 15pt;
-    font-weight: 700;
-    line-height: 1.8;
-    color: #f6f3ec;
-    margin-top: 6mm;
-  }
-  .final-page .closing-sub {
-    font-size: 11pt;
-    line-height: 1.85;
-    color: #cfc6b0;
-    margin-top: 4mm;
-  }
-
-  /* WEEK ページ用：コンテンツ少ないため中央寄せで見栄え向上 */
-  .week-content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* P5 テーマページ */
-  .theme-center {
-    text-align: center;
-    padding: 10mm 6mm;
-    background: #1c2733;
-    margin: 6mm 0;
-  }
-  .theme-center .theme-main {
-    font-size: 22pt;
-    font-weight: 700;
     color: #c9a24b;
-    line-height: 1.5;
-    letter-spacing: 0.1em;
-  }
-  .theme-center .theme-sub {
-    font-size: 10pt;
-    color: #a09880;
-    letter-spacing: 0.2em;
-    margin-top: 4mm;
-    font-family: "Noto Sans CJK JP", sans-serif;
+    margin-bottom: 6px;
   }
 
   /* ステップインジケーター */
   .step-indicator {
     display: flex;
-    gap: 3mm;
-    margin-bottom: 4mm;
-    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
   }
   .step-dot {
-    width: 8mm;
-    height: 2mm;
+    width: 20px;
+    height: 3px;
     background: #c9a24b;
-    opacity: 0.3;
+    opacity: 0.25;
+    border-radius: 2px;
   }
-  .step-dot.active {
-    opacity: 1;
+  .step-dot.active { opacity: 1; }
+
+  /* ── 表紙・最終ページ ── */
+  .cover-page, .final-page {
+    background: #1c2733;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cover-page .eyebrow,
+  .final-page .eyebrow { color: #c9a24b; }
+  .cover-page h1.page-title,
+  .final-page h1.page-title { color: #f6f3ec; }
+  .cover-page .corner-tl, .cover-page .corner-br,
+  .final-page .corner-tl, .final-page .corner-br { border-color: #c9a24b; }
+  .cover-page .footer,
+  .final-page .footer { color: #6a6252; }
+
+  .cover-page .diag-tag {
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: #1c2733;
+    background: #c9a24b;
+    display: inline-block;
+    padding: 5px 12px;
+    margin-bottom: 8px;
+  }
+  .cover-page .diag-result {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f6f3ec;
+    margin: 4px 0 24px;
+    letter-spacing: 0.05em;
+  }
+  .cover-page .cover-rule {
+    width: 40px;
+    height: 1px;
+    background: #c9a24b;
+    margin: 20px 0;
+  }
+  .cover-page .cover-message {
+    font-size: 15px;
+    line-height: 2.0;
+    color: #e0dbd0;
+  }
+
+  /* テーマページ */
+  .theme-block {
+    background: #1c2733;
+    padding: 24px 20px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .theme-block .theme-main {
+    font-size: 24px;
+    font-weight: 700;
+    color: #c9a24b;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+  }
+  .theme-block .theme-sub {
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 10px;
+    color: #8a8070;
+    letter-spacing: 0.22em;
+    margin-top: 10px;
+  }
+
+  /* WEEKグリッド（2×2） */
+  .week-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .week-grid-item {
+    background: #ffffff;
+    border: 1px solid #ddd4bf;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .week-grid-item .wg-label {
+    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: #c9a24b;
+    margin-bottom: 6px;
+  }
+  .week-grid-item .wg-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1c2733;
+    line-height: 1.5;
+  }
+
+  /* まとめページ */
+  .final-page .check-list { margin: 14px 0 20px; }
+  .final-page .check-list li { color: #f6f3ec; }
+  .final-page .check-list li::before { color: #c9a24b; }
+  .closing-line {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.7;
+    color: #f6f3ec;
+    margin-top: 20px;
+  }
+  .closing-sub {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #b0a890;
+    margin-top: 14px;
+  }
+
+  /* 印刷時はA4に戻す */
+  @media print {
+    body { background: #f6f3ec; }
+    .page {
+      max-width: 210mm;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 14mm 16mm 20mm;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+    .cover-page, .final-page { min-height: 297mm; }
+    h1.page-title { font-size: 20pt; }
+    .body-text { font-size: 10.5pt; }
+    .check-list li { font-size: 10.5pt; }
+    .flow-step { font-size: 10.5pt; }
+    .callout { font-size: 10pt; }
   }
 </style>
 </head>
 <body>
-<div class="page-wrap">
 
 <!-- 表紙 -->
 <div class="page cover-page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">SALESBREAK ｜ 特別診断レポート</div>
   <h1 class="page-title">売れる行動改善<br>ロードマップ</h1>
   <div class="cover-rule"></div>
   <div class="diag-tag">診断結果</div>
   <div class="diag-result">行動不足型</div>
   <div class="cover-message">
-    考える時間より、<br>
-    動く時間を増やす。<br><br>
-    営業15年で学んだ<br>
-    再現性のある改善ステップを公開。
+    考える時間より、<br>動く時間を増やす。<br><br>
+    営業15年で学んだ<br>再現性のある改善ステップを公開。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">COVER</div>
+  <div class="footer"><span>SALESBREAK</span><span>COVER</span></div>
 </div>
 
 <!-- P1 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">DIAGNOSIS ｜ あなたの診断結果</div>
   <div class="tag-diagnosis">行動不足型営業</div>
-  <h1 class="page-title">成果が出ない原因は、<br>能力不足ではありません。</h1>
+  <h1 class="page-title">成果が出ない原因は<br>能力不足ではありません</h1>
   <div class="rule"></div>
   <div class="body-text">
-    <p class="strong-line">行動不足です。</p>
-    <p>知識はある。<br>
-    やるべきことも分かっている。<br>
-    しかし、行動できていない。</p>
-    <p class="strong-line">そこが課題です。</p>
-    <p>頭の中にある「やろう」が、体の行動に変わっていない状態です。<br>
-    これは意志の弱さではなく、行動の仕組みがまだ整っていないだけです。</p>
+    <p><span class="strong-line">行動不足です。</span></p>
+    <p>知識はある。やるべきことも分かっている。<br>しかし、行動できていない。</p>
+    <p><span class="strong-line">そこが課題です。</span></p>
+    <p>頭の中にある「やろう」が、体の行動に変わっていない状態です。意志の弱さではなく、行動の仕組みがまだ整っていないだけです。</p>
   </div>
   <div class="callout">
     <span class="label">POINT</span>
-    頭で分かっていることと、体が動くことは、別物です。<br>
-    このロードマップは、「分かる」を「動ける」に変えるための、30日間の実践プログラムです。
+    頭で分かっていることと、体が動くことは別物です。このロードマップは「分かる」を「動ける」に変えるための、30日間の実践プログラムです。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P1</div>
+  <div class="footer"><span>SALESBREAK</span><span>P1</span></div>
 </div>
 
 <!-- P2 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">CHARACTERISTICS ｜ このタイプの特徴</div>
-  <h1 class="page-title">行動不足型営業に<br>見られる5つの特徴</h1>
+  <h1 class="page-title">行動不足型に<br>見られる5つの特徴</h1>
   <div class="rule"></div>
   <ul class="check-list">
-    <li>完璧になってから動こうとする<br><span style="font-size:10pt; color:#6a6a64;">「もう少し準備してから」が口癖になっている</span></li>
-    <li>失敗を避けたい<br><span style="font-size:10pt; color:#6a6a64;">うまくいかないことへの恐れが行動を止めている</span></li>
-    <li>情報収集ばかりしている<br><span style="font-size:10pt; color:#6a6a64;">学ぶことで動いている気になっている</span></li>
-    <li>準備して満足してしまう<br><span style="font-size:10pt; color:#6a6a64;">資料を作ること自体が目的になっている</span></li>
-    <li>自信がついてから動こうとする<br><span style="font-size:10pt; color:#6a6a64;">自信は行動の後にしか来ないことを知らない</span></li>
+    <li>完璧になってから動こうとする<span class="sub">「もう少し準備してから」が口癖になっている</span></li>
+    <li>失敗を避けたい<span class="sub">うまくいかないことへの恐れが行動を止めている</span></li>
+    <li>情報収集ばかりしている<span class="sub">学ぶことで動いている気になっている</span></li>
+    <li>準備して満足してしまう<span class="sub">資料を作ること自体が目的になっている</span></li>
+    <li>自信がついてから動こうとする<span class="sub">自信は行動の後にしか来ないことを知らない</span></li>
   </ul>
   <div class="callout">
     <span class="label">POINT</span>
-    一つでも当てはまったなら、それは性格の問題ではありません。<br>
-    行動の「順番」が逆になっているだけです。自信は、行動の後についてきます。
+    一つでも当てはまったなら、性格の問題ではありません。行動の「順番」が逆になっているだけです。自信は、行動の後についてきます。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P2</div>
+  <div class="footer"><span>SALESBREAK</span><span>P2</span></div>
 </div>
 
 <!-- P3 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">RISK ｜ 放置するとどうなるか</div>
-  <h1 class="page-title">行動しないことが生む、<br>静かな悪循環</h1>
+  <h1 class="page-title">行動しないことが生む<br>静かな悪循環</h1>
   <div class="rule"></div>
   <div class="flow">
     <div class="flow-step">行動しない</div>
@@ -403,86 +427,77 @@
   </div>
   <div class="callout">
     <span class="label">POINT</span>
-    この流れは、一度始まると自然には止まりません。<br>
-    止めるには、どこかで強制的に「行動」を差し込む必要があります。<br>
-    それが、このロードマップの役割です。
+    この流れは一度始まると自然には止まりません。止めるには、どこかで強制的に「行動」を差し込む必要があります。それが、このロードマップの役割です。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P3</div>
+  <div class="footer"><span>SALESBREAK</span><span>P3</span></div>
 </div>
 
 <!-- P4 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">STORY ｜ 私も同じでした</div>
-  <h1 class="page-title">才能ではなく、<br>習慣が変わっただけ</h1>
+  <h1 class="page-title">才能ではなく<br>習慣が変わっただけ</h1>
   <div class="rule"></div>
   <div class="body-text">
-    <p>新人時代、全く成果が出ませんでした。<br>
-    同期は受注する。私は受注できない。<br>
-    上司から叱責を受ける毎日でした。</p>
+    <p>新人時代、全く成果が出ませんでした。同期は受注する。私は受注できない。上司から叱責を受ける毎日でした。</p>
     <p>営業が怖くなり、一度この世界から離れました。</p>
-    <p class="strong-line">でも、変わったのは才能ではありません。<br>考え方と行動習慣でした。</p>
-    <p>失敗しない方法を探すのではなく、行動しながら学ぶ。<br>
-    完璧を目指すのではなく、まず動く。<br>
-    その積み重ねが結果を変えました。</p>
-    <p>最初の1件を動かすのが、すべての始まりです。<br>
-    うまくやる必要はない。ただ、動く。それだけでいい。</p>
+    <p><span class="strong-line">でも、変わったのは才能ではありません。考え方と行動習慣でした。</span></p>
+    <p>失敗しない方法を探すのではなく、行動しながら学ぶ。完璧を目指すのではなく、まず動く。その積み重ねが結果を変えました。</p>
+    <p>最初の1件を動かすのが、すべての始まりです。うまくやる必要はない。ただ、動く。それだけでいい。</p>
   </div>
   <div class="callout">
     <span class="label">POINT</span>
-    15年経った今でも、完璧に準備できてから動いたことは一度もありません。<br>
-    動きながら整えてきただけです。
+    15年経った今でも、完璧に準備できてから動いたことは一度もありません。動きながら整えてきただけです。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P4</div>
+  <div class="footer"><span>SALESBREAK</span><span>P4</span></div>
 </div>
 
 <!-- P5 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">30 DAYS THEME ｜ 30日改善テーマ</div>
   <h1 class="page-title">30日間のテーマ</h1>
   <div class="rule"></div>
 
-  <div class="theme-center">
+  <div class="theme-block">
     <div class="theme-main">考える前に、動く</div>
     <div class="theme-sub">30 DAYS ACTION THEME</div>
   </div>
 
-  <div class="body-text" style="margin-top:5mm;">
-    <p>行動不足型は、気合いで変わらない。<br>
-    小さな行動習慣で変わる。</p>
+  <div class="body-text" style="margin-top:16px;">
+    <p>行動不足型は、気合いで変わらない。小さな行動習慣で変わる。</p>
     <p>これから4週間、1つずつ行動のハードルを下げていきます。</p>
-    <p class="strong-line">難しいことは何もしません。<br>「今日もやった」を積み重ねるだけです。</p>
+    <p><span class="strong-line">難しいことは何もしません。「今日もやった」を積み重ねるだけです。</span></p>
   </div>
 
-  <div style="display:flex; gap:3mm; margin-top:6mm;">
-    <div style="flex:1; background:#ffffff; border:1px solid #ddd4bf; padding:4mm 5mm; text-align:center;">
-      <div style="font-family:'Noto Sans CJK JP',sans-serif; font-size:8pt; color:#c9a24b; letter-spacing:0.15em; margin-bottom:2mm;">WEEK 1</div>
-      <div style="font-size:10pt; color:#1c2733; font-weight:700;">ハードルを<br>下げる</div>
+  <div class="week-grid">
+    <div class="week-grid-item">
+      <div class="wg-label">WEEK 1</div>
+      <div class="wg-title">ハードルを<br>下げる</div>
     </div>
-    <div style="flex:1; background:#ffffff; border:1px solid #ddd4bf; padding:4mm 5mm; text-align:center;">
-      <div style="font-family:'Noto Sans CJK JP',sans-serif; font-size:8pt; color:#c9a24b; letter-spacing:0.15em; margin-bottom:2mm;">WEEK 2</div>
-      <div style="font-size:10pt; color:#1c2733; font-weight:700;">振り返りを<br>習慣化</div>
+    <div class="week-grid-item">
+      <div class="wg-label">WEEK 2</div>
+      <div class="wg-title">振り返りを<br>習慣化</div>
     </div>
-    <div style="flex:1; background:#ffffff; border:1px solid #ddd4bf; padding:4mm 5mm; text-align:center;">
-      <div style="font-family:'Noto Sans CJK JP',sans-serif; font-size:8pt; color:#c9a24b; letter-spacing:0.15em; margin-bottom:2mm;">WEEK 3</div>
-      <div style="font-size:10pt; color:#1c2733; font-weight:700;">行動量を<br>増やす</div>
+    <div class="week-grid-item">
+      <div class="wg-label">WEEK 3</div>
+      <div class="wg-title">行動量を<br>増やす</div>
     </div>
-    <div style="flex:1; background:#ffffff; border:1px solid #ddd4bf; padding:4mm 5mm; text-align:center;">
-      <div style="font-family:'Noto Sans CJK JP',sans-serif; font-size:8pt; color:#c9a24b; letter-spacing:0.15em; margin-bottom:2mm;">WEEK 4</div>
-      <div style="font-size:10pt; color:#1c2733; font-weight:700;">行動を<br>見える化</div>
+    <div class="week-grid-item">
+      <div class="wg-label">WEEK 4</div>
+      <div class="wg-title">行動を<br>見える化</div>
     </div>
   </div>
 
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P5</div>
+  <div class="footer"><span>SALESBREAK</span><span>P5</span></div>
 </div>
 
 <!-- P6 WEEK1 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">STEP 1 OF 4</div>
   <div class="step-indicator">
     <div class="step-dot active"></div>
@@ -491,9 +506,8 @@
     <div class="step-dot"></div>
   </div>
   <div class="week-badge">WEEK 1</div>
-  <h1 class="page-title">行動のハードルを下げる</h1>
+  <h1 class="page-title">行動のハードルを<br>下げる</h1>
   <div class="rule"></div>
-
   <div class="task-box">
     <div class="box-label">毎日やること（3つだけ）</div>
     <ul class="check-list" style="margin:0;">
@@ -502,26 +516,22 @@
       <li>商談を1件振り返る</li>
     </ul>
   </div>
-
-  <div class="body-text" style="margin-top:4mm;">
-    <p class="strong-line">目的：動くことを当たり前にする</p>
-    <p>最初の1週間は「量」も「質」も関係ない。<br>
-    ただ、動いた実績をつくることだけに集中する。</p>
+  <div class="body-text" style="margin-top:14px;">
+    <p><span class="strong-line">目的：動くことを当たり前にする</span></p>
+    <p>最初の1週間は「量」も「質」も関係ない。動いた実績をつくることだけに集中する。</p>
     <p>「今日もやった」の積み重ねが、来週の自分を変える。</p>
   </div>
-
   <div class="callout">
     <span class="label">POINT</span>
-    「うまくやる」必要はありません。「やる」ことだけに集中してください。<br>
-    質を気にすると、また手が止まります。
+    「うまくやる」必要はありません。「やる」ことだけに集中してください。質を気にすると、また手が止まります。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P6</div>
+  <div class="footer"><span>SALESBREAK</span><span>P6</span></div>
 </div>
 
 <!-- P7 WEEK2 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">STEP 2 OF 4</div>
   <div class="step-indicator">
     <div class="step-dot"></div>
@@ -530,9 +540,8 @@
     <div class="step-dot"></div>
   </div>
   <div class="week-badge">WEEK 2</div>
-  <h1 class="page-title">振り返りを習慣化する</h1>
+  <h1 class="page-title">振り返りを<br>習慣化する</h1>
   <div class="rule"></div>
-
   <div class="task-box">
     <div class="box-label">商談後3分でやること</div>
     <ul class="check-list" style="margin:0;">
@@ -541,27 +550,22 @@
       <li>次回やること（1つだけ）</li>
     </ul>
   </div>
-
-  <div class="body-text" style="margin-top:4mm;">
-    <p class="strong-line">目的：経験を学びに変える</p>
-    <p>行動するだけでは経験にならない。<br>
-    振り返ることで初めて、経験が「学び」に変わる。</p>
-    <p>3分でいい。スマホのメモでいい。<br>
-    続けることが最優先。</p>
+  <div class="body-text" style="margin-top:14px;">
+    <p><span class="strong-line">目的：経験を学びに変える</span></p>
+    <p>行動するだけでは経験にならない。振り返ることで初めて、経験が「学び」に変わる。</p>
+    <p>3分でいい。スマホのメモでいい。続けることが最優先。</p>
   </div>
-
   <div class="callout">
     <span class="label">POINT</span>
-    振り返りがないと、同じ失敗を何度も繰り返します。<br>
-    形より「続けること」を優先してください。
+    振り返りがないと、同じ失敗を何度も繰り返します。形より「続けること」を優先してください。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P7</div>
+  <div class="footer"><span>SALESBREAK</span><span>P7</span></div>
 </div>
 
 <!-- P8 WEEK3 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">STEP 3 OF 4</div>
   <div class="step-indicator">
     <div class="step-dot"></div>
@@ -572,7 +576,6 @@
   <div class="week-badge">WEEK 3</div>
   <h1 class="page-title">行動量を増やす</h1>
   <div class="rule"></div>
-
   <div class="task-box">
     <div class="box-label">毎日やること</div>
     <ul class="check-list" style="margin:0;">
@@ -581,26 +584,22 @@
       <li>フォロー 1件</li>
     </ul>
   </div>
-
-  <div class="body-text" style="margin-top:4mm;">
-    <p class="strong-line">量を増やす。質は後からついてくる。</p>
-    <p>Week1・2で「動く習慣」はできた。<br>
-    Week3は、その量を増やすだけでいい。</p>
-    <p>この段階で「質」を求めると、また動けなくなる。<br>
-    質は、Week1・2の振り返りが自動で上げてくれる。</p>
+  <div class="body-text" style="margin-top:14px;">
+    <p><span class="strong-line">量を増やす。質は後からついてくる。</span></p>
+    <p>Week1・2で「動く習慣」はできた。Week3は、その量を増やすだけでいい。</p>
+    <p>この段階で「質」を求めると、また動けなくなる。質は、Week1・2の振り返りが自動で上げてくれる。</p>
   </div>
-
   <div class="callout">
     <span class="label">POINT</span>
     経験値は量から生まれます。まずは数をこなすことに集中してください。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P8</div>
+  <div class="footer"><span>SALESBREAK</span><span>P8</span></div>
 </div>
 
 <!-- P9 WEEK4 -->
 <div class="page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">STEP 4 OF 4</div>
   <div class="step-indicator">
     <div class="step-dot"></div>
@@ -611,7 +610,6 @@
   <div class="week-badge">WEEK 4</div>
   <h1 class="page-title">行動を見える化する</h1>
   <div class="rule"></div>
-
   <div class="task-box">
     <div class="box-label">毎日記録すること</div>
     <ul class="checkbox-list" style="margin:0;">
@@ -621,27 +619,22 @@
       <li>フォロー（　　件）</li>
     </ul>
   </div>
-
-  <div class="body-text" style="margin-top:4mm;">
-    <p class="strong-line">数字で管理する。感覚で管理しない。</p>
-    <p>「今日は頑張った気がする」では、成長を判断できない。<br>
-    数字にして初めて、自分の行動量が見えてくる。</p>
-    <p>Week4を終えた頃、30日前の自分とは<br>
-    明らかに違う動き方ができているはずです。</p>
+  <div class="body-text" style="margin-top:14px;">
+    <p><span class="strong-line">数字で管理する。感覚で管理しない。</span></p>
+    <p>「今日は頑張った気がする」では、成長を判断できない。数字にして初めて、自分の行動量が見えてくる。</p>
+    <p>Week4を終えた頃、30日前の自分とは明らかに違う動き方ができているはずです。</p>
   </div>
-
   <div class="callout">
     <span class="label">POINT</span>
-    チェックの数が、あなたの行動量を客観的に教えてくれます。<br>
-    記録が習慣になれば、成長も習慣になります。
+    チェックの数が、あなたの行動量を客観的に教えてくれます。記録が習慣になれば、成長も習慣になります。
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P9</div>
+  <div class="footer"><span>SALESBREAK</span><span>P9</span></div>
 </div>
 
 <!-- P10 まとめ -->
 <div class="page final-page">
-  <div class="corner-tl"></div><div class="corner-br"></div>
+  <div class="corner-tl"></div>
+  <div class="corner-br"></div>
   <div class="eyebrow">SUMMARY ｜ まとめ</div>
   <h1 class="page-title">明日からやること</h1>
   <div class="rule"></div>
@@ -651,19 +644,15 @@
     <li>行動記録をつける</li>
   </ul>
   <div class="closing-line">
-    営業は才能ではない。<br>
-    習慣で変わる。
+    営業は才能ではない。<br>習慣で変わる。
   </div>
   <div class="closing-sub">
     小さな行動が未来を変える。<br>
-    このページを閉じた後、何か1つだけでも今日中に行動してください。<br>
-    その1件が、30日後のあなたを変えます。<br><br>
+    このページを閉じた後、何か1つだけでも今日中に行動してください。その1件が、30日後のあなたを変えます。<br><br>
     まっつん（SALESBREAK）
   </div>
-  <div class="brand-tag">SALESBREAK</div>
-  <div class="page-num">P10</div>
+  <div class="footer"><span>SALESBREAK</span><span>P10</span></div>
 </div>
 
-</div><!-- /.page-wrap -->
 </body>
 </html>
