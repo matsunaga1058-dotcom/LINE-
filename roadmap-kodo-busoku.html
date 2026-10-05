@@ -2,656 +2,1090 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>売れる行動改善ロードマップ｜SALESBREAK</title>
 <style>
-  @page { size: A4; margin: 0; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
-    color: #2b2b28;
-    background: #ddd9d1;
-    -webkit-text-size-adjust: 100%;
-  }
+:root {
+  --navy: #1c2733;
+  --gold: #c9a24b;
+  --gold-light: #e8c96a;
+  --cream: #f6f3ec;
+  --cream-dark: #ede9e0;
+  --text: #2b2b28;
+  --text-mid: #4a4a44;
+  --text-soft: #7a7a70;
+  --border: #d8d0bf;
+  --white: #ffffff;
+}
 
-  /* ── ページ共通 ── */
-  .page {
-    width: 100%;
-    max-width: 540px;
-    margin: 0 auto;
-    background: #f6f3ec;
-    padding: 48px 28px 56px;
-    position: relative;
-    border-bottom: 1px solid #d5cfc4;
-  }
-  .page:last-child { border-bottom: none; }
+html { background: var(--navy); }
 
-  /* 四隅マーク */
-  .corner-tl, .corner-br {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: #c9a24b;
-  }
-  .corner-tl { top: 14px; left: 14px; border-top: 1px solid; border-left: 1px solid; }
-  .corner-br { bottom: 14px; right: 14px; border-bottom: 1px solid; border-right: 1px solid; }
+body {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Times New Roman", serif;
+  color: var(--text);
+  background: var(--navy);
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
-  /* フッター */
-  .footer {
-    position: absolute;
-    bottom: 16px;
-    left: 28px;
-    right: 28px;
-    display: flex;
-    justify-content: space-between;
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: #b7ab8e;
-  }
+/* ━━━━━━━━━━━━━━━━━━━
+   表紙
+━━━━━━━━━━━━━━━━━━━ */
+.cover {
+  background: var(--navy);
+  width: 100%;
+  padding: 72px 32px 64px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100svh;
+}
 
-  /* ── テキスト要素 ── */
-  .eyebrow {
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    color: #c9a24b;
-    margin-bottom: 10px;
-  }
-  .rule {
-    width: 36px;
-    height: 1px;
-    background: #c9a24b;
-    margin: 10px 0 14px;
-  }
-  h1.page-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1c2733;
-    line-height: 1.5;
-  }
-  .body-text {
-    font-size: 14px;
-    line-height: 1.9;
-    color: #3a3a36;
-  }
-  .body-text p { margin-bottom: 12px; }
-  .body-text p:last-child { margin-bottom: 0; }
-  .strong-line { font-weight: 700; color: #1c2733; }
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 20px;
+  width: 28px; height: 28px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 24px; right: 20px;
+  width: 28px; height: 28px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+}
 
-  .tag-diagnosis {
-    display: inline-block;
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: #f6f3ec;
-    background: #1c2733;
-    padding: 4px 10px;
-    margin-bottom: 10px;
-  }
+.cover-eyebrow {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
 
-  /* チェックリスト */
-  .check-list {
-    list-style: none;
-    margin: 12px 0;
-  }
-  .check-list li {
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-    color: #2b2b28;
-  }
-  .check-list li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: #c9a24b;
-    font-weight: 700;
-  }
-  .check-list li .sub {
-    display: block;
-    font-size: 11px;
-    color: #7a7a70;
-    margin-top: 2px;
-    line-height: 1.5;
-  }
+.cover-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.4;
+  margin-bottom: 28px;
+  letter-spacing: 0.02em;
+}
 
-  /* フロー */
-  .flow { margin: 12px 0; }
-  .flow-step {
-    padding: 10px 14px;
-    background: #ffffff;
-    border-left: 3px solid #c9a24b;
-    font-size: 14px;
-    color: #2b2b28;
-    line-height: 1.5;
-  }
-  .flow-arrow {
-    text-align: center;
-    color: #c9a24b;
-    font-size: 14px;
-    padding: 3px 0;
-  }
+.cover-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 28px;
+}
 
-  /* コールアウト */
-  .callout {
-    background: #ffffff;
-    border: 1px solid #ddd4bf;
-    padding: 14px 16px;
-    margin-top: 16px;
-    font-size: 13px;
-    line-height: 1.8;
-    color: #4a4a44;
-  }
-  .callout .label {
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.22em;
-    color: #c9a24b;
-    margin-bottom: 6px;
-    display: block;
-  }
+.cover-diag-label {
+  display: inline-block;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 5px 14px;
+  margin-bottom: 12px;
+}
 
-  /* タスクボックス */
-  .task-box {
-    background: #ffffff;
-    border: 1px solid #ddd4bf;
-    padding: 14px 16px;
-    margin: 14px 0;
-  }
-  .task-box .box-label {
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: #9c9485;
-    margin-bottom: 8px;
-  }
+.cover-diag-type {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+  margin-bottom: 32px;
+}
 
-  /* チェックボックスリスト */
-  .checkbox-list { list-style: none; margin: 8px 0; }
-  .checkbox-list li {
-    font-size: 14px;
-    line-height: 1.8;
-    padding-left: 20px;
-    position: relative;
-    color: #2b2b28;
-  }
-  .checkbox-list li::before {
-    content: "□";
-    position: absolute;
-    left: 0;
-    color: #1c2733;
-  }
+.cover-message {
+  font-size: 16px;
+  line-height: 2.0;
+  color: #c8c2b2;
+}
 
-  /* WEEKバッジ */
-  .week-badge {
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: #c9a24b;
-    margin-bottom: 6px;
-  }
+.cover-footer {
+  margin-top: 48px;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: #5a5448;
+}
 
-  /* ステップインジケーター */
-  .step-indicator {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 10px;
-  }
-  .step-dot {
-    width: 20px;
-    height: 3px;
-    background: #c9a24b;
-    opacity: 0.25;
-    border-radius: 2px;
-  }
-  .step-dot.active { opacity: 1; }
+/* ━━━━━━━━━━━━━━━━━━━
+   コンテンツセクション共通
+━━━━━━━━━━━━━━━━━━━ */
+.section {
+  background: var(--cream);
+  width: 100%;
+  padding: 52px 28px 64px;
+  position: relative;
+  border-top: 4px solid var(--cream-dark);
+}
 
-  /* ── 表紙・最終ページ ── */
-  .cover-page, .final-page {
-    background: #1c2733;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .cover-page .eyebrow,
-  .final-page .eyebrow { color: #c9a24b; }
-  .cover-page h1.page-title,
-  .final-page h1.page-title { color: #f6f3ec; }
-  .cover-page .corner-tl, .cover-page .corner-br,
-  .final-page .corner-tl, .final-page .corner-br { border-color: #c9a24b; }
-  .cover-page .footer,
-  .final-page .footer { color: #6a6252; }
+.section:first-of-type { border-top: none; }
 
-  .cover-page .diag-tag {
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: #1c2733;
-    background: #c9a24b;
-    display: inline-block;
-    padding: 5px 12px;
-    margin-bottom: 8px;
-  }
-  .cover-page .diag-result {
-    font-size: 26px;
-    font-weight: 700;
-    color: #f6f3ec;
-    margin: 4px 0 24px;
-    letter-spacing: 0.05em;
-  }
-  .cover-page .cover-rule {
-    width: 40px;
-    height: 1px;
-    background: #c9a24b;
-    margin: 20px 0;
-  }
-  .cover-page .cover-message {
-    font-size: 15px;
-    line-height: 2.0;
-    color: #e0dbd0;
-  }
+.section-eyebrow {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
 
-  /* テーマページ */
-  .theme-block {
-    background: #1c2733;
-    padding: 24px 20px;
-    margin: 16px 0;
-    text-align: center;
-  }
-  .theme-block .theme-main {
-    font-size: 24px;
-    font-weight: 700;
-    color: #c9a24b;
-    line-height: 1.4;
-    letter-spacing: 0.08em;
-  }
-  .theme-block .theme-sub {
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 10px;
-    color: #8a8070;
-    letter-spacing: 0.22em;
-    margin-top: 10px;
-  }
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.5;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
 
-  /* WEEKグリッド（2×2） */
-  .week-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 16px;
-  }
-  .week-grid-item {
-    background: #ffffff;
-    border: 1px solid #ddd4bf;
-    padding: 12px 10px;
-    text-align: center;
-  }
-  .week-grid-item .wg-label {
-    font-family: "Hiragino Sans", "Helvetica Neue", sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    color: #c9a24b;
-    margin-bottom: 6px;
-  }
-  .week-grid-item .wg-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: #1c2733;
-    line-height: 1.5;
-  }
+.section-rule {
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+  margin: 16px 0 20px;
+}
 
-  /* まとめページ */
-  .final-page .check-list { margin: 14px 0 20px; }
-  .final-page .check-list li { color: #f6f3ec; }
-  .final-page .check-list li::before { color: #c9a24b; }
-  .closing-line {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.7;
-    color: #f6f3ec;
-    margin-top: 20px;
-  }
-  .closing-sub {
-    font-size: 13px;
-    line-height: 1.9;
-    color: #b0a890;
-    margin-top: 14px;
-  }
+.body-text {
+  font-size: 15px;
+  line-height: 2.0;
+  color: var(--text-mid);
+}
 
-  /* 印刷時はA4に戻す */
-  @media print {
-    body { background: #f6f3ec; }
-    .page {
-      max-width: 210mm;
-      width: 210mm;
-      min-height: 297mm;
-      padding: 14mm 16mm 20mm;
-      border-bottom: none;
-      page-break-after: always;
-    }
-    .page:last-child { page-break-after: auto; }
-    .cover-page, .final-page { min-height: 297mm; }
-    h1.page-title { font-size: 20pt; }
-    .body-text { font-size: 10.5pt; }
-    .check-list li { font-size: 10.5pt; }
-    .flow-step { font-size: 10.5pt; }
-    .callout { font-size: 10pt; }
-  }
+.body-text + .body-text { margin-top: 12px; }
+
+.text-block { margin-bottom: 16px; }
+.text-block:last-child { margin-bottom: 0; }
+
+.strong { font-weight: 700; color: var(--navy); }
+
+/* ページ番号 */
+.page-label {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--border);
+  margin-bottom: 20px;
+}
+
+/* タグ */
+.tag {
+  display: inline-block;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+  background: var(--navy);
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+
+/* POINT ボックス */
+.point-box {
+  background: var(--white);
+  border-left: 3px solid var(--gold);
+  padding: 18px 20px;
+  margin-top: 24px;
+}
+
+.point-label {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.point-text {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--text-mid);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   チェックリスト
+━━━━━━━━━━━━━━━━━━━ */
+.check-list {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.check-list li {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.check-list li:last-child { margin-bottom: 0; }
+
+.check-icon {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.check-content { flex: 1; }
+
+.check-main {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.5;
+  margin-bottom: 3px;
+}
+
+.check-sub {
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   悪循環フロー
+━━━━━━━━━━━━━━━━━━━ */
+.flow-list { margin: 20px 0; }
+
+.flow-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.flow-num {
+  width: 28px;
+  height: 28px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.flow-text {
+  font-size: 15px;
+  color: var(--navy);
+  font-weight: 500;
+  line-height: 1.4;
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--white);
+  border-radius: 2px;
+}
+
+.flow-arrow {
+  text-align: center;
+  padding: 2px 0 2px 42px;
+  color: var(--gold);
+  font-size: 18px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   テーマブロック (P5)
+━━━━━━━━━━━━━━━━━━━ */
+.theme-block {
+  background: var(--navy);
+  padding: 36px 24px;
+  margin: 24px 0;
+  text-align: center;
+  position: relative;
+}
+
+.theme-block::before {
+  content: '';
+  position: absolute;
+  top: 12px; left: 12px;
+  width: 16px; height: 16px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.theme-block::after {
+  content: '';
+  position: absolute;
+  bottom: 12px; right: 12px;
+  width: 16px; height: 16px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.theme-en {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: #6a5f4a;
+  margin-bottom: 14px;
+}
+
+.theme-main {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+}
+
+/* 週グリッド */
+.week-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.week-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.week-card-num {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.week-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   WEEKセクション
+━━━━━━━━━━━━━━━━━━━ */
+.week-section { background: var(--cream); }
+
+.step-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.step-pip {
+  height: 3px;
+  flex: 1;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.step-pip.active { background: var(--gold); }
+
+.week-badge {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+/* タスクカード */
+.task-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 20px 20px 16px;
+  margin: 20px 0;
+}
+
+.task-card-label {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-soft);
+  margin-bottom: 12px;
+}
+
+.task-list { list-style: none; }
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ede9e0;
+  font-size: 15px;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.task-list li:last-child { border-bottom: none; }
+
+.task-list li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* チェックボックスリスト（WEEK4） */
+.record-list { list-style: none; }
+
+.record-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ede9e0;
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.record-list li:last-child { border-bottom: none; }
+
+.record-list li::before {
+  content: '□';
+  color: var(--navy);
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.record-count {
+  margin-left: auto;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  color: var(--border);
+  letter-spacing: 0.05em;
+}
+
+/* 目的バッジ */
+.purpose-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--cream-dark);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.purpose-label {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.purpose-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.4;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   まとめページ
+━━━━━━━━━━━━━━━━━━━ */
+.final-section {
+  background: var(--navy);
+  width: 100%;
+  padding: 56px 28px 72px;
+  position: relative;
+}
+
+.final-section::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 20px;
+  width: 24px; height: 24px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.final-section::after {
+  content: '';
+  position: absolute;
+  bottom: 24px; right: 20px;
+  width: 24px; height: 24px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.final-eyebrow {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.final-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.final-rule {
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+  margin: 16px 0 20px;
+}
+
+.final-check-list { list-style: none; margin-bottom: 36px; }
+
+.final-check-list li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #2e3d4e;
+  font-size: 16px;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.final-check-list li:first-child { border-top: 1px solid #2e3d4e; }
+
+.final-check-list li::before {
+  content: '✓';
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.closing-main {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  border-left: 3px solid var(--gold);
+  padding-left: 18px;
+}
+
+.closing-body {
+  font-size: 14px;
+  line-height: 2.0;
+  color: #9a9080;
+  margin-bottom: 32px;
+}
+
+.closing-sig {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: #6a5f4a;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   区切り帯
+━━━━━━━━━━━━━━━━━━━ */
+.divider-band {
+  background: var(--navy);
+  width: 100%;
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divider-brand {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: #7a6e5e;
+}
+
+.divider-page {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #7a6e5e;
+}
 </style>
 </head>
 <body>
 
-<!-- 表紙 -->
-<div class="page cover-page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">SALESBREAK ｜ 特別診断レポート</div>
-  <h1 class="page-title">売れる行動改善<br>ロードマップ</h1>
+<!-- ═══════════════ 表紙 ═══════════════ -->
+<div class="cover">
+  <div class="cover-eyebrow">SALESBREAK ｜ 特別診断レポート</div>
+  <div class="cover-title">売れる行動改善<br>ロードマップ</div>
   <div class="cover-rule"></div>
-  <div class="diag-tag">診断結果</div>
-  <div class="diag-result">行動不足型</div>
+  <div class="cover-diag-label">診断結果</div>
+  <div class="cover-diag-type">行動不足型</div>
   <div class="cover-message">
-    考える時間より、<br>動く時間を増やす。<br><br>
-    営業15年で学んだ<br>再現性のある改善ステップを公開。
+    考える時間より、<br>動く時間を増やす。<br><br>営業15年で学んだ<br>再現性のある改善ステップを公開。
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>COVER</span></div>
+  <div class="cover-footer">SALESBREAK &nbsp;／&nbsp; COVER</div>
 </div>
 
-<!-- P1 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">DIAGNOSIS ｜ あなたの診断結果</div>
-  <div class="tag-diagnosis">行動不足型営業</div>
-  <h1 class="page-title">成果が出ない原因は<br>能力不足ではありません</h1>
-  <div class="rule"></div>
-  <div class="body-text">
-    <p><span class="strong-line">行動不足です。</span></p>
-    <p>知識はある。やるべきことも分かっている。<br>しかし、行動できていない。</p>
-    <p><span class="strong-line">そこが課題です。</span></p>
-    <p>頭の中にある「やろう」が、体の行動に変わっていない状態です。意志の弱さではなく、行動の仕組みがまだ整っていないだけです。</p>
-  </div>
-  <div class="callout">
-    <span class="label">POINT</span>
-    頭で分かっていることと、体が動くことは別物です。このロードマップは「分かる」を「動ける」に変えるための、30日間の実践プログラムです。
-  </div>
-  <div class="footer"><span>SALESBREAK</span><span>P1</span></div>
+<!-- ═══════════════ P1 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P1</span>
 </div>
 
-<!-- P2 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">CHARACTERISTICS ｜ このタイプの特徴</div>
-  <h1 class="page-title">行動不足型に<br>見られる5つの特徴</h1>
-  <div class="rule"></div>
+<div class="section">
+  <div class="section-eyebrow">DIAGNOSIS ｜ あなたの診断結果</div>
+  <div class="tag">行動不足型営業</div>
+  <div class="section-title">成果が出ない原因は<br>能力不足ではありません</div>
+  <div class="section-rule"></div>
+
+  <div class="text-block body-text">
+    <span class="strong">行動不足です。</span>
+  </div>
+  <div class="text-block body-text">
+    知識はある。やるべきことも分かっている。しかし、行動できていない。
+  </div>
+  <div class="text-block body-text">
+    <span class="strong">そこが課題です。</span>
+  </div>
+  <div class="text-block body-text">
+    頭の中にある「やろう」が、体の行動に変わっていない状態です。これは意志の弱さではなく、行動の仕組みがまだ整っていないだけです。
+  </div>
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      頭で分かっていることと、体が動くことは別物です。<br>
+      このロードマップは「分かる」を「動ける」に変えるための、30日間の実践プログラムです。
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P2 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P2</span>
+</div>
+
+<div class="section">
+  <div class="section-eyebrow">CHARACTERISTICS ｜ このタイプの特徴</div>
+  <div class="section-title">行動不足型に見られる<br>5つの特徴</div>
+  <div class="section-rule"></div>
+
   <ul class="check-list">
-    <li>完璧になってから動こうとする<span class="sub">「もう少し準備してから」が口癖になっている</span></li>
-    <li>失敗を避けたい<span class="sub">うまくいかないことへの恐れが行動を止めている</span></li>
-    <li>情報収集ばかりしている<span class="sub">学ぶことで動いている気になっている</span></li>
-    <li>準備して満足してしまう<span class="sub">資料を作ること自体が目的になっている</span></li>
-    <li>自信がついてから動こうとする<span class="sub">自信は行動の後にしか来ないことを知らない</span></li>
+    <li>
+      <span class="check-icon">✓</span>
+      <div class="check-content">
+        <div class="check-main">完璧になってから動こうとする</div>
+        <div class="check-sub">「もう少し準備してから」が口癖になっている</div>
+      </div>
+    </li>
+    <li>
+      <span class="check-icon">✓</span>
+      <div class="check-content">
+        <div class="check-main">失敗を避けたい</div>
+        <div class="check-sub">うまくいかないことへの恐れが行動を止めている</div>
+      </div>
+    </li>
+    <li>
+      <span class="check-icon">✓</span>
+      <div class="check-content">
+        <div class="check-main">情報収集ばかりしている</div>
+        <div class="check-sub">学ぶことで動いている気になっている</div>
+      </div>
+    </li>
+    <li>
+      <span class="check-icon">✓</span>
+      <div class="check-content">
+        <div class="check-main">準備して満足してしまう</div>
+        <div class="check-sub">資料を作ること自体が目的になっている</div>
+      </div>
+    </li>
+    <li>
+      <span class="check-icon">✓</span>
+      <div class="check-content">
+        <div class="check-main">自信がついてから動こうとする</div>
+        <div class="check-sub">自信は行動の後にしか来ないことを知らない</div>
+      </div>
+    </li>
   </ul>
-  <div class="callout">
-    <span class="label">POINT</span>
-    一つでも当てはまったなら、性格の問題ではありません。行動の「順番」が逆になっているだけです。自信は、行動の後についてきます。
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      一つでも当てはまったなら、性格の問題ではありません。行動の「順番」が逆になっているだけです。<br><br>
+      自信は、行動の後についてきます。行動の前には来ません。
+    </div>
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>P2</span></div>
 </div>
 
-<!-- P3 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">RISK ｜ 放置するとどうなるか</div>
-  <h1 class="page-title">行動しないことが生む<br>静かな悪循環</h1>
-  <div class="rule"></div>
-  <div class="flow">
-    <div class="flow-step">行動しない</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">経験が増えない</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">成果が出ない</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">成功体験が積み上がらない</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">自信を失う</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">挑戦できなくなる</div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-step">成長が止まる</div>
-  </div>
-  <div class="callout">
-    <span class="label">POINT</span>
-    この流れは一度始まると自然には止まりません。止めるには、どこかで強制的に「行動」を差し込む必要があります。それが、このロードマップの役割です。
-  </div>
-  <div class="footer"><span>SALESBREAK</span><span>P3</span></div>
+<!-- ═══════════════ P3 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P3</span>
 </div>
 
-<!-- P4 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">STORY ｜ 私も同じでした</div>
-  <h1 class="page-title">才能ではなく<br>習慣が変わっただけ</h1>
-  <div class="rule"></div>
-  <div class="body-text">
-    <p>新人時代、全く成果が出ませんでした。同期は受注する。私は受注できない。上司から叱責を受ける毎日でした。</p>
-    <p>営業が怖くなり、一度この世界から離れました。</p>
-    <p><span class="strong-line">でも、変わったのは才能ではありません。考え方と行動習慣でした。</span></p>
-    <p>失敗しない方法を探すのではなく、行動しながら学ぶ。完璧を目指すのではなく、まず動く。その積み重ねが結果を変えました。</p>
-    <p>最初の1件を動かすのが、すべての始まりです。うまくやる必要はない。ただ、動く。それだけでいい。</p>
+<div class="section">
+  <div class="section-eyebrow">RISK ｜ 放置するとどうなるか</div>
+  <div class="section-title">行動しないことが生む<br>静かな悪循環</div>
+  <div class="section-rule"></div>
+
+  <div class="flow-list">
+    <div class="flow-item">
+      <div class="flow-num">1</div>
+      <div class="flow-text">行動しない</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item">
+      <div class="flow-num">2</div>
+      <div class="flow-text">経験が増えない</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item">
+      <div class="flow-num">3</div>
+      <div class="flow-text">成果が出ない</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item">
+      <div class="flow-num">4</div>
+      <div class="flow-text">成功体験が積み上がらない</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item">
+      <div class="flow-num">5</div>
+      <div class="flow-text">自信を失う</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item">
+      <div class="flow-num">6</div>
+      <div class="flow-text">挑戦できなくなる</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-item">
+      <div class="flow-num">7</div>
+      <div class="flow-text">成長が止まる</div>
+    </div>
   </div>
-  <div class="callout">
-    <span class="label">POINT</span>
-    15年経った今でも、完璧に準備できてから動いたことは一度もありません。動きながら整えてきただけです。
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      この流れは一度始まると、自然には止まりません。止めるには、どこかで強制的に「行動」を差し込む必要があります。それが、このロードマップの役割です。
+    </div>
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>P4</span></div>
 </div>
 
-<!-- P5 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">30 DAYS THEME ｜ 30日改善テーマ</div>
-  <h1 class="page-title">30日間のテーマ</h1>
-  <div class="rule"></div>
+<!-- ═══════════════ P4 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P4</span>
+</div>
+
+<div class="section">
+  <div class="section-eyebrow">STORY ｜ 私も同じでした</div>
+  <div class="section-title">才能ではなく<br>習慣が変わっただけ</div>
+  <div class="section-rule"></div>
+
+  <div class="text-block body-text">
+    新人時代、全く成果が出ませんでした。同期は受注する。私は受注できない。上司から叱責を受ける毎日でした。
+  </div>
+  <div class="text-block body-text">
+    営業が怖くなり、一度この世界から離れました。
+  </div>
+  <div class="text-block body-text">
+    <span class="strong">でも、変わったのは才能ではありません。考え方と行動習慣でした。</span>
+  </div>
+  <div class="text-block body-text">
+    失敗しない方法を探すのではなく、行動しながら学ぶ。完璧を目指すのではなく、まず動く。その積み重ねが、結果を変えました。
+  </div>
+  <div class="text-block body-text">
+    最初の1件を動かすのが、すべての始まりです。うまくやる必要はない。ただ、動く。それだけでいい。
+  </div>
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      15年経った今でも、完璧に準備できてから動いたことは一度もありません。動きながら整えてきただけです。
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P5 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P5</span>
+</div>
+
+<div class="section">
+  <div class="section-eyebrow">30 DAYS THEME ｜ 30日改善テーマ</div>
+  <div class="section-title">30日間のテーマ</div>
+  <div class="section-rule"></div>
 
   <div class="theme-block">
+    <div class="theme-en">30 DAYS ACTION THEME</div>
     <div class="theme-main">考える前に、動く</div>
-    <div class="theme-sub">30 DAYS ACTION THEME</div>
   </div>
 
-  <div class="body-text" style="margin-top:16px;">
-    <p>行動不足型は、気合いで変わらない。小さな行動習慣で変わる。</p>
-    <p>これから4週間、1つずつ行動のハードルを下げていきます。</p>
-    <p><span class="strong-line">難しいことは何もしません。「今日もやった」を積み重ねるだけです。</span></p>
+  <div class="text-block body-text">
+    行動不足型は、気合いで変わらない。小さな行動習慣で変わる。
+  </div>
+  <div class="text-block body-text">
+    これから4週間、1つずつ行動のハードルを下げていきます。<span class="strong">難しいことは何もしません。「今日もやった」を積み重ねるだけです。</span>
   </div>
 
   <div class="week-grid">
-    <div class="week-grid-item">
-      <div class="wg-label">WEEK 1</div>
-      <div class="wg-title">ハードルを<br>下げる</div>
+    <div class="week-card">
+      <div class="week-card-num">WEEK 1</div>
+      <div class="week-card-title">ハードルを<br>下げる</div>
     </div>
-    <div class="week-grid-item">
-      <div class="wg-label">WEEK 2</div>
-      <div class="wg-title">振り返りを<br>習慣化</div>
+    <div class="week-card">
+      <div class="week-card-num">WEEK 2</div>
+      <div class="week-card-title">振り返りを<br>習慣化</div>
     </div>
-    <div class="week-grid-item">
-      <div class="wg-label">WEEK 3</div>
-      <div class="wg-title">行動量を<br>増やす</div>
+    <div class="week-card">
+      <div class="week-card-num">WEEK 3</div>
+      <div class="week-card-title">行動量を<br>増やす</div>
     </div>
-    <div class="week-grid-item">
-      <div class="wg-label">WEEK 4</div>
-      <div class="wg-title">行動を<br>見える化</div>
+    <div class="week-card">
+      <div class="week-card-num">WEEK 4</div>
+      <div class="week-card-title">行動を<br>見える化</div>
     </div>
   </div>
-
-  <div class="footer"><span>SALESBREAK</span><span>P5</span></div>
 </div>
 
-<!-- P6 WEEK1 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">STEP 1 OF 4</div>
-  <div class="step-indicator">
-    <div class="step-dot active"></div>
-    <div class="step-dot"></div>
-    <div class="step-dot"></div>
-    <div class="step-dot"></div>
+<!-- ═══════════════ P6 WEEK1 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P6</span>
+</div>
+
+<div class="section week-section">
+  <div class="section-eyebrow">STEP 1 OF 4</div>
+  <div class="step-bar">
+    <div class="step-pip active"></div>
+    <div class="step-pip"></div>
+    <div class="step-pip"></div>
+    <div class="step-pip"></div>
   </div>
   <div class="week-badge">WEEK 1</div>
-  <h1 class="page-title">行動のハードルを<br>下げる</h1>
-  <div class="rule"></div>
-  <div class="task-box">
-    <div class="box-label">毎日やること（3つだけ）</div>
-    <ul class="check-list" style="margin:0;">
+  <div class="section-title">行動のハードルを<br>下げる</div>
+  <div class="section-rule"></div>
+
+  <div class="task-card">
+    <div class="task-card-label">毎日やること（3つだけ）</div>
+    <ul class="task-list">
       <li>顧客へ1件連絡する</li>
       <li>メールを1件送る</li>
       <li>商談を1件振り返る</li>
     </ul>
   </div>
-  <div class="body-text" style="margin-top:14px;">
-    <p><span class="strong-line">目的：動くことを当たり前にする</span></p>
-    <p>最初の1週間は「量」も「質」も関係ない。動いた実績をつくることだけに集中する。</p>
-    <p>「今日もやった」の積み重ねが、来週の自分を変える。</p>
+
+  <div class="purpose-badge">
+    <span class="purpose-label">目的</span>
+    <span class="purpose-text">動くことを当たり前にする</span>
   </div>
-  <div class="callout">
-    <span class="label">POINT</span>
-    「うまくやる」必要はありません。「やる」ことだけに集中してください。質を気にすると、また手が止まります。
+
+  <div class="text-block body-text">
+    最初の1週間は「量」も「質」も関係ない。動いた実績をつくることだけに集中する。
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>P6</span></div>
+  <div class="text-block body-text">
+    「今日もやった」の積み重ねが、来週の自分を変える。
+  </div>
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      「うまくやる」必要はありません。「やる」ことだけに集中してください。質を気にすると、また手が止まります。
+    </div>
+  </div>
 </div>
 
-<!-- P7 WEEK2 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">STEP 2 OF 4</div>
-  <div class="step-indicator">
-    <div class="step-dot"></div>
-    <div class="step-dot active"></div>
-    <div class="step-dot"></div>
-    <div class="step-dot"></div>
+<!-- ═══════════════ P7 WEEK2 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P7</span>
+</div>
+
+<div class="section week-section">
+  <div class="section-eyebrow">STEP 2 OF 4</div>
+  <div class="step-bar">
+    <div class="step-pip"></div>
+    <div class="step-pip active"></div>
+    <div class="step-pip"></div>
+    <div class="step-pip"></div>
   </div>
   <div class="week-badge">WEEK 2</div>
-  <h1 class="page-title">振り返りを<br>習慣化する</h1>
-  <div class="rule"></div>
-  <div class="task-box">
-    <div class="box-label">商談後3分でやること</div>
-    <ul class="check-list" style="margin:0;">
+  <div class="section-title">振り返りを<br>習慣化する</div>
+  <div class="section-rule"></div>
+
+  <div class="task-card">
+    <div class="task-card-label">商談後3分でやること</div>
+    <ul class="task-list">
       <li>良かったこと（1つだけ）</li>
       <li>改善点（1つだけ）</li>
       <li>次回やること（1つだけ）</li>
     </ul>
   </div>
-  <div class="body-text" style="margin-top:14px;">
-    <p><span class="strong-line">目的：経験を学びに変える</span></p>
-    <p>行動するだけでは経験にならない。振り返ることで初めて、経験が「学び」に変わる。</p>
-    <p>3分でいい。スマホのメモでいい。続けることが最優先。</p>
+
+  <div class="purpose-badge">
+    <span class="purpose-label">目的</span>
+    <span class="purpose-text">経験を学びに変える</span>
   </div>
-  <div class="callout">
-    <span class="label">POINT</span>
-    振り返りがないと、同じ失敗を何度も繰り返します。形より「続けること」を優先してください。
+
+  <div class="text-block body-text">
+    行動するだけでは経験にならない。振り返ることで初めて、経験が「学び」に変わる。
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>P7</span></div>
+  <div class="text-block body-text">
+    3分でいい。スマホのメモでいい。続けることが最優先。
+  </div>
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      振り返りがないと、同じ失敗を何度も繰り返します。形より「続けること」を優先してください。
+    </div>
+  </div>
 </div>
 
-<!-- P8 WEEK3 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">STEP 3 OF 4</div>
-  <div class="step-indicator">
-    <div class="step-dot"></div>
-    <div class="step-dot"></div>
-    <div class="step-dot active"></div>
-    <div class="step-dot"></div>
+<!-- ═══════════════ P8 WEEK3 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P8</span>
+</div>
+
+<div class="section week-section">
+  <div class="section-eyebrow">STEP 3 OF 4</div>
+  <div class="step-bar">
+    <div class="step-pip"></div>
+    <div class="step-pip"></div>
+    <div class="step-pip active"></div>
+    <div class="step-pip"></div>
   </div>
   <div class="week-badge">WEEK 3</div>
-  <h1 class="page-title">行動量を増やす</h1>
-  <div class="rule"></div>
-  <div class="task-box">
-    <div class="box-label">毎日やること</div>
-    <ul class="check-list" style="margin:0;">
+  <div class="section-title">行動量を増やす</div>
+  <div class="section-rule"></div>
+
+  <div class="task-card">
+    <div class="task-card-label">毎日やること</div>
+    <ul class="task-list">
       <li>顧客接触 3件（Week1の3倍）</li>
       <li>提案 1件</li>
       <li>フォロー 1件</li>
     </ul>
   </div>
-  <div class="body-text" style="margin-top:14px;">
-    <p><span class="strong-line">量を増やす。質は後からついてくる。</span></p>
-    <p>Week1・2で「動く習慣」はできた。Week3は、その量を増やすだけでいい。</p>
-    <p>この段階で「質」を求めると、また動けなくなる。質は、Week1・2の振り返りが自動で上げてくれる。</p>
+
+  <div class="purpose-badge">
+    <span class="purpose-label">目的</span>
+    <span class="purpose-text">量を増やす。質は後からついてくる</span>
   </div>
-  <div class="callout">
-    <span class="label">POINT</span>
-    経験値は量から生まれます。まずは数をこなすことに集中してください。
+
+  <div class="text-block body-text">
+    Week1・2で「動く習慣」はできた。Week3は、その量を増やすだけでいい。
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>P8</span></div>
+  <div class="text-block body-text">
+    この段階で「質」を求めると、また動けなくなる。質は、Week1・2の振り返りが自動で上げてくれる。
+  </div>
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      経験値は量から生まれます。まずは数をこなすことに集中してください。
+    </div>
+  </div>
 </div>
 
-<!-- P9 WEEK4 -->
-<div class="page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">STEP 4 OF 4</div>
-  <div class="step-indicator">
-    <div class="step-dot"></div>
-    <div class="step-dot"></div>
-    <div class="step-dot"></div>
-    <div class="step-dot active"></div>
+<!-- ═══════════════ P9 WEEK4 ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P9</span>
+</div>
+
+<div class="section week-section">
+  <div class="section-eyebrow">STEP 4 OF 4</div>
+  <div class="step-bar">
+    <div class="step-pip"></div>
+    <div class="step-pip"></div>
+    <div class="step-pip"></div>
+    <div class="step-pip active"></div>
   </div>
   <div class="week-badge">WEEK 4</div>
-  <h1 class="page-title">行動を見える化する</h1>
-  <div class="rule"></div>
-  <div class="task-box">
-    <div class="box-label">毎日記録すること</div>
-    <ul class="checkbox-list" style="margin:0;">
-      <li>顧客接触（　　件）</li>
-      <li>提案（　　件）</li>
-      <li>振り返り（　　分）</li>
-      <li>フォロー（　　件）</li>
+  <div class="section-title">行動を見える化する</div>
+  <div class="section-rule"></div>
+
+  <div class="task-card">
+    <div class="task-card-label">毎日記録すること</div>
+    <ul class="record-list">
+      <li>顧客接触<span class="record-count">___件</span></li>
+      <li>提案<span class="record-count">___件</span></li>
+      <li>振り返り<span class="record-count">___分</span></li>
+      <li>フォロー<span class="record-count">___件</span></li>
     </ul>
   </div>
-  <div class="body-text" style="margin-top:14px;">
-    <p><span class="strong-line">数字で管理する。感覚で管理しない。</span></p>
-    <p>「今日は頑張った気がする」では、成長を判断できない。数字にして初めて、自分の行動量が見えてくる。</p>
-    <p>Week4を終えた頃、30日前の自分とは明らかに違う動き方ができているはずです。</p>
+
+  <div class="purpose-badge">
+    <span class="purpose-label">目的</span>
+    <span class="purpose-text">数字で管理する。感覚で管理しない</span>
   </div>
-  <div class="callout">
-    <span class="label">POINT</span>
-    チェックの数が、あなたの行動量を客観的に教えてくれます。記録が習慣になれば、成長も習慣になります。
+
+  <div class="text-block body-text">
+    「今日は頑張った気がする」では、成長を判断できない。数字にして初めて、自分の行動量が見えてくる。
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>P9</span></div>
+  <div class="text-block body-text">
+    Week4を終えた頃、30日前の自分とは明らかに違う動き方ができているはずです。
+  </div>
+
+  <div class="point-box">
+    <div class="point-label">POINT</div>
+    <div class="point-text">
+      チェックの数が、あなたの行動量を客観的に教えてくれます。記録が習慣になれば、成長も習慣になります。
+    </div>
+  </div>
 </div>
 
-<!-- P10 まとめ -->
-<div class="page final-page">
-  <div class="corner-tl"></div>
-  <div class="corner-br"></div>
-  <div class="eyebrow">SUMMARY ｜ まとめ</div>
-  <h1 class="page-title">明日からやること</h1>
-  <div class="rule"></div>
-  <ul class="check-list">
+<!-- ═══════════════ P10 まとめ ═══════════════ -->
+<div class="divider-band">
+  <span class="divider-brand">SALESBREAK</span>
+  <span class="divider-page">P10</span>
+</div>
+
+<div class="final-section">
+  <div class="final-eyebrow">SUMMARY ｜ まとめ</div>
+  <div class="final-title">明日からやること</div>
+  <div class="final-rule"></div>
+
+  <ul class="final-check-list">
     <li>顧客へ1件連絡する</li>
     <li>商談後3分、振り返りをする</li>
     <li>行動記録をつける</li>
   </ul>
-  <div class="closing-line">
+
+  <div class="closing-main">
     営業は才能ではない。<br>習慣で変わる。
   </div>
-  <div class="closing-sub">
-    小さな行動が未来を変える。<br>
-    このページを閉じた後、何か1つだけでも今日中に行動してください。その1件が、30日後のあなたを変えます。<br><br>
-    まっつん（SALESBREAK）
+
+  <div class="closing-body">
+    小さな行動が未来を変える。<br><br>
+    このページを閉じた後、何か1つだけ今日中に行動してください。<br>その1件が、30日後のあなたを変えます。<br><br>
+    あなたの営業人生が、今日から変わることを信じています。
   </div>
-  <div class="footer"><span>SALESBREAK</span><span>P10</span></div>
+
+  <div class="closing-sig">— まっつん（SALESBREAK）</div>
 </div>
 
 </body>
