@@ -6,125 +6,33 @@
 <title>3é€±é–“å®Ÿè·µã‚·ãƒ¼ãƒˆã€æºå¸¯å…¥åŠ›ç‰ˆã€‘</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
   :root {
-    --navy: #0f2d4e;
-    --gold: #e8b84b;
-    --green: #1a4a2a;
-    --brown: #4a2a0f;
-    --light: #f5f7fa;
-    --border: #c0d0e0;
-    --text: #1a1a1a;
-    --placeholder: #a0b0c0;
-    --done: #1a7a1a;
-    --white: #ffffff;
+    --navy: #0f2d4e; --gold: #e8b84b; --green: #1a4a2a;
+    --brown: #4a2a0f; --light: #f5f7fa; --border: #c0d0e0;
+    --text: #1a1a1a; --done: #1a7a1a; --white: #ffffff;
   }
+  body { font-family: 'Hiragino Sans','Hiragino Kaku Gothic Pro','Yu Gothic','Meiryo',sans-serif; background: var(--light); color: var(--text); font-size: 15px; min-height: 100vh; }
 
-  body {
-    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic Pro', 'Yu Gothic', 'Meiryo', sans-serif;
-    background: var(--light);
-    color: var(--text);
-    font-size: 15px;
-    min-height: 100vh;
-  }
-
-  /* ===== ã‚¢ãƒ—ãƒªãƒãƒ¼ ===== */
-  .app-bar {
-    background: var(--navy);
-    color: white;
-    padding: 14px 16px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  }
-  .app-bar-inner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  /* ã‚¢ãƒ—ãƒªãƒãƒ¼ */
+  .app-bar { background: var(--navy); color: white; padding: 14px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+  .app-bar-inner { display: flex; align-items: center; gap: 10px; }
   .app-bar .brand { font-size: 10px; color: var(--gold); font-weight: 700; letter-spacing: 2px; display: block; }
   .app-bar h1 { font-size: 16px; font-weight: 900; }
   .app-bar .badge { background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: auto; white-space: nowrap; }
+  .progress-bar { background: rgba(255,255,255,0.2); height: 4px; margin-top: 8px; border-radius: 2px; overflow: hidden; }
+  .progress-fill { background: var(--gold); height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+  .progress-label { font-size: 10px; color: rgba(255,255,255,0.8); margin-top: 3px; text-align: right; }
 
-  /* ===== ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ ===== */
-  .progress-bar {
-    background: rgba(255,255,255,0.2);
-    height: 4px;
-    margin-top: 8px;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    background: var(--gold);
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.5s ease;
-  }
-  .progress-label {
-    font-size: 10px;
-    color: rgba(255,255,255,0.8);
-    margin-top: 3px;
-    text-align: right;
-  }
-
-  /* ===== WEEK ogã‚¿ãƒ– ===== */
-  .week-tabs {
-    background: white;
-    display: flex;
-    border-bottom: 2px solid var(--border);
-    position: sticky;
-    top: 88px;
-    z-index: 99;
-  }
-  .week-tab {
-    flex: 1;
-    padding: 12px 4px;
-    border: none;
-    background: none;
-    font-size: 11px;
-    font-weight: 700;
-    color: #888;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
-    font-family: inherit;
-    transition: all 0.2s;
-  }
+  /* WEEKã‚¿ãƒ– */
+  .week-tabs { background: white; display: flex; border-bottom: 2px solid var(--border); position: sticky; top: 88px; z-index: 99; }
+  .week-tab { flex: 1; padding: 12px 4px; border: none; background: none; font-size: 11px; font-weight: 700; color: #888; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; font-family: inherit; transition: all 0.2s; }
   .week-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
   .week-tab .wt-num { font-size: 9px; color: var(--gold); display: block; }
 
-  /* ===== DAY&ã‚¹ãƒ¬ã‚¯ãƒ¼ ===== */
-  .day-selector {
-    background: white;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
+  /* DAYã‚»ãƒ¬ã‚¯ã‚¿ãƒ¼ */
+  .day-selector { background: white; padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .day-selector::-webkit-scrollbar { display: none; }
-  .day-btn {
-    min-width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    background: white;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    position: relative;
-    font-family: inherit;
-    color: var(--text);
-  }
+  .day-btn { min-width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--border); background: white; font-size: 11px; font-weight: 700; cursor: pointer; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.2s; position: relative; font-family: inherit; color: var(--text); }
   .day-btn .day-n { font-size: 14px; font-weight: 900; }
   .day-btn.active { background: var(--navy); border-color: var(--navy); color: white; }
   .day-btn.done { border-color: var(--done); background: #e8f5e8; }
@@ -136,30 +44,11 @@
   .day-btn.active.week2 { background: var(--green); }
   .day-btn.active.week3 { background: var(--brown); }
 
-  /* ===== DAYãƒ‘ããƒ« ===== */
-  .day-panel {
-    display: none;
-    padding: 16px;
-    padding-bottom: 80px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
+  /* DAYãƒ‘ãƒãƒ« */
+  .day-panel { display: none; padding: 16px; padding-bottom: 80px; max-width: 600px; margin: 0 auto; }
   .day-panel.active { display: block; }
-
-  /* ===== DAYã‚«ãƒ¼ãƒ‰ :===== */
-  .day-card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-  }
-
-  /* DAYãƒ˜ãƒƒãƒ€ãƒ¼ */
-  .day-header {
-    padding: 20px 18px;
-    position: relative;
-  }
+  .day-card { background: white; border-radius: 16px; overflow: hidden; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.1); }
+  .day-header { padding: 20px 18px; position: relative; }
   .dh-week1 { background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%); }
   .dh-week2 { background: linear-gradient(135deg, var(--green) 0%, #2a7a4a 100%); }
   .dh-week3 { background: linear-gradient(135deg, var(--brown) 0%, #7a3a1a 100%); }
@@ -167,113 +56,94 @@
   .day-header .dh-label { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
   .day-header .dh-week { font-size: 11px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
   .day-header h2 { font-size: 20px; font-weight: 900; color: white; line-height: 1.3; }
-
-  /* DAY™èhw--- */
   .day-body { padding: 16px; }
 
-  /* ãªxàà8à©8à®H
-‹ÂˆÚKX›ŞÂˆ˜XÚÙÜ›İ[™ˆÙYÙ˜NÂˆ›Ü™\‹[YˆÛÛY˜\ŠKYÛÛ
-NÂˆY[™ÎˆLœMÂˆ›Ü™\‹\˜Y]\ÎˆLLÂˆX\™Ú[‹X›İÛNˆMœÂˆ›Û\Ú^™NˆLË\Âˆ[™KZZYÚˆKÎÂˆÛÛÜˆÌÌÌÎÂˆBˆÚK[X™[È›Û\Ú^™NˆL\È›Û]ÙZYÚˆÌÈÛÛÜˆ˜\ŠKYÛÛ
-NÈX\™Ú[‹X›İÛNˆÈB‚ˆÊˆ9k§ùaixà`xà©øà øà«È
-‹Âˆœ˜XİXÙKXÚXÚÈÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆLœÂˆ˜XÚÙÜ›İ[™ˆÙNŒ˜NÂˆY[™ÎˆMMœÂˆ›Ü™\‹\˜Y]\ÎˆLÂˆX\™Ú[‹X›İÛNˆMœÂˆBˆœ˜XİXÙK[X™[È›Û\Ú^™NˆLÜÈ›Û]ÙZYÚˆÌÈÛÛÜˆ˜\ŠK[˜]JNÈBˆ˜ÚXÚË[Ü[ÛœÈÈ\Ü^Nˆ›^ÈØ\ˆLÈX\™Ú[‹[Yˆ]]ÎÈBˆ˜ÚXÚË[ÜÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆœÂˆY[™ÎˆMÂˆ›Ü™\‹\˜Y]\ÎˆŒÂˆ›Ü™\ˆœÛÛY˜\ŠKX›Ü™\ŠNÂˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆİ\œÛÜˆÚ[\Âˆ›Û\Ú^™NˆLÜÂˆ›Û]ÙZYÚˆÌÂˆ˜[œÚ][Ûˆ[ŒœÎÂˆ›ÛY˜[Z[Nˆ[š\š]ÂˆBˆ˜ÚXÚË[Ü™Û™K[ÜÈÛÛÜˆ˜\ŠKYÛ™JNÈ›Ü™\‹XÛÛÜˆ˜\ŠKYÛ™JNÈ˜XÚÙÜ›İ[™ˆÙNYNÈBˆ˜ÚXÚË[Ü››İ[ÜÈÛÛÜˆØØÍMMMNÈ›Ü™\‹XÛÛÜˆØØÍMMMNÈ˜XÚÙÜ›İ[™ˆÙ™™YNÈB‚ˆÊˆ9aiyb¦øàåxà¨øàï8àêøàâH
-‹Âˆ™šY[ÂˆX\™Ú[‹X›İÛNˆMœÂˆBˆ™šY[[X™[Âˆ›Û\Ú^™NˆLÜÂˆ›Û]ÙZYÚˆÌÂˆÛÛÜˆ˜\ŠK[˜]JNÂˆX\™Ú[‹X›İÛNˆœÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆœÂˆBˆ^\™XHÂˆÚYˆL	NÂˆY[™ÎˆLÜMÂˆ›Ü™\ˆœÛÛY˜\ŠKX›Ü™\ŠNÂˆ›Ü™\‹\˜Y]\ÎˆLÂˆ›Û\Ú^™NˆM\Âˆ›ÛY˜[Z[Nˆ[š\š]ÂˆÛÛÜˆ˜\ŠK]^
-NÂˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆ™\Ú^™Nˆ™\XØ[ÂˆZ[‹ZZYÚˆÂˆ˜[œÚ][Ûˆ›Ü™\‹XÛÛÜˆŒœÎÂˆ[™KZZYÚˆKÂˆBˆ^\™XN™›Øİ\ÈÂˆİ][™Nˆ›Û™NÂˆ›Ü™\‹XÛÛÜˆ˜\ŠK[˜]JNÂˆ›Ş\ÚYİÎˆÜ™Ø˜JMKKÎŒJNÂˆBˆ^\™XNœXÙZÛ\ˆÈÛÛÜˆ˜\ŠK\XÙZÛ\ŠNÈ›Û\Ú^™NˆLÜÈBˆ^\™XKœÚÜÈZ[‹ZZYÚˆŒÈB‚ˆÊˆ8à¨¸àâxàä8à©8à®8àç8ààøà«øà®H
-‹Âˆ˜YšXÙKX›ŞÂˆ›Ü™\‹\˜Y]\ÎˆLÂˆY[™ÎˆMMœÂˆ›Û\Ú^™NˆLË\Âˆ[™KZZYÚˆKÎÂˆÛÛÜˆÚ]NÂˆX\™Ú[‹X›İÛNˆÂˆBˆ˜X‹]ÙYZÌHÈ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
-LYË˜\ŠK[˜]JKÌXMMØJNÈBˆ˜X‹]ÙYZÌˆÈ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
-LYË˜\ŠKYÜ™Y[ŠKÌ˜MØMJNÈBˆ˜X‹]ÙYZÌÈÈ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
-LYË˜\ŠKXœ›İÛŠKÍØLØLXJNÈBˆ˜YšXÙK[X™[È›Û\Ú^™NˆL\ÈÛÛÜˆ˜\ŠKYÛÛ
-NÈ›Û]ÙZYÚˆÌÈX\™Ú[‹X›İÛNˆÈB‚ˆÊˆOOOOHÓQxàäxàcxàêÈOOOOH
-‹ÂˆšÛYK\[™[Âˆ\Ü^Nˆ›ØÚÎÂˆY[™ÎˆMœÂˆY[™ËX›İÛNˆÂˆX^]ÚYˆŒÂˆX\™Ú[ˆ]]ÎÂˆB‚ˆš\›ËXØ\™Âˆ›Ü™\‹\˜Y]\ÎˆMœÂˆY[™ÎˆŒÂˆ^X[YÛˆÙ[\Âˆ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
-LÍYYË˜\ŠK[˜]JH	KÌXMXNXHL	JNÂˆÛÛÜˆÚ]NÂˆX\™Ú[‹X›İÛNˆMœÂˆÜÚ][Ûˆ™[]]™NÂˆİ™\™›İÎˆY[ÂˆBˆš\›ËXØ\™˜™Y›Ü™HÂˆÛÛ[ˆ	ÌŒIÎÂˆÜÚ][ÛˆXœÛÛ]NÂˆšYÚˆLLÂˆÜˆLLÂˆ›Û\Ú^™NˆLÂˆ›Û]ÙZYÚˆLÂˆÛÛÜˆ™Ø˜JMKMKMKŒŠNÂˆ[™KZZYÚˆNÂˆBˆš\›ËXØ\™˜œ˜[™È›Û\Ú^™NˆLÈÛÛÜˆ˜\ŠKYÛÛ
-NÈ]\‹\ÜXÚ[™ÎˆÜÈ›Û]ÙZYÚˆÌÈX\™Ú[‹X›İÛNˆÈ\Ü^Nˆ›ØÚÎÈBˆš\›ËXØ\™ˆÈ›Û\Ú^™NˆŒÈ›Û]ÙZYÚˆLÈ[™KZZYÚˆKÈX\™Ú[‹X›İÛNˆÈBˆš\›ËXØ\™™[ˆÈ›Û\Ú^™NˆLÈ]\‹\ÜXÚ[™ÎˆœÈÛÛÜˆ™Ø˜JMKMKMKŠNÈB‚ˆœ›ÙÜ™\ÜËXØ\™Âˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆ›Ü™\‹\˜Y]\ÎˆLœÂˆY[™ÎˆMœÂˆX\™Ú[‹X›İÛNˆMœÂˆ›Ş\ÚYİÎˆœ™Ø˜JŒ
-NÂˆBˆœËZXY\ˆÈ›Û\Ú^™NˆLÜÈ›Û]ÙZYÚˆÌÈÛÛÜˆ˜\ŠK[˜]JNÈX\™Ú[‹X›İÛNˆLœÈBˆœËX˜\‹]Ü˜\È\Ü^Nˆ›^È[YÛ‹Z][\ÎˆÙ[\ÈØ\ˆLÈBˆœËX˜\ˆÈ›^ˆNÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[YÚ
-NÈ›Ü™\‹\˜Y]\ÎˆLÈZYÚˆLœÈİ™\™›İÎˆY[ÈBˆœËX˜\‹Yš[È˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
-LYË˜\ŠK[˜]JK˜\ŠKYÛÛ
-JNÈZYÚˆL	NÈ›Ü™\‹\˜Y]\ÎˆLÈ˜[œÚ][ÛˆÚY\ÎÈBˆœË[X™[È›Û\Ú^™NˆMÈ›Û]ÙZYÚˆLÈÛÛÜˆ˜\ŠK[˜]JNÈZ[‹]ÚYˆLÈ^X[YÛˆšYÚÈBˆœËY^\ÈÈ\Ü^Nˆ›^ÈØ\ˆÈX\™Ú[‹]ÜˆLÈ›^]Ü˜\ˆÜ˜\ÈBˆœËY^HÈÚYˆÈZYÚˆÈ›Ü™\‹\˜Y]\ÎˆL	NÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[YÚ
-NÈ›Ü™\ˆ\ÛÛY˜\ŠKX›Ü™\ŠNÈ\Ü^Nˆ›^È[YÛ‹Z][\ÎˆÙ[\È\İYKXÛÛ[ˆÙ[\È›Û\Ú^™Nˆ\È›Û]ÙZYÚˆÌÈÛÛÜˆÎNNNÈİ\œÛÜˆÚ[\ÈBˆœËY^K™Û™HÈ˜XÚÙÜ›İ[™ˆ˜\ŠKYÛ™JNÈ›Ü™\‹XÛÛÜˆ˜\ŠKYÛ™JNÈÛÛÜˆÚ]NÈBˆœËY^K˜İ\œ™[È˜XÚÙÜ›İ[™ˆ˜\ŠK[˜]JNÈ›Ü™\‹XÛÛÜˆ˜\ŠK[˜]JNÈÛÛÜˆÚ]NÈB‚ˆœİ\XˆÂˆÚYˆL	NÂˆY[™ÎˆMœÂˆ˜XÚÙÜ›İ[™ˆ˜\ŠKYÛÛ
-NÂˆÛÛÜˆ˜\ŠK[˜]JNÂˆ›Ü™\ˆ›Û™NÂˆ›Ü™\‹\˜Y]\ÎˆLœÂˆ›Û\Ú^™NˆMÜÂˆ›Û]ÙZYÚˆLÂˆİ\œÛÜˆÚ[\ÂˆX\™Ú[‹X›İÛNˆLœÂˆ›ÛY˜[Z[Nˆ[š\š]Âˆ˜[œÚ][Ûˆ[ŒœÎÂˆ›Ş\ÚYİÎˆLœ™Ø˜JŒÌ‹NÍK
-NÂˆBˆœİ\X˜Xİ]™HÈ˜[œÙ›Ü›NˆØØ[JN
-NÈB‚ˆÙYZËXØ\™ÈÈ\Ü^Nˆ›^È›^Y\™Xİ[ÛˆÛÛ[[ÈØ\ˆLÈBˆÙYZËXØ\™Âˆ›Ü™\‹\˜Y]\ÎˆLœÂˆY[™ÎˆMMœÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆMÂˆİ\œÛÜˆÚ[\Âˆ˜[œÚ][Ûˆ[ŒœÎÂˆ›Ü™\ˆ›Û™NÂˆ›ÛY˜[Z[Nˆ[š\š]Âˆ^X[YÛˆYÂˆÚYˆL	NÂˆBˆÙYZËXØ\™˜Xİ]™HÈ˜[œÙ›Ü›NˆØØ[JNJNÈBˆØËLHÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[˜]JNÈÛÛÜˆÚ]NÈBˆØËLˆÈ˜XÚÙÜ›İ[™ˆ˜\ŠKYÜ™Y[ŠNÈÛÛÜˆÚ]NÈBˆØËLÈÈ˜XÚÙÜ›İ[™ˆ˜\ŠKXœ›İÛŠNÈÛÛÜˆÚ]NÈBˆØË[[HÈ›Û\Ú^™NˆÈ›Û]ÙZYÚˆLÈÛÛÜˆ™Ø˜JMKMKMKŒÊNÈZ[‹]ÚYˆÈBˆØËZ[™›ÈÈ›^ˆNÈBˆØË[X™[È›Û\Ú^™NˆLÈÛÛÜˆ˜\ŠKYÛÛ
-NÈ›Û]ÙZYÚˆÌÈBˆØË][YHÈ›Û\Ú^™NˆM\È›Û]ÙZYÚˆLÈÛÛÜˆÚ]NÈBˆØËY^\ÈÈ›Û\Ú^™NˆL\ÈÛÛÜˆ™Ø˜JMKMKMKÊNÈBˆØËX\œ›İÈÈ›Û\Ú^™NˆŒœÈÛÛÜˆ™Ø˜JMKMKMKJNÈB‚ˆÊˆOOOOH9ce¹©+xàëøàï8à«ÈOOOOH
-‹Âˆ™Ü˜YXØ\™Âˆ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
-LÍYYËÌ˜LXLKÍLØLJNÂˆ›Ü™\‹\˜Y]\ÎˆMœÂˆY[™ÎˆŒÂˆX\™Ú[‹X›İÛNˆMœÂˆÛÛÜˆÚ]NÂˆ^X[YÛˆÙ[\ÂˆBˆ™Ü˜YXØ\™™Ü˜YZXÛÛˆÈ›Û\Ú^™NˆÈX\™Ú[‹X›İÛNˆÈBˆ™Ü˜YXØ\™ÈÈ›Û\Ú^™NˆŒÈ›Û]ÙZYÚˆLÈÛÛÜˆ˜\ŠKYÛÛ
-NÈX\™Ú[‹X›İÛNˆœÈBˆ™Ü˜YXØ\™È›Û\Ú^™NˆLÜÈÛÛÜˆ™Ø˜JMKMKMK
-NÈ[™KZZYÚˆKÎÈB‚ˆÊˆOOOOH8à®øàï8àå¸àä8àïOOOOH
-‹ÂˆœØ]™KX˜\ˆÂˆÜÚ][Ûˆš^YÂˆ›İÛNˆÂˆYˆÂˆšYÚˆÂˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆ›Ü™\‹]Üˆ\ÛÛY˜\ŠKX›Ü™\ŠNÂˆY[™ÎˆLMœÂˆ\Ü^Nˆ›^ÂˆØ\ˆLÂˆ‹Z[™^ˆLÂˆBˆœØ]™KX˜\ˆ]ÛˆÂˆ›^ˆNÂˆY[™ÎˆLœÂˆ›Ü™\ˆ›Û™NÂˆ›Ü™\‹\˜Y]\ÎˆÂˆ›Û\Ú^™NˆLÜÂˆ›Û]ÙZYÚˆÌÂˆ›ÛY˜[Z[Nˆ[š\š]Âˆİ\œÛÜˆÚ[\ÂˆBˆœØ]™KXˆÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[˜]JNÈÛÛÜˆÚ]NÈBˆ›™^XˆÈ˜XÚÙÜ›İ[™ˆ var(--gold); color: var(--navy); }
+  /* ã‚»ã‚¯ã‚·ãƒ§ãƒ³ */
+  .section { margin-bottom: 16px; }
+  .section-label { font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .section-text { background: #f8f9fa; border-radius: 10px; padding: 12px; font-size: 14px; line-height: 1.7; color: var(--text); white-space: pre-wrap; }
+  .advice-box { background: linear-gradient(135deg, #fff8e8 0%, #fff3d0 100%); border-left: 4px solid var(--gold); border-radius: 0 10px 10px 0; padding: 12px 14px; font-size: 14px; line-height: 1.7; }
 
-  /* ===== ãƒˆãƒ¼ã‚¹ãƒˆˆ===== */
-  .toast {
-    position: fixed;
-    top: 110px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-10px);
-    background: var(--done);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 700;
-    opacity: 0;
-    transition: all 0.3s;
-    pointer-events: none;
-    z-index: 200;
-    white-space: nowrap;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  /* ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢ */
+  textarea { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 12px; font-size: 15px; font-family: inherit; resize: none; line-height: 1.6; transition: border-color 0.2s; color: var(--text); background: white; }
+  textarea:focus { outline: none; border-color: var(--navy); }
+  textarea::placeholder { color: #a0b0c0; }
 
-  /* è¡Œå‹•ç«¡åˆ·é”® */
-  .action-count-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-  .action-count-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: #f0f6ff;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--navy);
-  }
-  .action-count-item input {
-    width: 50px;
-    padding: 4px 8px;
-    border: 2px solid var(--border);
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 900;
-    text-align: center;
-    font-family: inherit;
-    color: var(--navy);
-  }
+  /* å®Ÿè·µãƒœã‚¿ãƒ³ */
+  .practice-btns { display: flex; gap: 8px; margin-top: 8px; }
+  .prac-btn { flex: 1; padding: 10px; border: 2px solid var(--border); border-radius: 10px; background: white; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; color: #666; transition: all 0.2s; }
+  .prac-btn.selected { border-color: var(--navy); background: var(--navy); color: white; }
+  .prac-btn.done-btn.selected { border-color: var(--done); background: var(--done); }
+
+  /* å®Œäº†ãƒœã‚¿ãƒ³ */
+  .complete-btn { width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 900; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+  .complete-btn.week1 { background: var(--navy); color: white; }
+  .complete-btn.week2 { background: var(--green); color: white; }
+  .complete-btn.week3 { background: var(--brown); color: white; }
+  .complete-btn:active { transform: scale(0.98); }
+
+  /* ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ */
+  .action-count { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .action-count-item { display: flex; align-items: center; gap: 6px; background: #f0f6ff; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; color: var(--navy); }
+  .action-count-item input { width: 50px; padding: 4px 8px; border: 2px solid var(--border); border-radius: 6px; font-size: 16px; font-weight: 900; text-align: center; font-family: inherit; color: var(--navy); }
   .action-count-item input:focus { outline: none; border-color: var(--navy); }
+
+  /* HOMEãƒ‘ãƒãƒ« */
+  .home-panel { padding: 20px 16px 80px; max-width: 600px; margin: 0 auto; }
+  .hero-card { background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%); border-radius: 20px; padding: 28px 24px; color: white; margin-bottom: 20px; }
+  .hero-card .brand { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 3px; display: block; margin-bottom: 10px; }
+  .hero-card h2 { font-size: 28px; font-weight: 900; line-height: 1.3; margin-bottom: 8px; }
+  .hero-card .en { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 1px; margin-top: 8px; }
+  .progress-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+  .pc-header { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+  .pc-bar-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .pc-bar { flex: 1; height: 10px; background: #e0e8f0; border-radius: 5px; overflow: hidden; }
+  .pc-bar-fill { height: 100%; background: linear-gradient(90deg, var(--navy), var(--gold)); border-radius: 5px; transition: width 0.5s ease; }
+  .pc-label { font-size: 13px; font-weight: 700; color: var(--navy); white-space: nowrap; }
+  .pc-days { display: flex; gap: 4px; flex-wrap: wrap; }
+  .pc-dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); background: white; font-size: 8px; display: flex; align-items: center; justify-content: center; }
+  .pc-dot.done { background: var(--done); border-color: var(--done); color: white; }
+  .pc-dot.today { border-color: var(--gold); border-width: 3px; }
+  .start-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--gold) 0%, #d4a53a 100%); border: none; border-radius: 14px; font-size: 17px; font-weight: 900; color: var(--navy); cursor: pointer; font-family: inherit; margin-bottom: 20px; box-shadow: 0 4px 14px rgba(232,184,75,0.4); }
+  .week-cards { display: flex; flex-direction: column; gap: 12px; }
+  .week-card { display: flex; align-items: center; gap: 14px; background: white; border: none; border-radius: 14px; padding: 16px; cursor: pointer; font-family: inherit; text-align: left; box-shadow: 0 3px 10px rgba(0,0,0,0.08); transition: transform 0.15s; }
+  .week-card:active { transform: scale(0.98); }
+  .wc-num { font-size: 22px; font-weight: 900; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+  .wc-1 .wc-num { background: var(--navy); }
+  .wc-2 .wc-num { background: var(--green); }
+  .wc-3 .wc-num { background: var(--brown); }
+  .wc-info { flex: 1; }
+  .wc-label { font-size: 10px; font-weight: 700; color: #888; letter-spacing: 1px; }
+  .wc-theme { font-size: 15px; font-weight: 900; color: var(--text); margin: 2px 0; }
+  .wc-days { font-size: 12px; color: #888; }
+  .wc-arrow { font-size: 22px; color: #ccc; }
+
+  /* ã‚»ãƒ¼ãƒ–ãƒãƒ¼ */
+  .save-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 16px; display: flex; gap: 10px; border-top: 1px solid var(--border); box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; }
+  .save-btn { flex: 1; padding: 13px; background: white; border: 2px solid var(--border); border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; color: var(--text); }
+  .next-btn { flex: 2; padding: 13px; background: var(--gold); border: none; border-radius: 12px; font-size: 14px; font-weight: 900; cursor: pointer; font-family: inherit; color: var(--navy); }
+
+  /* ãƒˆãƒ¼ã‚¹ãƒˆ */
+  .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(0,0,0,0.85); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; opacity: 0; transition: all 0.3s; z-index: 200; white-space: nowrap; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- ãƒˆãƒ¼ã‚¹ãƒˆç«‹æ¨¢åœ -->
-<div class="toast" id="toast">âœ… é€¹å­˜ã—ã¾ã—ãŸ</div>
+<div class="toast" id="toast"></div>
 
-<!-- ===== ã‚¢ãƒ—ãƒªãƒãƒ¼ ===== -->
 <div class="app-bar">
   <div class="app-bar-inner">
     <div>
       <span class="brand">SALESBREAK</span>
-      <h1>3é€±éš• è¡Œå‹•ç¿’æ…£ å®Ÿè·µå‚·æƒ…ã‚¸</h1>
+      <h1>3é€±é–“ è¡Œå‹•ç¿’æ…£ å®Ÿè·µã‚·ãƒ¼ãƒˆ</h1>
     </div>
-    <div class="badge">é€¹å¾Œå…¥åŠ›ã‰ˆ</div>
+    <div class="badge">é”å¾Œå…¥åŠ›â‘©</div>
   </div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="main-progress" style="width:0%"></div>
-  </div>
+  <div class="progress-bar"><div class="progress-fill" id="main-progress" style="width:0%"></div></div>
   <div class="progress-label" id="progress-label">0 / 21 æ—¥å®Œäº†</div>
 </div>
 
-<!-- ===== WEEK ogã‚¿ãƒ– ===== -->
 <div class="week-tabs">
   <button class="week-tab active" onclick="showWeek('home')">ğŸ <span class="wt-num">HOME</span></button>
   <button class="week-tab" onclick="showWeek(1)"><span class="wt-num">WEEK 1</span>å‹•ã‘ã‚‹</button>
@@ -281,103 +151,284 @@ NÈ[™KZZYÚˆKÎÈB‚ˆÊˆOOOOH8à®øàï8àå¸àä8àïOOOOH
   <button class="week-tab" onclick="showWeek(3)"><span class="wt-num">WEEK 3</span>è‡ªä¿¡ã‚’ç©ã‚€</button>
 </div>
 
-<!-- ===== DAY 
-ç¹ãƒ«ã‚¹ãƒ¬ã‚¯ãƒ¼ ===== -->
-<div class="day-selector" id="day-selector" style="display:none;">
-  <!-- å‹•çš„ç”Ÿæˆ -->
-</div>
+<div class="day-selector" id="day-selector" style="display:none;"></div>
 
-<!-- ===== HOME ãƒ‘ããƒ« ===== -->
 <div class="home-panel" id="panel-home">
   <div class="hero-card">
     <span class="brand">SALESBREAK</span>
-    <h2>3é€±é•¥ã¦è¨€èª¬ã«ã¤ã<br>æ­Ÿã‚Œã‚‹è¡Œå‹•ç¿’æ…£</h2>
+    <h2>3é€±é–“ã§èº«ã«ã¤ã<br>å£²ã‚Œã‚‹è¡Œå‹•ç¿’æ…£</h2>
     <div class="en">21-DAY ACTION WORKBOOK</div>
   </div>
-
   <div class="progress-card">
-    <div class="pc-header">ğŸ“Š 21æ—¥’fùe¤ã®è€²æ—</div>
+    <div class="pc-header">ğŸ“Š 21æ—¥é–“ã®é€²æ—</div>
     <div class="pc-bar-wrap">
       <div class="pc-bar"><div class="pc-bar-fill" id="progress-bar-fill" style="width:0%"></div></div>
       <div class="pc-label" id="progress-count">0/21</div>
     </div>
-    <div class="pc-days" id="pc-days-dots">
-      <!-- å‹•çš„ç”Ÿæˆ -->
-    </div>
+    <div class="pc-days" id="pc-days-dots"></div>
   </div>
-
-  <button class="start-btn" onclick="goToNextDay()">â–¶ ä»Šé€±ã®DAR’Ké–‹ã</button>
-
+  <button class="start-btn" onclick="goToNextDay()">â–¶ ä»Šæ—¥ã®DAYã‚’é–‹ã</button>
   <div class="week-cards">
     <button class="week-card wc-1" onclick="showWeek(1)">
       <div class="wc-num">W1</div>
-      <div class="wc-info">
-        <div class="wc-label">WEEK 1</div>
-        <div class="wc-theme">å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹</div>
-        <div class="wc-days">DAY 01ã€œ07</div>
-      </div>
+      <div class="wc-info"><div class="wc-label">WEEK 1</div><div class="wc-theme">å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹</div><div class="wc-days">DAY 01ã€œ07</div></div>
       <div class="wc-arrow">â€º</div>
     </button>
     <button class="week-card wc-2" onclick="showWeek(2)">
       <div class="wc-num">W2</div>
-      <div class="wc-info">
-        <div class="wc-label">WEEK 2</div>
-        <div class="wc-theme">ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹</div>
-        <div class="wc-days">DAY 08ã€œ14</div>
-      </div>
+      <div class="wc-info"><div class="wc-label">WEEK 2</div><div class="wc-theme">ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹</div><div class="wc-days">DAY 08ã€œ14</div></div>
       <div class="wc-arrow">â€º</div>
     </button>
     <button class="week-card wc-3" onclick="showWeek(3)">
       <div class="wc-num">W3</div>
-      <div class="wc-info">
-        <div class="wc-label">WEEK 3</div>
-        <div class="wc-theme">è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹</div>
-        <div class="wc-days">DAY 15ã€œ21</div>
-      </div>
+      <div class="wc-info"><div class="wc-label">WEEK 3</div><div class="wc-theme">è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹</div><div class="wc-days">DAY 15ã€œ21</div></div>
       <div class="wc-arrow">â€º</div>
     </button>
   </div>
 </div>
 
-<!-- DAYãƒ‘ãƒãƒ«ã¯å‹•çš„ç”Ÿæˆ -->
 <div id="day-panels"></div>
 
-<!-- ===== ã‚»ãƒ¼ãƒ–ãƒãƒ¼ ===== -->
 <div class="save-bar">
-  <button class="save-btn" onclick="saveData()">ğŸ’¾ é€¹å­˜ã™ã‚‹</button>
-  <button class="next-btn" onclick="completeAndNext()">å®Œèµ°ã—ã¦æ¬¡ã¸â€º</button>
+  <button class="save-btn" onclick="saveData()">ğŸ’¾ ä¿å­˜ã™ã‚‹</button>
+  <button class="next-btn" onclick="completeAndNext()">å®Œäº†ã—ã¦æ¬¡ã¸â€º</button>
 </div>
 
 <script>
 const days = [
-  { day:1, week:1, theme:'å…µã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'ãƒ¡ãƒ¼ãƒ«ã¯é†„ãŸã‚‰ãš\nã¾8å‹•ì¢šé€¹', why:'è¿”ä¿¡ãŒé…ã”ã—ã„ã¥ã‘ã§ã€Œä¿¡è ¼ã€ã‚’ã†ã€‚ ã‚¹ãƒãƒ¼ãƒ‰ã¯é‡æ‹„ã§ã¯ãªãã€Œã“ã®äººã€å¤Šå¤Šãªã£ã¦ã„ã€. 5æ—¥ã‚ã£ãŸã„ã¦ã¾ã™ã€‚ã0', advice:'ã€Œå³²ã§ã„ã€ã¯ä»Šè¦¨ã«é£¾æ˜ã—ã¦ããˆã‚‹æœ€å¾Œã®æ­¦åˆ°ã€‚è€‹ãé£¾ã·ã‚ï¼Šã©ã†ã¯ã·ã©ã¸ã§ã¾ã™ã€"},
-  { day:2, week:1, theme:'å…µã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'è¦™ã¡ã‘1ä»¶ãŸã‘ç« çµ±ã™ã‚‹', why:'ã€Œè¦™äººã‚’æ˜”ã”æ¦‚ã£ãŸ$ã€ã¯è‡ªå‹•ã‚’å­’ã‚é—¬ã‚‰ã«ã«ãŒã£ã¦ã„ã€‚1ä»¶c®é¦§çµ±ãŒã€å—¥ã„ã‚ãªã„å†ƒã‚¯ã‚ŠãˆãŠã£ å‹•ã„ãŸè¡Œå‹•ãŒå—ã‘å–ã‚Œã‚‹ã‚‚ã®ãŒã‚ã‚‹ã€‚', advice:'1ä»¶ã ã‘ã§ã„',
-  action:'å…µã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', advice:'test'},
+  { day:1, week:1, theme:'å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'ãƒ¡ãƒ¼ãƒ«ã¯å³ãƒ¬ã‚¹\nå—ã‘å–ã£ãŸã‚‰5åˆ†ä»¥å†…ã«è¿”ä¿¡ã™ã‚‹', why:'è¿”ä¿¡ãŒé€Ÿã„ã ã‘ã§ã€Œä¿¡é ¼ã€ãŒç©ã¾ã‚Œã‚‹ã€‚ã‚¹ãƒ”ãƒ¼ãƒ‰ã¯èƒ½åŠ›ã§ã¯ãªãã€Œã“ã®äººã€ã‚„ã£ã¦ãã‚Œã‚‹ã€ã¨ã„ã†å°è±¡ã‚’ã¤ãã‚‹ã€‚5åˆ†ã‚ã‚Œã°ååˆ†ã§ã™ã€‚', advice:'ã€Œã‚ã¨ã§è¿”ãã†ã€ã¯ä»Šæ—¥ã‹ã‚‰å’æ¥­ã€‚å³ãƒ¬ã‚¹ãŒæœ€å¼·ã®æ­¦å™¨ã«ãªã‚‹ã€‚' },
+  { day:2, week:1, theme:'å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'è¦‹è¾¼ã¿å®¢ã«1ä»¶ã ã‘é€£çµ¡ã™ã‚‹', why:'ã€Œè¡Œå‹•ã‚’èµ·ã“ã—ãŸã€ã¨ã„ã†äº‹å®ŸãŒè‡ªä¿¡ã‚’ç”Ÿã‚€ã€‚1ä»¶ã®é€£çµ¡ãŒã€ä½•ã‚‚ã—ãªã„100æ—¥ã‚ˆã‚Šä¾¡å€¤ãŒã‚ã‚‹ã€‚å‹•ã„ãŸè¨˜éŒ²ãŒæ¬¡ã®è¡Œå‹•ã‚’å¼•ãå¯„ã›ã‚‹ã€‚', advice:'1ä»¶ã ã‘ã§ã„ã„ã€‚å®Œç’§ãªæº–å‚™ã‚ˆã‚Šä»Šæ—¥ã®1è¡Œå‹•ã€‚' },
+  { day:3, week:1, theme:'å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'ä»Šæ—¥ã®è¡Œå‹•ã‚’3ã¤æ±ºã‚ã¦ã‹ã‚‰ä»•äº‹ã‚’å§‹ã‚ã‚‹', why:'æ±ºã‚ãªã„ã¾ã¾å‹•ãã¨ã€æ°—ã¥ã„ãŸã‚‰ã€Œã‚„ã£ãŸæ„Ÿã€ã ã‘ã§çµ‚ã‚ã‚‹ã€‚3ã¤æ±ºã‚ã‚‹ã ã‘ã§ã€1æ—¥ã®å¯†åº¦ãŒå¤‰ã‚ã‚‹ã€‚', advice:'å‰æ—¥å¤œã‹æœã‚¤ãƒã«æ›¸ãã€‚æ‰‹å¸³ã§ã‚‚ã‚¹ãƒãƒ›ã®ãƒ¡ãƒ¢ã§ã‚‚ã€‚', hasCounter: true },
+  { day:4, week:1, theme:'å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'ãŠå®¢æ§˜ã«ã€Œã‚ã‚ŠãŒã¨ã†ã€ã‚’ä¼ãˆã‚‹', why:'æ„Ÿè¬ã¯é–¢ä¿‚ã®æ¸©åº¦ã‚’ä¸Šã’ã‚‹æœ€çŸ­ãƒ«ãƒ¼ãƒˆã€‚è¨€è‘‰ã«ã—ãªã„ã¨ä¼ã‚ã‚‰ãªã„ã€‚ä»Šæ—¥ã€1äººã«ä¼ãˆã‚‹ã€‚', advice:'ç†ç”±ã‚’ã‚»ãƒƒãƒˆã«ã™ã‚‹ã¨åˆºã•ã‚‹ã€‚ã€Œã€‡ã€‡ã—ã¦ãã‚ŒãŸã‹ã‚‰åŠ©ã‹ã‚Šã¾ã—ãŸã€', hasCounter: true },
+  { day:5, week:1, theme:'å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'ä»Šæ—¥ã®å¤±æ•—ã‚’1ã¤æ›¸ãå‡ºã™', why:'å¤±æ•—ã‚’æ›¸ãã®ã¯è‡ªå·±å¦å®šã§ã¯ãªãã€æ”¹å–„ã®ç¬¬ä¸€æ­©ã€‚æ›¸ã‹ãªã„ã¨åŒã˜å¤±æ•—ã‚’ç¹°ã‚Šè¿”ã™ã€‚', advice:'å¤±æ•—ã®éš£ã«ã€Œæ¬¡ã©ã†ã™ã‚‹ã‹ã€ã‚’1è¡Œæ›¸ãã ã‘ã§æˆé•·ãƒ­ã‚°ã«ãªã‚‹ã€‚', hasFailure: true, isWeekend: true },
+  { day:6, week:1, theme:'å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'ä»Šé€±ã®è¡Œå‹•ã‚’æŒ¯ã‚Šè¿”ã‚‹', why:'æŒ¯ã‚Šè¿”ã‚Šã¯ã€Œæ¬¡ã®è¡Œå‹•ã®è¨­è¨ˆã€ã€‚ä½•ãŒåŠ¹ã„ã¦ä½•ãŒåŠ¹ã‹ãªã‹ã£ãŸã‹ã‚’çŸ¥ã‚‹ã“ã¨ã§ã€æ¥é€±ã®ç²¾åº¦ãŒä¸ŠãŒã‚‹ã€‚', advice:'è‰¯ã‹ã£ãŸç‚¹1ã¤ã€æ”¹å–„ç‚¹1ã¤ã ã‘ã§ååˆ†ã€‚', isWeekend: true },
+  { day:7, week:1, theme:'å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'æ¥é€±ã®ç›®æ¨™ã‚’1ã¤æ±ºã‚ã‚‹', why:'ç›®æ¨™ãŒãªã‘ã‚Œã°è¡Œå‹•ã¯ãƒ©ãƒ³ãƒ€ãƒ ã«ãªã‚‹ã€‚1ã¤æ±ºã‚ã‚‹ã ã‘ã§æ–¹å‘ãŒå®šã¾ã‚‹ã€‚', advice:'ã€Œæ•°å­—ã€ã‹ã€Œè¡Œå‹•å›æ•°ã€ã§æ±ºã‚ã‚‹ã¨é”æˆåˆ¤å®šãŒã—ã‚„ã™ã„ã€‚' },
+  { day:8, week:2, theme:'ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹', action:'ãŠå®¢æ§˜ã®ã€Œå›°ã‚Šã”ã¨ã€ã‚’1ã¤èã', why:'å£²ã‚ã†ã¨ã™ã‚‹å‰ã«èãã€‚å›°ã‚Šã”ã¨ã‚’çŸ¥ã£ã¦ã„ã‚‹äººãŒã€æœ¬å½“ã®æ„å‘³ã§ã€Œå½¹ã«ç«‹ã¦ã‚‹äººã€ã«ãªã‚Œã‚‹ã€‚', advice:'ã€Œæœ€è¿‘ã€ä½•ã‹å›°ã£ã¦ã„ã‚‹ã“ã¨ã¯ã‚ã‚Šã¾ã™ã‹ï¼Ÿã€ã“ã®ä¸€è¨€ã‚’ä»Šæ—¥ä½¿ã†ã€‚' },
+  { day:9, week:2, theme:'ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹', action:'ææ¡ˆå‰ã«ã€Œç›¸æ‰‹ã®ç«‹å ´ã€ã§è€ƒãˆã‚‹', why:'è‡ªåˆ†ç›®ç·šã®ææ¡ˆã¯æŠ¼ã—å£²ã‚Šã«è¦‹ãˆã‚‹ã€‚ç›¸æ‰‹ç›®ç·šã§è€ƒãˆãŸææ¡ˆã¯ã€Œã“ã®äººã€ã‚ã‹ã£ã¦ãã‚Œã¦ã‚‹ã€ã«ãªã‚‹ã€‚', advice:'ã€Œã“ã®å•†å“ã‚’è²·ã£ãŸã‚‰ã€ã“ã®äººã®ä½•ãŒè§£æ±ºã™ã‚‹ã‹ã€ã‚’1è¡Œæ›¸ã„ã¦ã‹ã‚‰ææ¡ˆã™ã‚‹ã€‚' },
+  { day:10, week:2, theme:'ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹', action:'æˆåŠŸäº‹ä¾‹ã‚’1ã¤è©±ã™æº–å‚™ã‚’ã™ã‚‹', why:'ãŠå®¢æ§˜ã¯ã€Œä»–ã®äººãŒã©ã†ãªã£ãŸã‹ã€ã‚’çŸ¥ã‚ŠãŸã„ã€‚å®Ÿç¸¾ã®è©±ã¯æœ€å¼·ã®ä¿¡é ¼ææ–™ã«ãªã‚‹ã€‚', advice:'ã€Œå®Ÿã¯ã“ã‚“ãªæ–¹ãŒã„ã¦â€¦ã€ã¨ã„ã†å½¢ã§è‡ªç„¶ã«è©±ã›ã‚‹ã‚ˆã†ã«ä»Šæ—¥æº–å‚™ã™ã‚‹ã€‚' },
+  { day:11, week:2, theme:'ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹', action:'æ–­ã‚‰ã‚ŒãŸç†ç”±ã‚’åˆ†æã™ã‚‹', why:'æ–­ã‚‰ã‚ŒãŸç†ç”±ã‚’çŸ¥ã‚‹ã“ã¨ãŒã€æ¬¡ã®æˆç´„ã¸ã®è¿‘é“ã€‚æ„Ÿæƒ…ã§ã¯ãªãã€æƒ…å ±ã¨ã—ã¦å—ã‘å–ã‚‹ç·´ç¿’ã‚’ã™ã‚‹ã€‚', advice:'ã€Œãªãœä»Šã˜ã‚ƒãªã„ã®ã‹ã€ã€Œæœ¬å½“ã®ç†ç”±ã¯ä½•ã‹ã€ã‚’è€ƒãˆã¦ã¿ã‚‹ã€‚', hasFailure: true },
+  { day:12, week:2, theme:'ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹', action:'ãŠå®¢æ§˜ã®ã€ŒæˆåŠŸã‚¤ãƒ¡ãƒ¼ã‚¸ã€ã‚’ä¸€ç·’ã«æã', why:'äººã¯å¤‰åŒ–ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ãŒè¦‹ãˆãŸã¨ãã«å‹•ãã€‚ã€Œã“ã†ãªã‚Œã¾ã™ã‚ˆã€ã‚’å…·ä½“çš„ã«è¦‹ã›ã‚‹ã“ã¨ãŒè³¼è²·æ„æ¬²ã«ã¤ãªãŒã‚‹ã€‚', advice:'ã€Œã‚‚ã—ã€‡ã€‡ã ã£ãŸã‚‰ã€ã©ã‚“ãªçŠ¶æ…‹ã«ãªã‚ŠãŸã„ã§ã™ã‹ï¼Ÿã€ã¨èã„ã¦ã¿ã‚‹ã€‚' },
+  { day:13, week:2, theme:'ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹', action:'ä»Šé€±ã®ææ¡ˆå†…å®¹ã‚’æŒ¯ã‚Šè¿”ã‚‹', why:'ææ¡ˆã®è³ªã¯æŒ¯ã‚Šè¿”ã‚Šã§ä¸ŠãŒã‚‹ã€‚ä½•ã‚’è¨€ã£ãŸã‹ã€ã©ã†åå¿œã•ã‚ŒãŸã‹ã‚’ç¢ºèªã™ã‚‹ã ã‘ã§æ”¹å–„ã§ãã‚‹ã€‚', advice:'1ä»¶ã ã‘æŒ¯ã‚Šè¿”ã‚Œã°ååˆ†ã€‚é‡ã‚ˆã‚Šè³ªã®æŒ¯ã‚Šè¿”ã‚Šã€‚', isWeekend: true },
+  { day:14, week:2, theme:'ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹', action:'æ¥é€±ã®è¦‹è¾¼ã¿å®¢ãƒªã‚¹ãƒˆã‚’ä½œã‚‹', why:'ãƒªã‚¹ãƒˆãŒãªã‘ã‚Œã°è¡Œå‹•ã§ããªã„ã€‚ä»Šé€±ä¸­ã«ã€Œèª°ã«é€£çµ¡ã™ã‚‹ã‹ã€ã‚’æ±ºã‚ã¦ãŠãã€‚', advice:'3äººã§ã„ã„ã€‚åå‰ã¨é€£çµ¡æ‰‹æ®µã ã‘æ›¸ã„ã¦ãŠãã€‚', isWeekend: true },
+  { day:15, week:3, theme:'è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹', action:'ä»Šæ—¥ã®ã€Œå°ã•ãªæˆåŠŸã€ã‚’æ›¸ã', why:'æˆåŠŸã¯å¤§ããªã‚‚ã®ã ã‘ã˜ã‚ƒãªã„ã€‚å°ã•ãªæˆåŠŸã‚’ç©ã¿é‡ã­ã‚‹ã“ã¨ã§è‡ªå·±è‚¯å®šæ„Ÿã¨è¡Œå‹•åŠ›ãŒä¸ŠãŒã‚‹ã€‚', advice:'ã€Œä»Šæ—¥ã€ã€‡ã€‡ã§ããŸã€ã‚’1ã¤æ›¸ãã ã‘ã€‚ãã‚ŒãŒè‡ªä¿¡ã®ç¨®ã«ãªã‚‹ã€‚', hasSuccess: true },
+  { day:16, week:3, theme:'è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹', action:'è‡ªåˆ†ã®ã€Œå¼·ã¿ã€ã‚’1ã¤è¨€èªåŒ–ã™ã‚‹', why:'å¼·ã¿ã‚’çŸ¥ã£ã¦ã„ã‚‹äººã¯ã€ãã‚Œã‚’æ­¦å™¨ã«ã—ã¦ææ¡ˆã§ãã‚‹ã€‚è¨€èªåŒ–ã™ã‚‹ã“ã¨ã§æ„è­˜çš„ã«ä½¿ãˆã‚‹ã‚ˆã†ã«ãªã‚‹ã€‚', advice:'ãŠå®¢æ§˜ã‹ã‚‰æ„Ÿè¬ã•ã‚ŒãŸã“ã¨ã€è¤’ã‚ã‚‰ã‚ŒãŸã“ã¨ã‹ã‚‰å¼·ã¿ã‚’è¦‹ã¤ã‘ã‚‹ã€‚' },
+  { day:17, week:3, theme:'è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹', action:'ãƒ­ãƒ¼ãƒ—ãƒ¬ã‚’1å›ã‚„ã‚‹', why:'æœ¬ç•ªã§ã†ã¾ãã‚„ã‚‹ã«ã¯ãƒªãƒãƒ¼ã‚µãƒ«ãŒå¿…è¦ã€‚1å›ã§ã‚‚ç·´ç¿’ã—ãŸäººã¯ã€ã—ã¦ãªã„äººã‚ˆã‚Šåœ§å€’çš„ã«å¼·ã„ã€‚', advice:'é¡ã®å‰ã§ã‚‚ã€ã‚¹ãƒãƒ›ã«éŒ²éŸ³ã§ã‚‚ã€‚1åˆ†ã§ã„ã„ã‹ã‚‰ã‚„ã£ã¦ã¿ã‚‹ã€‚' },
+  { day:18, week:3, theme:'è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹', action:'æ„Ÿè¬ã®æ°—æŒã¡ã‚’æ—¥è¨˜ã«æ›¸ã', why:'æ„Ÿè¬ã§ãã‚‹ã“ã¨ã‚’æ„è­˜ã™ã‚‹ã¨ã€æ€è€ƒãŒãƒã‚¸ãƒ†ã‚£ãƒ–ã«ãªã‚‹ã€‚å‰å‘ããªçŠ¶æ…‹ã®å–¶æ¥­ãƒãƒ³ã¯ã€ãŠå®¢æ§˜ã«ã‚‚ä¼ã‚ã‚‹ã€‚', advice:'ã€Œä»Šæ—¥ã€æ„Ÿè¬ã§ãã‚‹ã“ã¨ã¯ä½•ï¼Ÿã€3ã¤æ›¸ãã ã‘ã€‚', hasGratitude: true },
+  { day:19, week:3, theme:'è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹', action:'åŒåƒšã‚„å…ˆè¼©ã®æˆåŠŸã‹ã‚‰å­¦ã¶', why:'æˆåŠŸè€…ã®è¡Œå‹•ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ã®ã¯æœ€é€Ÿã®æˆé•·æ³•ã€‚ã€Œãªãœå£²ã‚Œã¦ã„ã‚‹ã®ã‹ã€ã‚’è¦³å¯Ÿã—ã¦ç›—ã‚€ã€‚', advice:'ã€Œã‚ãªãŸãŒä¸€ç•ªå¤§äº‹ã«ã—ã¦ã„ã‚‹ã“ã¨ã¯ä½•ã§ã™ã‹ï¼Ÿã€ã¨èã„ã¦ã¿ã‚‹ã€‚', hasCompare: true },
+  { day:20, week:3, theme:'è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹', action:'ä»Šé€±ã®è¡Œå‹•ã‚’ã™ã¹ã¦æŒ¯ã‚Šè¿”ã‚‹', why:'3é€±é–“ã®é›†å¤§æˆã®å‰ã«ã€è‡ªåˆ†ã®æˆé•·ã‚’ç¢ºèªã™ã‚‹ã€‚æŒ¯ã‚Šè¿”ã‚Šã¯è‡ªä¿¡ã®è¨¼æ˜ã«ãªã‚‹ã€‚', advice:'ã€Œ3é€±é–“å‰ã®è‡ªåˆ†ã¨æ¯”ã¹ã¦ã€ä½•ãŒå¤‰ã‚ã£ãŸã‹ã€ã‚’æ›¸ãå‡ºã™ã€‚', isWeekend: true },
+  { day:21, week:3, theme:'è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹', action:'æ¬¡ã®21æ—¥é–“ã®ç›®æ¨™ã‚’1ã¤æ±ºã‚ã‚‹', why:'ç¿’æ…£åŒ–ã®æœ¬ç•ªã¯ã“ã“ã‹ã‚‰ã€‚ã“ã®21æ—¥é–“ã§èº«ã«ã¤ã„ãŸã“ã¨ã‚’ã€ã•ã‚‰ã«æ·±ã‚ã‚‹ãŸã‚ã®æ¬¡ã®ç›®æ¨™ã‚’è¨­å®šã™ã‚‹ã€‚', advice:'ã€Œç¶šã‘ã‚‹ã“ã¨ã€ã€Œæ–°ã—ã„ã“ã¨ã‚’åŠ ãˆã‚‹ã“ã¨ã€ã©ã¡ã‚‰ã§ã‚‚ã„ã„ã€‚æ±ºã‚ãŸç¬é–“ãŒå§‹ã¾ã‚Šã€‚', isGrad: true }
 ];
 
-const weekColors = { 1: 'week1', 2: 'week2', 3: 'week3' };
+let currentWeek = 'home';
+let currentDay = null;
+let data = {};
 
 function init() {
   loadData();
   buildDayPanels();
   buildDaySelector();
+  buildProgressDots();
   updateProgress();
 }
 
-function openDay(day) {
+function getNextDay() {
+  for (let i = 0; i < days.length; i++) {
+    if (!data[days[i].day] || !data[days[i].day].done) return days[i].day;
+  }
+  return days[days.length - 1].day;
+}
+
+function buildDayPanels() {
+  const container = document.getElementById('day-panels');
+  container.innerHTML = days.map(d => buildDayHTML(d)).join('');
+}
+
+function buildDayHTML(d) {
+  const wc = 'dh-week' + d.week;
+  const btnClass = 'complete-btn week' + d.week;
+  let body = '';
+
+  body += `<div class="section"><div class="section-label">ğŸ“Œ ãƒ†ãƒ¼ãƒ</div><div class="section-text">${d.theme}</div></div>`;
+  body += `<div class="section"><div class="section-label">âœ… ä»Šæ—¥ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³</div><div class="section-text">${d.action.replace(/\n/g,'<br>')}</div></div>`;
+  body += `<div class="section"><div class="section-label">ğŸ’¡ ãªãœã‚„ã‚‹ã®ã‹</div><div class="section-text">${d.why}</div></div>`;
+  body += `<div class="section"><div class="section-label">âš¡ MATSUã‹ã‚‰ã®ã‚¢ãƒ‰ãƒã‚¤ã‚¹</div><div class="advice-box">${d.advice}</div></div>`;
+
+  if (d.hasCounter) {
+    body += `<div class="section"><div class="section-label">ğŸ“Š å®Ÿæ–½å›æ•°</div><div class="action-count"><div class="action-count-item">ä»Šæ—¥ã®ä»¶æ•°<input type="number" min="0" id="counter-${d.day}" placeholder="0" onchange="setPractice(${d.day},'counter',this.value)"></div></div></div>`;
+  }
+  if (d.hasFailure) {
+    body += `<div class="section"><div class="section-label">ğŸ“ ä»Šæ—¥ã®å¤±æ•—ãƒ»æ°—ã¥ã</div><textarea rows="3" id="failure-${d.day}" placeholder="ä»Šæ—¥ã†ã¾ãã„ã‹ãªã‹ã£ãŸã“ã¨ã€æ°—ã¥ã„ãŸã“ã¨ã‚’æ›¸ã..." onchange="setPractice(${d.day},'failure',this.value)"></textarea></div>`;
+  }
+  if (d.hasSuccess) {
+    body += `<div class="section"><div class="section-label">ğŸŒŸ ä»Šæ—¥ã®å°ã•ãªæˆåŠŸ</div><textarea rows="3" id="success-${d.day}" placeholder="ã©ã‚“ãªå°ã•ãªã“ã¨ã§ã‚‚OKã€‚ã§ããŸã“ã¨ã‚’æ›¸ã..." onchange="setPractice(${d.day},'success',this.value)"></textarea></div>`;
+  }
+  if (d.hasGratitude) {
+    body += `<div class="section"><div class="section-label">ğŸ™ æ„Ÿè¬ã§ãã‚‹ã“ã¨ï¼ˆ3ã¤ï¼‰</div><textarea rows="4" id="gratitude-${d.day}" placeholder="1. \n2. \n3. " onchange="setPractice(${d.day},'gratitude',this.value)"></textarea></div>`;
+  }
+  if (d.hasCompare) {
+    body += `<div class="section"><div class="section-label">ğŸ“– å­¦ã‚“ã ã“ã¨</div><textarea rows="3" id="compare-${d.day}" placeholder="å…ˆè¼©ãƒ»åŒåƒšã‹ã‚‰å­¦ã‚“ã ã“ã¨..." onchange="setPractice(${d.day},'compare',this.value)"></textarea></div>`;
+  }
+
+  body += `<div class="section"><div class="section-label">âœï¸ ä»Šæ—¥ã®ä¸€è¨€ãƒ¡ãƒ¢</div><textarea rows="3" id="memo-${d.day}" placeholder="ä»Šæ—¥ã‚„ã£ã¦ã¿ã¦æ„Ÿã˜ãŸã“ã¨ã‚’æ›¸ã..." onchange="setPractice(${d.day},'memo',this.value)"></textarea></div>`;
+  body += `<div class="practice-btns">
+    <button class="prac-btn" id="prac-${d.day}-1" onclick="setPracticeBtn(${d.day},1)">ğŸ˜° ã¾ã </button>
+    <button class="prac-btn" id="prac-${d.day}-2" onclick="setPracticeBtn(${d.day},2)">ğŸ”¥ ã‚„ã£ãŸ</button>
+    <button class="prac-btn done-btn" id="prac-${d.day}-3" onclick="setPracticeBtn(${d.day},3)">âœ… å®Œç’§</button>
+  </div>`;
+  body += `<button class="${btnClass}" style="margin-top:16px;" onclick="completeDay(${d.day})">${d.isGrad ? 'ğŸ“ 21æ—¥é–“å®Œèµ°ï¼' : 'âœ“ ã“ã®DAYã‚’å®Œäº†ã™ã‚‹'}</button>`;
+
+  return `<div class="day-panel" id="day-panel-${d.day}">
+    <div class="day-card">
+      <div class="day-header ${wc}">
+        <div class="dh-num">${String(d.day).padStart(2,'0')}</div>
+        <div class="dh-label">DAY ${String(d.day).padStart(2,'0')}</div>
+        <div class="dh-week">WEEK ${d.week}ï¼š${d.theme}</div>
+        <h2>${d.action.split('\n')[0]}</h2>
+      </div>
+      <div class="day-body">${body}</div>
+    </div>
+  </div>`;
+}
+
+function buildDaySelector() {
+  const sel = document.getElementById('day-selector');
+  sel.innerHTML = days.map(d => {
+    const isDone = data[d.day] && data[d.day].done;
+    const isToday = d.day === (currentDay || getNextDay());
+    return `<button class="day-btn week${d.week}${isDone?' done':''}${isToday?' active':''}" onclick="openDay(${d.day})" id="day-btn-${d.day}">
+      <span class="day-n">${d.day}</span>W${d.week}
+    </button>`;
+  }).join('');
+}
+
+function buildProgressDots() {
+  const container = document.getElementById('pc-days-dots');
+  if (!container) return;
+  const nextDay = getNextDay();
+  container.innerHTML = days.map(d => {
+    const isDone = data[d.day] && data[d.day].done;
+    const isToday = d.day === nextDay;
+    return `<div class="pc-dot${isDone?' done':''}${isToday?' today':''}" title="DAY${d.day}">${isDone ? 'âœ“' : d.day}</div>`;
+  }).join('');
+}
+
+function showWeek(week) {
+  currentWeek = week;
+  document.querySelectorAll('.week-tab').forEach((t,i) => {
+    const w = i === 0 ? 'home' : i;
+    t.classList.toggle('active', w === week);
+  });
+  document.getElementById('panel-home').style.display = week === 'home' ? '' : 'none';
   document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('day-panel-' + day).classList.add('active');
+  const sel = document.getElementById('day-selector');
+  if (week === 'home') {
+    sel.style.display = 'none';
+  } else {
+    sel.style.display = 'flex';
+    const weekDays = days.filter(d => d.week === week);
+    const target = weekDays.find(d => !(data[d.day] && data[d.day].done)) || weekDays[weekDays.length - 1];
+    openDay(target.day);
+    const btn = document.getElementById('day-btn-' + target.day);
+    if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
+function openDay(day) {
+  currentDay = day;
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('day-panel-' + day);
+  if (panel) { panel.classList.add('active'); loadDayData(day); }
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('day-btn-' + day);
+  if (btn) btn.classList.add('active');
+}
+
+function setPractice(day, key, value) {
+  if (!data[day]) data[day] = {};
+  data[day][key] = value;
+}
+
+function setPracticeBtn(day, level) {
+  setPractice(day, 'practice', level);
+  [1,2,3].forEach(l => document.getElementById(`prac-${day}-${l}`).classList.toggle('selected', l === level));
+}
+
+function completeDay(day) {
+  if (!data[day]) data[day] = {};
+  data[day].done = true;
+  saveData();
+  updateProgress();
+  buildDaySelector();
+  buildProgressDots();
+  const nextDayNum = getNextDay();
+  if (nextDayNum !== day) {
+    showToast('âœ… DAY' + day + ' å®Œäº†ï¼');
+    setTimeout(() => {
+      const d = days.find(x => x.day === nextDayNum);
+      if (d) showWeek(d.week);
+      openDay(nextDayNum);
+    }, 800);
+  } else {
+    showToast('ğŸ“ å…¨21æ—¥é–“å®Œèµ°ï¼ãŠã‚ã§ã¨ã†ã”ã–ã„ã¾ã™ï¼');
+  }
+}
+
+function completeAndNext() {
+  if (currentDay) completeDay(currentDay);
+}
+
+function goToNextDay() {
+  const next = getNextDay();
+  const d = days.find(x => x.day === next);
+  if (d) showWeek(d.week);
+  openDay(next);
+}
+
+function updateProgress() {
+  const done = days.filter(d => data[d.day] && data[d.day].done).length;
+  const pct = Math.round(done / 21 * 100);
+  const fill = document.getElementById('main-progress');
+  const label = document.getElementById('progress-label');
+  const barFill = document.getElementById('progress-bar-fill');
+  const count = document.getElementById('progress-count');
+  if (fill) fill.style.width = pct + '%';
+  if (label) label.textContent = done + ' / 21 æ—¥å®Œäº†';
+  if (barFill) barFill.style.width = pct + '%';
+  if (count) count.textContent = done + '/21';
 }
 
 function saveData() {
-  localStorage.setItem('sb_habit_data', JSON.stringify({}));
-  showToast('ş’† ä¿å­˜ã—ã¾ã—ãŸ');
+  try { localStorage.setItem('sb_habit_data', JSON.stringify(data)); } catch(e) {}
+  showToast('ğŸ’¾ ä¿å­˜ã—ã¾ã—ãŸ');
 }
 
-function loadData() {}
-function buildDayPanels() {}
-function buildDaySelector() {}
-function updateProgress() {}
+function loadData() {
+  try { const s = localStorage.getItem('sb_habit_data'); if (s) data = JSON.parse(s); } catch(e) {}
+}
+
+function loadDayData(day) {
+  const d = data[day];
+  if (!d) return;
+  const memo = document.getElementById('memo-' + day);
+  if (memo && d.memo) memo.value = d.memo;
+  const failure = document.getElementById('failure-' + day);
+  if (failure && d.failure) failure.value = d.failure;
+  const success = document.getElementById('success-' + day);
+  if (success && d.success) success.value = d.success;
+  const gratitude = document.getElementById('gratitude-' + day);
+  if (gratitude && d.gratitude) gratitude.value = d.gratitude;
+  const compare = document.getElementById('compare-' + day);
+  if (compare && d.compare) compare.value = d.compare;
+  const counter = document.getElementById('counter-' + day);
+  if (counter && d.counter) counter.value = d.counter;
+  if (d.practice) {
+    [1,2,3].forEach(l => {
+      const btn = document.getElementById(`prac-${day}-${l}`);
+      if (btn) btn.classList.toggle('selected', l === d.practice);
+    });
+  }
+}
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -385,6 +436,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+setInterval(saveData, 30000);
 init();
 </script>
 </body>
