@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   @page {
     size: A4;
@@ -12,18 +13,32 @@
     margin: 0;
     font-family: "Noto Serif CJK JP", serif;
     color: #2b2b28;
-    background: #f6f3ec;
+    background: #e8e4dc;
+  }
+  .page-wrap {
+    max-width: 210mm;
+    margin: 0 auto;
   }
   .page {
-    width: 210mm;
-    height: 297mm;
+    width: 100%;
+    min-height: 297mm;
     position: relative;
     page-break-after: always;
-    overflow: hidden;
     background: #f6f3ec;
-    padding: 14mm 16mm 16mm;
+    padding: 14mm 16mm 20mm;
   }
   .page:last-child { page-break-after: auto; }
+
+  @media print {
+    body { background: #f6f3ec; }
+    .page-wrap { max-width: none; }
+    .page {
+      width: 210mm;
+      height: 297mm;
+      min-height: unset;
+      overflow: hidden;
+    }
+  }
 
   .corner-tl, .corner-br {
     position: absolute;
@@ -298,6 +313,7 @@
 </style>
 </head>
 <body>
+<div class="page-wrap">
 
 <!-- 表紙 -->
 <div class="page cover-page">
@@ -648,5 +664,6 @@
   <div class="page-num">P10</div>
 </div>
 
+</div><!-- /.page-wrap -->
 </body>
 </html>
