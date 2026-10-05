@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>3é€±é–“å®Ÿè·µã‚·ãƒ¼ãƒˆã€æºå¸¯å…¥åŠ›ç‰ˆã€‘</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --navy: #0f2d4e;
+    --gold: #e8b84b;
+    --green: #1a4a2a;
+    --brown: #4a2a0f;
+    --light: #f5f7fa;
+    --border: #c0d0e0;
+    --text: #1a1a1a;
+    --placeholder: #a0b0c0;
+    --done: #1a7a1a;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic Pro', 'Yu Gothic', 'Meiryo', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    font-size: 15px;
+    min-height: 100vh;
+  }
+
+  /* ===== ã‚¢ãƒ—ãƒªãƒãƒ¼ ===== */
+  .app-bar {
+    background: var(--navy);
+    color: white;
+    padding: 14px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .app-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .app-bar .brand { font-size: 10px; color: var(--gold); font-weight: 700; letter-spacing: 2px; display: block; }
+  .app-bar h1 { font-size: 16px; font-weight: 900; }
+  .app-bar .badge { background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: auto; white-space: nowrap; }
+
+  /* ===== ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼ ===== */
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 4px;
+    margin-top: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: var(--gold);
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+  .progress-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 3px;
+    text-align: right;
+  }
+
+  /* ===== WEEK ogã‚¿ãƒ– ===== */
+  .week-tabs {
+    background: white;
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 88px;
+    z-index: 99;
+  }
+  .week-tab {
+    flex: 1;
+    padding: 12px 4px;
+    border: none;
+    background: none;
+    font-size: 11px;
+    font-weight: 700;
+    color: #888;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .week-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .week-tab .wt-num { font-size: 9px; color: var(--gold); display: block; }
+
+  /* ===== DAY&ã‚¹ãƒ¬ã‚¯ãƒ¼ ===== */
+  .day-selector {
+    background: white;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .day-selector::-webkit-scrollbar { display: none; }
+  .day-btn {
+    min-width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: white;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    position: relative;
+    font-family: inherit;
+    color: var(--text);
+  }
+  .day-btn .day-n { font-size: 14px; font-weight: 900; }
+  .day-btn.active { background: var(--navy); border-color: var(--navy); color: white; }
+  .day-btn.done { border-color: var(--done); background: #e8f5e8; }
+  .day-btn.done::after { content: 'âœ“'; position: absolute; top: -4px; right: -4px; background: var(--done); color: white; width: 16px; height: 16px; border-radius: 50%; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+  .day-btn.week1 { border-top: 3px solid var(--navy); }
+  .day-btn.week2 { border-top: 3px solid var(--green); }
+  .day-btn.week3 { border-top: 3px solid var(--brown); }
+  .day-btn.active.week1 { background: var(--navy); }
+  .day-btn.active.week2 { background: var(--green); }
+  .day-btn.active.week3 { background: var(--brown); }
+
+  /* ===== DAYãƒ‘ããƒ« ===== */
+  .day-panel {
+    display: none;
+    padding: 16px;
+    padding-bottom: 80px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .day-panel.active { display: block; }
+
+  /* ===== DAYã‚«ãƒ¼ãƒ‰ :===== */
+  .day-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  }
+
+  /* DAYãƒ˜ãƒƒãƒ€ãƒ¼ */
+  .day-header {
+    padding: 20px 18px;
+    position: relative;
+  }
+  .dh-week1 { background: linear-gradient(135deg, var(--navy) 0%, #1a4a7a 100%); }
+  .dh-week2 { background: linear-gradient(135deg, var(--green) 0%, #2a7a4a 100%); }
+  .dh-week3 { background: linear-gradient(135deg, var(--brown) 0%, #7a3a1a 100%); }
+  .day-header .dh-num { font-size: 52px; font-weight: 900; color: rgba(255,255,255,0.12); position: absolute; top: 8px; right: 14px; line-height: 1; }
+  .day-header .dh-label { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+  .day-header .dh-week { font-size: 11px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+  .day-header h2 { font-size: 20px; font-weight: 900; color: white; line-height: 1.3; }
+
+  /* DAY™èhw--- */
+  .day-body { padding: 16px; }
+
+  /* ãªxàà8à©8à®H
+‹ÂˆÚKX›ŞÂˆ˜XÚÙÜ›İ[™ˆÙYÙ˜NÂˆ›Ü™\‹[YˆÛÛY˜\ŠKYÛÛ
+NÂˆY[™ÎˆLœMÂˆ›Ü™\‹\˜Y]\ÎˆLLÂˆX\™Ú[‹X›İÛNˆMœÂˆ›Û\Ú^™NˆLË\Âˆ[™KZZYÚˆKÎÂˆÛÛÜˆÌÌÌÎÂˆBˆÚK[X™[È›Û\Ú^™NˆL\È›Û]ÙZYÚˆÌÈÛÛÜˆ˜\ŠKYÛÛ
+NÈX\™Ú[‹X›İÛNˆÈB‚ˆÊˆ9k§ùaixà`xà©øà øà«È
+‹Âˆœ˜XİXÙKXÚXÚÈÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆLœÂˆ˜XÚÙÜ›İ[™ˆÙNŒ˜NÂˆY[™ÎˆMMœÂˆ›Ü™\‹\˜Y]\ÎˆLÂˆX\™Ú[‹X›İÛNˆMœÂˆBˆœ˜XİXÙK[X™[È›Û\Ú^™NˆLÜÈ›Û]ÙZYÚˆÌÈÛÛÜˆ˜\ŠK[˜]JNÈBˆ˜ÚXÚË[Ü[ÛœÈÈ\Ü^Nˆ›^ÈØ\ˆLÈX\™Ú[‹[Yˆ]]ÎÈBˆ˜ÚXÚË[ÜÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆœÂˆY[™ÎˆMÂˆ›Ü™\‹\˜Y]\ÎˆŒÂˆ›Ü™\ˆœÛÛY˜\ŠKX›Ü™\ŠNÂˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆİ\œÛÜˆÚ[\Âˆ›Û\Ú^™NˆLÜÂˆ›Û]ÙZYÚˆÌÂˆ˜[œÚ][Ûˆ[ŒœÎÂˆ›ÛY˜[Z[Nˆ[š\š]ÂˆBˆ˜ÚXÚË[Ü™Û™K[ÜÈÛÛÜˆ˜\ŠKYÛ™JNÈ›Ü™\‹XÛÛÜˆ˜\ŠKYÛ™JNÈ˜XÚÙÜ›İ[™ˆÙNYNÈBˆ˜ÚXÚË[Ü››İ[ÜÈÛÛÜˆØØÍMMMNÈ›Ü™\‹XÛÛÜˆØØÍMMMNÈ˜XÚÙÜ›İ[™ˆÙ™™YNÈB‚ˆÊˆ9aiyb¦øàåxà¨øàï8àêøàâH
+‹Âˆ™šY[ÂˆX\™Ú[‹X›İÛNˆMœÂˆBˆ™šY[[X™[Âˆ›Û\Ú^™NˆLÜÂˆ›Û]ÙZYÚˆÌÂˆÛÛÜˆ˜\ŠK[˜]JNÂˆX\™Ú[‹X›İÛNˆœÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆœÂˆBˆ^\™XHÂˆÚYˆL	NÂˆY[™ÎˆLÜMÂˆ›Ü™\ˆœÛÛY˜\ŠKX›Ü™\ŠNÂˆ›Ü™\‹\˜Y]\ÎˆLÂˆ›Û\Ú^™NˆM\Âˆ›ÛY˜[Z[Nˆ[š\š]ÂˆÛÛÜˆ˜\ŠK]^
+NÂˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆ™\Ú^™Nˆ™\XØ[ÂˆZ[‹ZZYÚˆÂˆ˜[œÚ][Ûˆ›Ü™\‹XÛÛÜˆŒœÎÂˆ[™KZZYÚˆKÂˆBˆ^\™XN™›Øİ\ÈÂˆİ][™Nˆ›Û™NÂˆ›Ü™\‹XÛÛÜˆ˜\ŠK[˜]JNÂˆ›Ş\ÚYİÎˆÜ™Ø˜JMKKÎŒJNÂˆBˆ^\™XNœXÙZÛ\ˆÈÛÛÜˆ˜\ŠK\XÙZÛ\ŠNÈ›Û\Ú^™NˆLÜÈBˆ^\™XKœÚÜÈZ[‹ZZYÚˆŒÈB‚ˆÊˆ8à¨¸àâxàä8à©8à®8àç8ààøà«øà®H
+‹Âˆ˜YšXÙKX›ŞÂˆ›Ü™\‹\˜Y]\ÎˆLÂˆY[™ÎˆMMœÂˆ›Û\Ú^™NˆLË\Âˆ[™KZZYÚˆKÎÂˆÛÛÜˆÚ]NÂˆX\™Ú[‹X›İÛNˆÂˆBˆ˜X‹]ÙYZÌHÈ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
+LYË˜\ŠK[˜]JKÌXMMØJNÈBˆ˜X‹]ÙYZÌˆÈ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
+LYË˜\ŠKYÜ™Y[ŠKÌ˜MØMJNÈBˆ˜X‹]ÙYZÌÈÈ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
+LYË˜\ŠKXœ›İÛŠKÍØLØLXJNÈBˆ˜YšXÙK[X™[È›Û\Ú^™NˆL\ÈÛÛÜˆ˜\ŠKYÛÛ
+NÈ›Û]ÙZYÚˆÌÈX\™Ú[‹X›İÛNˆÈB‚ˆÊˆOOOOHÓQxàäxàcxàêÈOOOOH
+‹ÂˆšÛYK\[™[Âˆ\Ü^Nˆ›ØÚÎÂˆY[™ÎˆMœÂˆY[™ËX›İÛNˆÂˆX^]ÚYˆŒÂˆX\™Ú[ˆ]]ÎÂˆB‚ˆš\›ËXØ\™Âˆ›Ü™\‹\˜Y]\ÎˆMœÂˆY[™ÎˆŒÂˆ^X[YÛˆÙ[\Âˆ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
+LÍYYË˜\ŠK[˜]JH	KÌXMXNXHL	JNÂˆÛÛÜˆÚ]NÂˆX\™Ú[‹X›İÛNˆMœÂˆÜÚ][Ûˆ™[]]™NÂˆİ™\™›İÎˆY[ÂˆBˆš\›ËXØ\™˜™Y›Ü™HÂˆÛÛ[ˆ	ÌŒIÎÂˆÜÚ][ÛˆXœÛÛ]NÂˆšYÚˆLLÂˆÜˆLLÂˆ›Û\Ú^™NˆLÂˆ›Û]ÙZYÚˆLÂˆÛÛÜˆ™Ø˜JMKMKMKŒŠNÂˆ[™KZZYÚˆNÂˆBˆš\›ËXØ\™˜œ˜[™È›Û\Ú^™NˆLÈÛÛÜˆ˜\ŠKYÛÛ
+NÈ]\‹\ÜXÚ[™ÎˆÜÈ›Û]ÙZYÚˆÌÈX\™Ú[‹X›İÛNˆÈ\Ü^Nˆ›ØÚÎÈBˆš\›ËXØ\™ˆÈ›Û\Ú^™NˆŒÈ›Û]ÙZYÚˆLÈ[™KZZYÚˆKÈX\™Ú[‹X›İÛNˆÈBˆš\›ËXØ\™™[ˆÈ›Û\Ú^™NˆLÈ]\‹\ÜXÚ[™ÎˆœÈÛÛÜˆ™Ø˜JMKMKMKŠNÈB‚ˆœ›ÙÜ™\ÜËXØ\™Âˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆ›Ü™\‹\˜Y]\ÎˆLœÂˆY[™ÎˆMœÂˆX\™Ú[‹X›İÛNˆMœÂˆ›Ş\ÚYİÎˆœ™Ø˜JŒ
+NÂˆBˆœËZXY\ˆÈ›Û\Ú^™NˆLÜÈ›Û]ÙZYÚˆÌÈÛÛÜˆ˜\ŠK[˜]JNÈX\™Ú[‹X›İÛNˆLœÈBˆœËX˜\‹]Ü˜\È\Ü^Nˆ›^È[YÛ‹Z][\ÎˆÙ[\ÈØ\ˆLÈBˆœËX˜\ˆÈ›^ˆNÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[YÚ
+NÈ›Ü™\‹\˜Y]\ÎˆLÈZYÚˆLœÈİ™\™›İÎˆY[ÈBˆœËX˜\‹Yš[È˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
+LYË˜\ŠK[˜]JK˜\ŠKYÛÛ
+JNÈZYÚˆL	NÈ›Ü™\‹\˜Y]\ÎˆLÈ˜[œÚ][ÛˆÚY\ÎÈBˆœË[X™[È›Û\Ú^™NˆMÈ›Û]ÙZYÚˆLÈÛÛÜˆ˜\ŠK[˜]JNÈZ[‹]ÚYˆLÈ^X[YÛˆšYÚÈBˆœËY^\ÈÈ\Ü^Nˆ›^ÈØ\ˆÈX\™Ú[‹]ÜˆLÈ›^]Ü˜\ˆÜ˜\ÈBˆœËY^HÈÚYˆÈZYÚˆÈ›Ü™\‹\˜Y]\ÎˆL	NÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[YÚ
+NÈ›Ü™\ˆ\ÛÛY˜\ŠKX›Ü™\ŠNÈ\Ü^Nˆ›^È[YÛ‹Z][\ÎˆÙ[\È\İYKXÛÛ[ˆÙ[\È›Û\Ú^™Nˆ\È›Û]ÙZYÚˆÌÈÛÛÜˆÎNNNÈİ\œÛÜˆÚ[\ÈBˆœËY^K™Û™HÈ˜XÚÙÜ›İ[™ˆ˜\ŠKYÛ™JNÈ›Ü™\‹XÛÛÜˆ˜\ŠKYÛ™JNÈÛÛÜˆÚ]NÈBˆœËY^K˜İ\œ™[È˜XÚÙÜ›İ[™ˆ˜\ŠK[˜]JNÈ›Ü™\‹XÛÛÜˆ˜\ŠK[˜]JNÈÛÛÜˆÚ]NÈB‚ˆœİ\XˆÂˆÚYˆL	NÂˆY[™ÎˆMœÂˆ˜XÚÙÜ›İ[™ˆ˜\ŠKYÛÛ
+NÂˆÛÛÜˆ˜\ŠK[˜]JNÂˆ›Ü™\ˆ›Û™NÂˆ›Ü™\‹\˜Y]\ÎˆLœÂˆ›Û\Ú^™NˆMÜÂˆ›Û]ÙZYÚˆLÂˆİ\œÛÜˆÚ[\ÂˆX\™Ú[‹X›İÛNˆLœÂˆ›ÛY˜[Z[Nˆ[š\š]Âˆ˜[œÚ][Ûˆ[ŒœÎÂˆ›Ş\ÚYİÎˆLœ™Ø˜JŒÌ‹NÍK
+NÂˆBˆœİ\X˜Xİ]™HÈ˜[œÙ›Ü›NˆØØ[JN
+NÈB‚ˆÙYZËXØ\™ÈÈ\Ü^Nˆ›^È›^Y\™Xİ[ÛˆÛÛ[[ÈØ\ˆLÈBˆÙYZËXØ\™Âˆ›Ü™\‹\˜Y]\ÎˆLœÂˆY[™ÎˆMMœÂˆ\Ü^Nˆ›^Âˆ[YÛ‹Z][\ÎˆÙ[\ÂˆØ\ˆMÂˆİ\œÛÜˆÚ[\Âˆ˜[œÚ][Ûˆ[ŒœÎÂˆ›Ü™\ˆ›Û™NÂˆ›ÛY˜[Z[Nˆ[š\š]Âˆ^X[YÛˆYÂˆÚYˆL	NÂˆBˆÙYZËXØ\™˜Xİ]™HÈ˜[œÙ›Ü›NˆØØ[JNJNÈBˆØËLHÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[˜]JNÈÛÛÜˆÚ]NÈBˆØËLˆÈ˜XÚÙÜ›İ[™ˆ˜\ŠKYÜ™Y[ŠNÈÛÛÜˆÚ]NÈBˆØËLÈÈ˜XÚÙÜ›İ[™ˆ˜\ŠKXœ›İÛŠNÈÛÛÜˆÚ]NÈBˆØË[[HÈ›Û\Ú^™NˆÈ›Û]ÙZYÚˆLÈÛÛÜˆ™Ø˜JMKMKMKŒÊNÈZ[‹]ÚYˆÈBˆØËZ[™›ÈÈ›^ˆNÈBˆØË[X™[È›Û\Ú^™NˆLÈÛÛÜˆ˜\ŠKYÛÛ
+NÈ›Û]ÙZYÚˆÌÈBˆØË][YHÈ›Û\Ú^™NˆM\È›Û]ÙZYÚˆLÈÛÛÜˆÚ]NÈBˆØËY^\ÈÈ›Û\Ú^™NˆL\ÈÛÛÜˆ™Ø˜JMKMKMKÊNÈBˆØËX\œ›İÈÈ›Û\Ú^™NˆŒœÈÛÛÜˆ™Ø˜JMKMKMKJNÈB‚ˆÊˆOOOOH9ce¹©+xàëøàï8à«ÈOOOOH
+‹Âˆ™Ü˜YXØ\™Âˆ˜XÚÙÜ›İ[™ˆ[™X\‹YÜ˜YY[
+LÍYYËÌ˜LXLKÍLØLJNÂˆ›Ü™\‹\˜Y]\ÎˆMœÂˆY[™ÎˆŒÂˆX\™Ú[‹X›İÛNˆMœÂˆÛÛÜˆÚ]NÂˆ^X[YÛˆÙ[\ÂˆBˆ™Ü˜YXØ\™™Ü˜YZXÛÛˆÈ›Û\Ú^™NˆÈX\™Ú[‹X›İÛNˆÈBˆ™Ü˜YXØ\™ÈÈ›Û\Ú^™NˆŒÈ›Û]ÙZYÚˆLÈÛÛÜˆ˜\ŠKYÛÛ
+NÈX\™Ú[‹X›İÛNˆœÈBˆ™Ü˜YXØ\™È›Û\Ú^™NˆLÜÈÛÛÜˆ™Ø˜JMKMKMK
+NÈ[™KZZYÚˆKÎÈB‚ˆÊˆOOOOH8à®øàï8àå¸àä8àïOOOOH
+‹ÂˆœØ]™KX˜\ˆÂˆÜÚ][Ûˆš^YÂˆ›İÛNˆÂˆYˆÂˆšYÚˆÂˆ˜XÚÙÜ›İ[™ˆÚ]NÂˆ›Ü™\‹]Üˆ\ÛÛY˜\ŠKX›Ü™\ŠNÂˆY[™ÎˆLMœÂˆ\Ü^Nˆ›^ÂˆØ\ˆLÂˆ‹Z[™^ˆLÂˆBˆœØ]™KX˜\ˆ]ÛˆÂˆ›^ˆNÂˆY[™ÎˆLœÂˆ›Ü™\ˆ›Û™NÂˆ›Ü™\‹\˜Y]\ÎˆÂˆ›Û\Ú^™NˆLÜÂˆ›Û]ÙZYÚˆÌÂˆ›ÛY˜[Z[Nˆ[š\š]Âˆİ\œÛÜˆÚ[\ÂˆBˆœØ]™KXˆÈ˜XÚÙÜ›İ[™ˆ˜\ŠK[˜]JNÈÛÛÜˆÚ]NÈBˆ›™^XˆÈ˜XÚÙÜ›İ[™ˆ var(--gold); color: var(--navy); }
+
+  /* ===== ãƒˆãƒ¼ã‚¹ãƒˆˆ===== */
+  .toast {
+    position: fixed;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: var(--done);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 200;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* è¡Œå‹•ç«¡åˆ·é”® */
+  .action-count-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .action-count-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f6ff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .action-count-item input {
+    width: 50px;
+    padding: 4px 8px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 900;
+    text-align: center;
+    font-family: inherit;
+    color: var(--navy);
+  }
+  .action-count-item input:focus { outline: none; border-color: var(--navy); }
+</style>
+</head>
+<body>
+
+<!-- ãƒˆãƒ¼ã‚¹ãƒˆç«‹æ¨¢åœ -->
+<div class="toast" id="toast">âœ… é€¹å­˜ã—ã¾ã—ãŸ</div>
+
+<!-- ===== ã‚¢ãƒ—ãƒªãƒãƒ¼ ===== -->
+<div class="app-bar">
+  <div class="app-bar-inner">
+    <div>
+      <span class="brand">SALESBREAK</span>
+      <h1>3é€±éš• è¡Œå‹•ç¿’æ…£ å®Ÿè·µå‚·æƒ…ã‚¸</h1>
+    </div>
+    <div class="badge">é€¹å¾Œå…¥åŠ›ã‰ˆ</div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="main-progress" style="width:0%"></div>
+  </div>
+  <div class="progress-label" id="progress-label">0 / 21 æ—¥å®Œäº†</div>
+</div>
+
+<!-- ===== WEEK ogã‚¿ãƒ– ===== -->
+<div class="week-tabs">
+  <button class="week-tab active" onclick="showWeek('home')">ğŸ <span class="wt-num">HOME</span></button>
+  <button class="week-tab" onclick="showWeek(1)"><span class="wt-num">WEEK 1</span>å‹•ã‘ã‚‹</button>
+  <button class="week-tab" onclick="showWeek(2)"><span class="wt-num">WEEK 2</span>ä¾¡å€¤ã‚’å±Šã‘ã‚‹</button>
+  <button class="week-tab" onclick="showWeek(3)"><span class="wt-num">WEEK 3</span>è‡ªä¿¡ã‚’ç©ã‚€</button>
+</div>
+
+<!-- ===== DAY 
+ç¹ãƒ«ã‚¹ãƒ¬ã‚¯ãƒ¼ ===== -->
+<div class="day-selector" id="day-selector" style="display:none;">
+  <!-- å‹•çš„ç”Ÿæˆ -->
+</div>
+
+<!-- ===== HOME ãƒ‘ããƒ« ===== -->
+<div class="home-panel" id="panel-home">
+  <div class="hero-card">
+    <span class="brand">SALESBREAK</span>
+    <h2>3é€±é•¥ã¦è¨€èª¬ã«ã¤ã<br>æ­Ÿã‚Œã‚‹è¡Œå‹•ç¿’æ…£</h2>
+    <div class="en">21-DAY ACTION WORKBOOK</div>
+  </div>
+
+  <div class="progress-card">
+    <div class="pc-header">ğŸ“Š 21æ—¥’fùe¤ã®è€²æ—</div>
+    <div class="pc-bar-wrap">
+      <div class="pc-bar"><div class="pc-bar-fill" id="progress-bar-fill" style="width:0%"></div></div>
+      <div class="pc-label" id="progress-count">0/21</div>
+    </div>
+    <div class="pc-days" id="pc-days-dots">
+      <!-- å‹•çš„ç”Ÿæˆ -->
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="goToNextDay()">â–¶ ä»Šé€±ã®DAR’Ké–‹ã</button>
+
+  <div class="week-cards">
+    <button class="week-card wc-1" onclick="showWeek(1)">
+      <div class="wc-num">W1</div>
+      <div class="wc-info">
+        <div class="wc-label">WEEK 1</div>
+        <div class="wc-theme">å‹•ã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹</div>
+        <div class="wc-days">DAY 01ã€œ07</div>
+      </div>
+      <div class="wc-arrow">â€º</div>
+    </button>
+    <button class="week-card wc-2" onclick="showWeek(2)">
+      <div class="wc-num">W2</div>
+      <div class="wc-info">
+        <div class="wc-label">WEEK 2</div>
+        <div class="wc-theme">ç›¸æ‰‹ã«ä¾¡å€¤ã‚’å±Šã‘ã‚‹</div>
+        <div class="wc-days">DAY 08ã€œ14</div>
+      </div>
+      <div class="wc-arrow">â€º</div>
+    </button>
+    <button class="week-card wc-3" onclick="showWeek(3)">
+      <div class="wc-num">W3</div>
+      <div class="wc-info">
+        <div class="wc-label">WEEK 3</div>
+        <div class="wc-theme">è‡ªä¿¡ã‚’ç©ã¿ä¸Šã’ã‚‹</div>
+        <div class="wc-days">DAY 15ã€œ21</div>
+      </div>
+      <div class="wc-arrow">â€º</div>
+    </button>
+  </div>
+</div>
+
+<!-- DAYãƒ‘ãƒãƒ«ã¯å‹•çš„ç”Ÿæˆ -->
+<div id="day-panels"></div>
+
+<!-- ===== ã‚»ãƒ¼ãƒ–ãƒãƒ¼ ===== -->
+<div class="save-bar">
+  <button class="save-btn" onclick="saveData()">ğŸ’¾ é€¹å­˜ã™ã‚‹</button>
+  <button class="next-btn" onclick="completeAndNext()">å®Œèµ°ã—ã¦æ¬¡ã¸â€º</button>
+</div>
+
+<script>
+const days = [
+  { day:1, week:1, theme:'å…µã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'ãƒ¡ãƒ¼ãƒ«ã¯é†„ãŸã‚‰ãš\nã¾8å‹•ì¢šé€¹', why:'è¿”ä¿¡ãŒé…ã”ã—ã„ã¥ã‘ã§ã€Œä¿¡è ¼ã€ã‚’ã†ã€‚ ã‚¹ãƒãƒ¼ãƒ‰ã¯é‡æ‹„ã§ã¯ãªãã€Œã“ã®äººã€å¤Šå¤Šãªã£ã¦ã„ã€. 5æ—¥ã‚ã£ãŸã„ã¦ã¾ã™ã€‚ã0', advice:'ã€Œå³²ã§ã„ã€ã¯ä»Šè¦¨ã«é£¾æ˜ã—ã¦ããˆã‚‹æœ€å¾Œã®æ­¦åˆ°ã€‚è€‹ãé£¾ã·ã‚ï¼Šã©ã†ã¯ã·ã©ã¸ã§ã¾ã™ã€"},
+  { day:2, week:1, theme:'å…µã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', action:'è¦™ã¡ã‘1ä»¶ãŸã‘ç« çµ±ã™ã‚‹', why:'ã€Œè¦™äººã‚’æ˜”ã”æ¦‚ã£ãŸ$ã€ã¯è‡ªå‹•ã‚’å­’ã‚é—¬ã‚‰ã«ã«ãŒã£ã¦ã„ã€‚1ä»¶c®é¦§çµ±ãŒã€å—¥ã„ã‚ãªã„å†ƒã‚¯ã‚ŠãˆãŠã£ å‹•ã„ãŸè¡Œå‹•ãŒå—ã‘å–ã‚Œã‚‹ã‚‚ã®ãŒã‚ã‚‹ã€‚', advice:'1ä»¶ã ã‘ã§ã„',
+  action:'å…µã‘ã‚‹è‡ªåˆ†ã‚’ã¤ãã‚‹', advice:'test'},
+];
+
+const weekColors = { 1: 'week1', 2: 'week2', 3: 'week3' };
+
+function init() {
+  loadData();
+  buildDayPanels();
+  buildDaySelector();
+  updateProgress();
+}
+
+function openDay(day) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('day-panel-' + day).classList.add('active');
+}
+
+function saveData() {
+  localStorage.setItem('sb_habit_data', JSON.stringify({}));
+  showToast('ş’† ä¿å­˜ã—ã¾ã—ãŸ');
+}
+
+function loadData() {}
+function buildDayPanels() {}
+function buildDaySelector() {}
+function updateProgress() {}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+init();
+</script>
+</body>
+</html>
