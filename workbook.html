@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>営業実践ワークブック【携帯入力版】</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --navy: #0f2d4e; --gold: #e8b84b; --light: #f5f7fa; --border: #c0d0e0;
+    --text: #1a1a1a; --white: #ffffff; --accent: #1a4a7a;
+  }
+  body { font-family: 'Hiragino Sans','Hiragino Kaku Gothic Pro','Yu Gothic','Meiryo',sans-serif; background: var(--light); color: var(--text); font-size: 15px; min-height: 100vh; }
+
+  /* アプリバー */
+  .app-bar { background: var(--navy); color: white; padding: 14px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+  .app-bar .brand { font-size: 10px; color: var(--gold); font-weight: 700; letter-spacing: 2px; display: block; margin-bottom: 2px; }
+  .app-bar h1 { font-size: 16px; font-weight: 900; }
+  .app-bar .subtitle { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+
+  /* ナビタブ */
+  .nav-tabs { background: white; display: flex; overflow-x: auto; border-bottom: 2px solid var(--border); position: sticky; top: 72px; z-index: 99; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab { flex-shrink: 0; padding: 10px 14px; border: none; background: none; font-size: 11px; font-weight: 700; color: #888; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; font-family: inherit; white-space: nowrap; transition: all 0.2s; }
+  .nav-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .nav-tab .tab-icon { font-size: 14px; display: block; margin-bottom: 2px; }
+
+  /* ホームパネル */
+  .home-panel { padding: 20px 16px 80px; max-width: 600px; margin: 0 auto; }
+  .hero-card { background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%); border-radius: 20px; padding: 28px 20px; color: white; margin-bottom: 20px; text-align: center; }
+  .hero-card .hero-brand { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .hero-card h2 { font-size: 22px; font-weight: 900; line-height: 1.4; margin-bottom: 12px; }
+  .hero-card p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+  .intro-copy { background: white; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+  .intro-copy .tagline { font-size: 16px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+  .intro-copy p { font-size: 14px; line-height: 1.8; color: #444; }
+  .benefits { margin-bottom: 20px; }
+  .benefit-item { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .benefit-icon { font-size: 22px; flex-shrink: 0; }
+  .benefit-text { font-size: 14px; line-height: 1.6; }
+  .how-to { background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+  .how-to h3 { font-size: 14px; font-weight: 900; color: var(--navy); margin-bottom: 14px; border-bottom: 2px solid var(--gold); padding-bottom: 8px; }
+  .how-step { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+  .step-num { background: var(--navy); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; }
+  .step-content .step-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .step-content .step-desc { font-size: 12px; color: #666; line-height: 1.5; }
+  .sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sheet-card { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; border: 2px solid transparent; transition: all 0.2s; text-align: center; }
+  .sheet-card:active { border-color: var(--navy); transform: scale(0.98); }
+  .sheet-card .sc-icon { font-size: 24px; margin-bottom: 6px; }
+  .sheet-card .sc-title { font-size: 12px; font-weight: 700; color: var(--navy); line-height: 1.4; }
+  .sheet-card .sc-sub { font-size: 10px; color: #888; margin-top: 2px; }
+
+  /* シートパネル共通 */
+  .sheet-panel { display: none; padding: 16px; padding-bottom: 80px; max-width: 600px; margin: 0 auto; }
+  .sheet-panel.active { display: block; }
+  .sheet-header { border-radius: 16px; padding: 20px; color: white; margin-bottom: 16px; position: relative; overflow: hidden; }
+  .sh-bg1 { background: linear-gradient(135deg, #0f2d4e 0%, #1a4a7a 100%); }
+  .sh-bg2 { background: linear-gradient(135deg, #1a3a0f 0%, #2a6a1a 100%); }
+  .sh-bg3 { background: linear-gradient(135deg, #3a1a0f 0%, #6a2a1a 100%); }
+  .sh-bg4 { background: linear-gradient(135deg, #2a1a4a 0%, #4a2a7a 100%); }
+  .sh-bg5 { background: linear-gradient(135deg, #0f3a3a 0%, #1a6a6a 100%); }
+  .sh-bg6 { background: linear-gradient(135deg, #3a3a0f 0%, #6a6a1a 100%); }
+  .sh-bg7 { background: linear-gradient(135deg, #1a1a3a 0%, #3a3a6a 100%); }
+  .sh-bg8 { background: linear-gradient(135deg, #3a0f1a 0%, #6a1a3a 100%); }
+  .sh-bg9 { background: linear-gradient(135deg, #0f1a3a 0%, #1a3a6a 100%); }
+  .sh-bg10 { background: linear-gradient(135deg, #1a3a1a 0%, #2a6a2a 100%); }
+  .sh-bg11 { background: linear-gradient(135deg, #2a0f3a 0%, #4a1a6a 100%); }
+  .sheet-header .sh-deco { font-size: 60px; font-weight: 900; color: rgba(255,255,255,0.1); position: absolute; top: 0; right: 10px; line-height: 1; }
+  .sheet-header .sh-en { font-size: 10px; color: var(--gold); font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+  .sheet-header h2 { font-size: 20px; font-weight: 900; }
+  .sheet-header .sh-desc { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 6px; line-height: 1.5; }
+
+  /* カード */
+  .card { background: white; border-radius: 16px; padding: 18px; margin-bottom: 14px; box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+  .card-title { font-size: 12px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--gold); display: flex; align-items: center; gap: 6px; }
+  .card-title .ct-icon { font-size: 16px; }
+  .field-label { font-size: 12px; font-weight: 700; color: #555; margin-bottom: 6px; margin-top: 12px; }
+  .field-label:first-child { margin-top: 0; }
+  textarea { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 12px; font-size: 15px; font-family: inherit; resize: none; line-height: 1.6; transition: border-color 0.2s; color: var(--text); background: white; }
+  textarea:focus { outline: none; border-color: var(--navy); }
+  textarea::placeholder { color: #b0c0d0; font-size: 13px; }
+  input[type="text"], input[type="date"] { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 12px; font-size: 15px; font-family: inherit; transition: border-color 0.2s; color: var(--text); background: white; }
+  input[type="text"]:focus, input[type="date"]:focus { outline: none; border-color: var(--navy); }
+  .tip-box { background: linear-gradient(135deg, #fff8e8 0%, #fff3d0 100%); border-left: 4px solid var(--gold); border-radius: 0 10px 10px 0; padding: 10px 14px; font-size: 13px; line-height: 1.7; color: #555; margin-top: 10px; }
+  .why-text { background: #f0f4f8; border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.7; color: #444; }
+  .numbered-section { border-left: 3px solid var(--navy); padding-left: 14px; margin-bottom: 12px; }
+  .ns-num { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+  .ns-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+
+  /* スキルチェック */
+  .skill-grid { display: flex; flex-direction: column; gap: 14px; }
+  .skill-item .skill-name { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+  .skill-stars { display: flex; gap: 6px; }
+  .star-btn { width: 40px; height: 40px; border-radius: 8px; border: 2px solid var(--border); background: white; font-size: 18px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .star-btn.on { border-color: var(--gold); background: #fff8e0; }
+
+  /* カレンダー */
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; }
+  .cal-day-name { text-align: center; font-size: 10px; font-weight: 700; color: #888; padding: 4px 2px; }
+  .cal-day-name:first-child { color: #e55; }
+  .cal-day-name:last-child { color: #55e; }
+  .cal-cell { border: 1px solid var(--border); border-radius: 6px; min-height: 48px; padding: 4px; font-size: 10px; background: white; cursor: pointer; }
+  .cal-cell .cal-num { font-size: 11px; font-weight: 700; color: var(--navy); }
+  .cal-cell input { width: 100%; border: none; font-size: 9px; font-family: inherit; color: #444; background: transparent; padding: 0; margin-top: 2px; }
+  .cal-cell input:focus { outline: none; }
+
+  /* 行動記録 */
+  .log-list { display: flex; flex-direction: column; gap: 8px; }
+  .log-item { display: flex; gap: 10px; align-items: flex-start; }
+  .log-date { font-size: 11px; font-weight: 700; color: var(--navy); min-width: 36px; padding-top: 12px; }
+  .log-fields { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .log-fields input { border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-size: 13px; font-family: inherit; }
+  .log-fields input:focus { outline: none; border-color: var(--navy); }
+  .add-log-btn { width: 100%; padding: 12px; border: 2px dashed var(--border); border-radius: 10px; background: white; font-size: 14px; font-weight: 700; color: #888; cursor: pointer; font-family: inherit; margin-top: 8px; }
+  .add-log-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* セーブバー */
+  .save-bar { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 16px; background: white; border-top: 1px solid var(--border); z-index: 200; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
+  .save-btn { width: 100%; max-width: 600px; margin: 0 auto; display: block; padding: 14px; background: var(--navy); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 900; cursor: pointer; font-family: inherit; }
+  .save-btn:active { background: var(--accent); }
+
+  /* トースト */
+  .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(0,0,0,0.85); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; opacity: 0; transition: all 0.3s; z-index: 999; white-space: nowrap; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast">保存しました ✓</div>
+
+<!-- アプリバー -->
+<div class="app-bar">
+  <span class="brand">SALESBREAK</span>
+  <h1>営業実践ワークブック</h1>
+  <div class="subtitle">DAILY ACTION WORKBOOK</div>
+</div>
+
+<!-- ナビタブ -->
+<div class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" onclick="showPanel('home')" data-panel="home">
+    <span class="tab-icon">🏠</span>ホーム
+  </button>
+  <button class="nav-tab" onclick="showPanel('morning')" data-panel="morning">
+    <span class="tab-icon">🌅</span>朝5分
+  </button>
+  <button class="nav-tab" onclick="showPanel('before')" data-panel="before">
+    <span class="tab-icon">📋</span>商談準備
+  </button>
+  <button class="nav-tab" onclick="showPanel('review')" data-panel="review">
+    <span class="tab-icon">💬</span>商談振返
+  </button>
+  <button class="nav-tab" onclick="showPanel('goal')" data-panel="goal">
+    <span class="tab-icon">🎯</span>目標設定
+  </button>
+  <button class="nav-tab" onclick="showPanel('improve')" data-panel="improve">
+    <span class="tab-icon">📈</span>改善プラン
+  </button>
+  <button class="nav-tab" onclick="showPanel('log')" data-panel="log">
+    <span class="tab-icon">📝</span>行動記録
+  </button>
+  <button class="nav-tab" onclick="showPanel('success')" data-panel="success">
+    <span class="tab-icon">⭐</span>成功パターン
+  </button>
+  <button class="nav-tab" onclick="showPanel('failure')" data-panel="failure">
+    <span class="tab-icon">🔍</span>失敗分析
+  </button>
+  <button class="nav-tab" onclick="showPanel('skill')" data-panel="skill">
+    <span class="tab-icon">💪</span>スキル確認
+  </button>
+  <button class="nav-tab" onclick="showPanel('monthly')" data-panel="monthly">
+    <span class="tab-icon">📅</span>月間計画
+  </button>
+  <button class="nav-tab" onclick="showPanel('weekly')" data-panel="weekly">
+    <span class="tab-icon">🔄</span>週次振返
+  </button>
+</div>
+
+<!-- ホームパネル -->
+<div class="home-panel" id="panel-home">
+  <div class="hero-card">
+    <div class="hero-brand">SALESBREAK WORKBOOK</div>
+    <h2>営業実践<br>ワークブック</h2>
+    <p>毎日の商談・準備・振り返りを記録して<br>自分の営業パターンを可視化する</p>
+  </div>
+  <div class="intro-copy">
+    <div class="tagline">うまくいかない理由を探すのではなく、<br>次にうまくいく確率を、1%でも上げる。</div>
+    <p>営業という仕事は、才能ではなく「行動の積み重ね」で結果が変わります。このワークブックは、毎日の商談・準備・振り返りを決まったフォーマットで書き込むことで、自分の営業パターンを可視化し、少しずつ改善していくためのツールです。</p>
+  </div>
+  <div class="benefits">
+    <div class="benefit-item">
+      <span class="benefit-icon">📊</span>
+      <div class="benefit-text">毎日の行動を記録し、自分の営業パターンを可視化できる</div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">⏱</span>
+      <div class="benefit-text">商談前後の5分で、準備と振り返りの習慣がつく</div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">🔍</span>
+      <div class="benefit-text">失敗の原因を深掘りし、同じミスを繰り返さなくなる</div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">⭐</span>
+      <div class="benefit-text">成功パターンを言語化し、再現できるようになる</div>
+    </div>
+    <div class="benefit-item">
+      <span class="benefit-icon">🔄</span>
+      <div class="benefit-text">週次・月次で振り返り、行動を継続的に修正できる</div>
+    </div>
+  </div>
+  <div class="how-to">
+    <h3>📖 使い方</h3>
+    <div class="how-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">朝5分・商談前5分で準備する</div>
+        <div class="step-desc">1日の始まりと商談前に、目的と行動を言語化する</div>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">商談後5分で振り返る</div>
+        <div class="step-desc">うまくいった点・改善点をすぐに記録する</div>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">週末・月末にまとめる</div>
+        <div class="step-desc">パターンを俯瞰し、次の行動計画に落とし込む</div>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">繰り返す</div>
+        <div class="step-desc">習慣化することで、営業力が積み上がっていく</div>
+      </div>
+    </div>
+  </div>
+  <div class="how-to">
+    <h3>📋 シート一覧</h3>
+    <div class="sheet-grid">
+      <div class="sheet-card" onclick="showPanel('morning')">
+        <div class="sc-icon">🌅</div>
+        <div class="sc-title">朝5分シート</div>
+        <div class="sc-sub">今日の1つの行動</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('before')">
+        <div class="sc-icon">📋</div>
+        <div class="sc-title">商談準備シート</div>
+        <div class="sc-sub">商談前5分</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('review')">
+        <div class="sc-icon">💬</div>
+        <div class="sc-title">商談振り返り</div>
+        <div class="sc-sub">事実→気づき→改善</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('goal')">
+        <div class="sc-icon">🎯</div>
+        <div class="sc-title">目標設定シート</div>
+        <div class="sc-sub">目標→理由→行動</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('improve')">
+        <div class="sc-icon">📈</div>
+        <div class="sc-title">改善プランシート</div>
+        <div class="sc-sub">優先3つに絞る</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('log')">
+        <div class="sc-icon">📝</div>
+        <div class="sc-title">行動記録シート</div>
+        <div class="sc-sub">1行で毎日記録</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('success')">
+        <div class="sc-icon">⭐</div>
+        <div class="sc-title">成功パターン</div>
+        <div class="sc-sub">再現できる形に</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('failure')">
+        <div class="sc-icon">🔍</div>
+        <div class="sc-title">失敗分析シート</div>
+        <div class="sc-sub">なぜ？を5回</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('skill')">
+        <div class="sc-icon">💪</div>
+        <div class="sc-title">スキルチェック</div>
+        <div class="sc-sub">5段階で自己評価</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('monthly')">
+        <div class="sc-icon">📅</div>
+        <div class="sc-title">月間計画シート</div>
+        <div class="sc-sub">カレンダー入力</div>
+      </div>
+      <div class="sheet-card" onclick="showPanel('weekly')">
+        <div class="sc-icon">🔄</div>
+        <div class="sc-title">週次振り返り</div>
+        <div class="sc-sub">来週につなげる</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip-box">💡 書くことに正解はありません。うまく書こうとせず、思ったことをそのまま書いてください。毎日続けることを優先する。完璧な記録より、毎日書き続けることの方が価値があります。</div>
+</div>
+
+<!-- 朝5分シート -->
+<div class="sheet-panel" id="panel-morning">
+  <div class="sheet-header sh-bg1">
+    <div class="sh-deco">朝</div>
+    <div class="sh-en">MORNING 5MIN</div>
+    <h2>朝5分シート</h2>
+    <div class="sh-desc">1日の始まりに、今日いちばん大切な行動を1つだけ決める</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📅</span>今日の日付</div>
+    <input type="date" id="m-date">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🎯</span>今日の1つの行動</div>
+    <div class="tip-box" style="margin-bottom:12px;">抽象的な目標ではなく「誰が」「何を」「いつまでに」がわかる1文にすると、行動に移しやすくなります。<br><br>例）今日中に、A社の担当者から見積の依頼をいただく。</div>
+    <div class="field-label">今日の1つの行動を書く</div>
+    <textarea id="m-action" rows="3" placeholder="今日中に、〇〇さんから〇〇をいただく。"></textarea>
+    <div class="tip-box" style="margin-top:10px;">○ 小さな1歩でも、書けば行動になる。</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📝</span>今日のメモ</div>
+    <textarea id="m-memo" rows="3" placeholder="その他、今日の気づきや意識すること…"></textarea>
+  </div>
+</div>
+
+<!-- 商談準備シート -->
+<div class="sheet-panel" id="panel-before">
+  <div class="sheet-header sh-bg2">
+    <div class="sh-deco">前</div>
+    <div class="sh-en">BEFORE 5MIN</div>
+    <h2>商談準備シート</h2>
+    <div class="sh-desc">商談の前5分で、目的と想定を整理する</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🏢</span>基本情報</div>
+    <div class="field-label">会社名・担当者名</div>
+    <input type="text" id="b-company" placeholder="〇〇株式会社 / 〇〇さん">
+    <div class="field-label">商談の場所</div>
+    <input type="text" id="b-place" placeholder="先方オフィス / Zoom / 電話…">
+    <div class="field-label">決裁者</div>
+    <input type="text" id="b-decision" placeholder="同席者・決裁者の名前">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🎯</span>今日の目的</div>
+    <div class="field-label">この商談が終わった時、何が決まっていればゴールか</div>
+    <textarea id="b-goal" rows="3" placeholder="例）見積依頼をいただく / 次回アポを取る / 課題を明確にする"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">✅</span>今日確認したいこと</div>
+    <div class="field-label">□ 予算感</div>
+    <textarea id="b-budget" rows="2" placeholder="予算感・導入時期について確認することを書く"></textarea>
+    <div class="field-label">□ 競合状況</div>
+    <textarea id="b-comp" rows="2" placeholder="他社との比較・検討状況"></textarea>
+    <div class="field-label">□ 決裁フロー</div>
+    <textarea id="b-flow" rows="2" placeholder="誰が決めるか・どんなプロセスか"></textarea>
+    <div class="field-label">□ 懸念点</div>
+    <textarea id="b-concern" rows="2" placeholder="相手が持ちそうな懸念・反論"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💭</span>相手が得たい未来</div>
+    <textarea id="b-future" rows="3" placeholder="相手はこの商談で何を得たいと考えているか"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">❓</span>想定質問へのメモ</div>
+    <textarea id="b-qa" rows="4" placeholder="想定される質問と、その回答のポイント"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">➡️</span>次のアクション（商談後記入）</div>
+    <textarea id="b-next" rows="3" placeholder="商談後に決まった次のステップ"></textarea>
+  </div>
+  <div class="tip-box">○ 準備した分だけ、商談で落ち着いて話せる。</div>
+</div>
+
+<!-- 商談振り返りシート -->
+<div class="sheet-panel" id="panel-review">
+  <div class="sheet-header sh-bg3">
+    <div class="sh-deco">振</div>
+    <div class="sh-en">REVIEW</div>
+    <h2>商談振り返りシート</h2>
+    <div class="sh-desc">商談直後に、事実→気づき→改善の順で振り返る</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🏢</span>商談情報</div>
+    <div class="field-label">会社名・担当者名</div>
+    <input type="text" id="r-company" placeholder="〇〇株式会社 / 〇〇さん">
+    <div class="field-label">日付</div>
+    <input type="date" id="r-date">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">1️⃣</span>事実</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 1</div>
+      <div class="ns-title">商談で実際に何が起きたか、客観的な事実を書く</div>
+    </div>
+    <textarea id="r-fact" rows="5" placeholder="• 提案した内容
+• 相手の反応
+• 決まったこと / 決まらなかったこと
+• 出てきた懸念や質問"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">2️⃣</span>気づき</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 2</div>
+      <div class="ns-title">その事実から、何に気づいたか</div>
+    </div>
+    <textarea id="r-notice" rows="4" placeholder="気づいたこと、感じたこと、分かったことを書く"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">3️⃣</span>改善</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 3</div>
+      <div class="ns-title">次回、何を変えるか</div>
+    </div>
+    <textarea id="r-improve" rows="4" placeholder="次の商談で変えること・試すことを具体的に書く"></textarea>
+  </div>
+  <div class="tip-box">記憶が新しいうちに書くほど、精度が上がる。</div>
+</div>
+
+<!-- 目標設定シート -->
+<div class="sheet-panel" id="panel-goal">
+  <div class="sheet-header sh-bg4">
+    <div class="sh-deco">目</div>
+    <div class="sh-en">GOAL SETTING</div>
+    <h2>目標設定シート</h2>
+    <div class="sh-desc">目標→理由→行動の順に整理し、行動につなげる</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🎯</span>目標</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 1</div>
+      <div class="ns-title">達成したい数字・状態を具体的に書く</div>
+    </div>
+    <textarea id="g-goal" rows="4" placeholder="例）今月中に新規受注3件を獲得する
+例）月商100万円を達成する"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">❤️</span>理由</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 2</div>
+      <div class="ns-title">なぜそれを達成したいのか</div>
+    </div>
+    <textarea id="g-reason" rows="4" placeholder="なぜこの目標を達成したいのか、本音を書く"></textarea>
+    <div class="tip-box">理由が明確な目標ほど、行動が続きやすい。</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">👟</span>行動</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 3</div>
+      <div class="ns-title">今日から何をするか</div>
+    </div>
+    <textarea id="g-action" rows="4" placeholder="具体的な行動を書く（いつ・何を・どれくらい）"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📅</span>期限</div>
+    <input type="date" id="g-deadline">
+  </div>
+</div>
+
+<!-- 改善プランシート -->
+<div class="sheet-panel" id="panel-improve">
+  <div class="sheet-header sh-bg5">
+    <div class="sh-deco">改</div>
+    <div class="sh-en">IMPROVEMENT PLAN</div>
+    <h2>改善プランシート</h2>
+    <div class="sh-desc">優先度の高い改善点を3つに絞り、期限を決める</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">1️⃣</span>改善点 1</div>
+    <div class="field-label">改善点</div>
+    <textarea id="i1-point" rows="2" placeholder="何を改善するか"></textarea>
+    <div class="field-label">改善内容</div>
+    <textarea id="i1-content" rows="3" placeholder="具体的にどう変えるか"></textarea>
+    <div class="field-label">実行期限</div>
+    <input type="date" id="i1-deadline">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">2️⃣</span>改善点 2</div>
+    <div class="field-label">改善点</div>
+    <textarea id="i2-point" rows="2" placeholder="何を改善するか"></textarea>
+    <div class="field-label">改善内容</div>
+    <textarea id="i2-content" rows="3" placeholder="具体的にどう変えるか"></textarea>
+    <div class="field-label">実行期限</div>
+    <input type="date" id="i2-deadline">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">3️⃣</span>改善点 3</div>
+    <div class="field-label">改善点</div>
+    <textarea id="i3-point" rows="2" placeholder="何を改善するか"></textarea>
+    <div class="field-label">改善内容</div>
+    <textarea id="i3-content" rows="3" placeholder="具体的にどう変えるか"></textarea>
+    <div class="field-label">実行期限</div>
+    <input type="date" id="i3-deadline">
+  </div>
+  <div class="tip-box">○ 絞り込むほど、改善は実行に移しやすくなる。</div>
+</div>
+
+<!-- 行動記録シート -->
+<div class="sheet-panel" id="panel-log">
+  <div class="sheet-header sh-bg6">
+    <div class="sh-deco">録</div>
+    <div class="sh-en">ACTION LOG</div>
+    <h2>行動記録シート</h2>
+    <div class="sh-desc">毎日の行動を1行で記録し、積み重ねを可視化する</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📝</span>行動ログ</div>
+    <div class="tip-box" style="margin-bottom:14px;">1行でいい。続けることに価値がある。</div>
+    <div class="log-list" id="logList"></div>
+    <button class="add-log-btn" onclick="addLogItem()">＋ 行を追加する</button>
+  </div>
+</div>
+
+<!-- 成功パターン記録 -->
+<div class="sheet-panel" id="panel-success">
+  <div class="sheet-header sh-bg7">
+    <div class="sh-deco">成</div>
+    <div class="sh-en">SUCCESS PATTERN</div>
+    <h2>成功パターン記録</h2>
+    <div class="sh-desc">うまくいった商談を分解し、再現できる形にする</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📅</span>日付・案件名</div>
+    <div class="field-label">日付</div>
+    <input type="date" id="s-date">
+    <div class="field-label">案件名</div>
+    <input type="text" id="s-deal" placeholder="〇〇社 / 〇〇の受注">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">1️⃣</span>何が起きたか</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 1</div>
+      <div class="ns-title">受注・好反応など、うまくいった出来事を書く</div>
+    </div>
+    <textarea id="s-what" rows="4" placeholder="どんな成果が出たか、何が起きたか"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">2️⃣</span>なぜ成功したか</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 2</div>
+      <div class="ns-title">自分の行動・準備・話し方など、要因を深掘りする</div>
+    </div>
+    <textarea id="s-why" rows="4" placeholder="何が成功の要因だったか（準備・聞き方・提案内容など）"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">3️⃣</span>次にどう再現するか</div>
+    <div class="numbered-section">
+      <div class="ns-num">STEP 3</div>
+      <div class="ns-title">次の商談で同じ要因を再現する方法を書く</div>
+    </div>
+    <textarea id="s-how" rows="4" placeholder="次回、同じ結果を出すために何をするか"></textarea>
+  </div>
+</div>
+
+<!-- 失敗分析シート -->
+<div class="sheet-panel" id="panel-failure">
+  <div class="sheet-header sh-bg8">
+    <div class="sh-deco">失</div>
+    <div class="sh-en">FAILURE ANALYSIS</div>
+    <h2>失敗分析シート</h2>
+    <div class="sh-desc">「なぜ？」を5回繰り返し、本当の原因を掘り下げる</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📅</span>日付・案件名</div>
+    <div class="field-label">日付</div>
+    <input type="date" id="f-date">
+    <div class="field-label">案件名</div>
+    <input type="text" id="f-deal" placeholder="〇〇社 / 〇〇の失注">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">❌</span>失敗した内容</div>
+    <textarea id="f-what" rows="3" placeholder="何が失敗したか、どんな結果になったか"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🔍</span>なぜ？を5回</div>
+    <div class="field-label">① なぜ、この結果になったのか？</div>
+    <textarea id="f-why1" rows="2" placeholder="最初の「なぜ」"></textarea>
+    <div class="field-label">② なぜ、それが起きたのか？</div>
+    <textarea id="f-why2" rows="2" placeholder="2つ目の「なぜ」"></textarea>
+    <div class="field-label">③ なぜ、それが原因なのか？</div>
+    <textarea id="f-why3" rows="2" placeholder="3つ目の「なぜ」"></textarea>
+    <div class="field-label">④ なぜ、それを防げなかったのか？</div>
+    <textarea id="f-why4" rows="2" placeholder="4つ目の「なぜ」"></textarea>
+    <div class="field-label">⑤ なぜ、根本的にそうなるのか？</div>
+    <textarea id="f-why5" rows="2" placeholder="5つ目の「なぜ」（本当の原因）"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💡</span>本当の原因と改善策</div>
+    <div class="field-label">本当の原因</div>
+    <textarea id="f-root" rows="2" placeholder="5回のなぜで見えてきた根本原因"></textarea>
+    <div class="field-label">改善策</div>
+    <textarea id="f-fix" rows="3" placeholder="次回から何を変えるか"></textarea>
+  </div>
+</div>
+
+<!-- スキルチェック -->
+<div class="sheet-panel" id="panel-skill">
+  <div class="sheet-header sh-bg9">
+    <div class="sh-deco">力</div>
+    <div class="sh-en">SKILL CHECK</div>
+    <h2>スキルチェック</h2>
+    <div class="sh-desc">自分の営業スキルを俯瞰し、伸ばしたい力を見つける</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💪</span>現在のスキルレベル（各項目を5段階で自己評価）</div>
+    <div class="skill-grid">
+      <div class="skill-item">
+        <div class="skill-name">準備力</div>
+        <div class="skill-stars" id="stars-prep"></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">ヒアリング力</div>
+        <div class="skill-stars" id="stars-hear"></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">提案力</div>
+        <div class="skill-stars" id="stars-prop"></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">関係構築力</div>
+        <div class="skill-stars" id="stars-rel"></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">クロージング力</div>
+        <div class="skill-stars" id="stars-close"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🎯</span>特に伸ばしたい力</div>
+    <div class="field-label">伸ばしたいスキル</div>
+    <input type="text" id="sk-target" placeholder="例）ヒアリング力">
+    <div class="field-label">その理由（なぜ今の自分に必要か）</div>
+    <textarea id="sk-reason" rows="4" placeholder="なぜその力が今の自分に必要だと思うか"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">👟</span>この1ヶ月で取り組むこと</div>
+    <textarea id="sk-action" rows="4" placeholder="スキルアップのために具体的に何をするか"></textarea>
+  </div>
+</div>
+
+<!-- 月間計画シート -->
+<div class="sheet-panel" id="panel-monthly">
+  <div class="sheet-header sh-bg10">
+    <div class="sh-deco">月</div>
+    <div class="sh-en">MONTHLY PLAN</div>
+    <h2>月間計画シート</h2>
+    <div class="sh-desc">今月の焦点と予定を先に決め、月末に振り返るための土台にする</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📅</span>対象月</div>
+    <input type="month" id="mn-month">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🎯</span>今月のテーマ</div>
+    <div class="field-label">今月、特に力を入れて取り組む1つのテーマを先に決めておく</div>
+    <textarea id="mn-theme" rows="3" placeholder="例）新規開拓を強化し、初回商談の件数を増やす"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📊</span>今月のKPI</div>
+    <div class="field-label">商談件数（目標）</div>
+    <input type="text" id="mn-meetings-g" placeholder="例）20件">
+    <div class="field-label">商談件数（実績）</div>
+    <input type="text" id="mn-meetings-r" placeholder="月末に記入">
+    <div class="field-label">受注件数（目標）</div>
+    <input type="text" id="mn-orders-g" placeholder="例）5件">
+    <div class="field-label">受注件数（実績）</div>
+    <input type="text" id="mn-orders-r" placeholder="月末に記入">
+    <div class="field-label">新規接点（目標）</div>
+    <input type="text" id="mn-new-g" placeholder="例）10件">
+    <div class="field-label">新規接点（実績）</div>
+    <input type="text" id="mn-new-r" placeholder="月末に記入">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">❌</span>今月やらないこと</div>
+    <div class="tip-box" style="margin-bottom:10px;">やることを増やす前に、やめることを決める。</div>
+    <textarea id="mn-noaction" rows="4" placeholder="例）的を絞らない飛び込み営業
+例）見込みの薄い商談への深追い
+例）資料作りへの時間のかけすぎ"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📋</span>今月のカレンダー（商談予定・重要日程）</div>
+    <div class="tip-box" style="margin-bottom:12px;">商談予定日や締め日など、主な予定を書き込んでください。</div>
+    <div id="calendarArea"></div>
+  </div>
+</div>
+
+<!-- 週次振り返りシート -->
+<div class="sheet-panel" id="panel-weekly">
+  <div class="sheet-header sh-bg11">
+    <div class="sh-deco">週</div>
+    <div class="sh-en">WEEKLY REVIEW</div>
+    <h2>週次振り返りシート</h2>
+    <div class="sh-desc">1週間の行動を振り返り、来週につなげる</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📅</span>対象週</div>
+    <div class="field-label">週の開始日</div>
+    <input type="date" id="w-start">
+    <div class="field-label">週の終了日</div>
+    <input type="date" id="w-end">
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">✅</span>チェックリスト</div>
+    <div id="weeklyChecks"></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💡</span>気づき・学び</div>
+    <div class="field-label">今週、商談や行動を通じて気づいたことを書く</div>
+    <textarea id="w-learning" rows="5" placeholder="今週の気づき・学んだこと・感じたこと"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">👟</span>来週やること</div>
+    <textarea id="w-next" rows="4" placeholder="来週に向けて、具体的にやることを書く"></textarea>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💬</span>今週のひとこと</div>
+    <textarea id="w-oneword" rows="3" placeholder="今週を一言で表すと…"></textarea>
+    <div class="tip-box" style="margin-top:10px;">振り返りは、次の1週間の質を決める。</div>
+  </div>
+  <div class="closing-msg" style="text-align:center;padding:24px 0;color:var(--navy);">
+    <div style="font-size:20px;font-weight:900;line-height:1.6;margin-bottom:8px;">行動は、才能ではなく、<br>習慣で変えられる。</div>
+    <div style="font-size:13px;color:#666;">今日、このページを閉じたあとの1つの行動が、<br>明日のあなたを変えていきます。</div>
+  </div>
+</div>
+
+<!-- セーブバー -->
+<div class="save-bar">
+  <button class="save-btn" onclick="saveAll()">💾 保存する</button>
+</div>
+
+<script>
+const SAVE_KEY = 'sb_workbook_data';
+let currentPanel = 'home';
+let logCount = 0;
+const skillKeys = ['prep','hear','prop','rel','close'];
+const skillScores = {prep:0, hear:0, prop:0, rel:0, close:0};
+
+const weeklyCheckItems = [
+  '今週決めた行動を実行できた',
+  '商談前後の振り返りを続けられた',
+  '来週に向けた課題が見えている'
+];
+
+function showPanel(id) {
+  document.querySelectorAll('.sheet-panel, .home-panel').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('panel-' + id);
+  if (target) target.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.panel === id);
+  });
+  currentPanel = id;
+  window.scrollTo(0, 0);
+}
+
+function buildSkillStars() {
+  skillKeys.forEach(key => {
+    const el = document.getElementById('stars-' + key);
+    if (!el) return;
+    el.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'star-btn' + (skillScores[key] >= i ? ' on' : '');
+      btn.textContent = '★';
+      btn.onclick = () => { skillScores[key] = i; buildSkillStars(); };
+      el.appendChild(btn);
+    }
+  });
+}
+
+function buildWeeklyChecks() {
+  const el = document.getElementById('weeklyChecks');
+  if (!el) return;
+  el.innerHTML = weeklyCheckItems.map((item, i) => `
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #eee;">
+      <input type="checkbox" id="wc-${i}" style="width:22px;height:22px;accent-color:var(--navy);">
+      <label for="wc-${i}" style="font-size:14px;font-weight:700;color:var(--navy);">${item}</label>
+    </div>
+  `).join('');
+}
+
+function buildCalendar(year, month) {
+  const area = document.getElementById('calendarArea');
+  if (!area) return;
+  const firstDay = new Date(year, month - 1, 1).getDay();
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const dayNames = ['日','月','火','水','木','金','土'];
+  let html = `<div class="cal-header">${dayNames.map(d => `<div class="cal-day-name">${d}</div>`).join('')}</div><div class="cal-grid">`;
+  for (let i = 0; i < firstDay; i++) html += '<div></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    html += `<div class="cal-cell"><div class="cal-num">${d}</div><input type="text" id="cal-${d}" placeholder="" style="font-size:9px;"></div>`;
+  }
+  html += '</div>';
+  area.innerHTML = html;
+  loadCalendarData();
+}
+
+function loadCalendarData() {
+  const data = loadData();
+  if (data && data.calendar) {
+    Object.keys(data.calendar).forEach(k => {
+      const el = document.getElementById('cal-' + k);
+      if (el) el.value = data.calendar[k];
+    });
+  }
+}
+
+function addLogItem() {
+  logCount++;
+  const list = document.getElementById('logList');
+  const today = new Date().toLocaleDateString('ja-JP', {month:'2-digit', day:'2-digit'});
+  const item = document.createElement('div');
+  item.className = 'log-item';
+  item.id = 'log-' + logCount;
+  item.innerHTML = `
+    <div class="log-date">${today}</div>
+    <div class="log-fields">
+      <input type="text" id="log-action-${logCount}" placeholder="今日の行動">
+      <input type="text" id="log-memo-${logCount}" placeholder="一言振り返り">
+    </div>
+  `;
+  list.appendChild(item);
+}
+
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? (el.type === 'checkbox' ? el.checked : el.value) : '';
+}
+
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (el.type === 'checkbox') el.checked = !!val;
+  else el.value = val || '';
+}
+
+function saveAll() {
+  const data = {
+    morning: { date: getVal('m-date'), action: getVal('m-action'), memo: getVal('m-memo') },
+    before: { company: getVal('b-company'), place: getVal('b-place'), decision: getVal('b-decision'), goal: getVal('b-goal'), budget: getVal('b-budget'), comp: getVal('b-comp'), flow: getVal('b-flow'), concern: getVal('b-concern'), future: getVal('b-future'), qa: getVal('b-qa'), next: getVal('b-next') },
+    review: { company: getVal('r-company'), date: getVal('r-date'), fact: getVal('r-fact'), notice: getVal('r-notice'), improve: getVal('r-improve') },
+    goal: { goal: getVal('g-goal'), reason: getVal('g-reason'), action: getVal('g-action'), deadline: getVal('g-deadline') },
+    improve: { i1p: getVal('i1-point'), i1c: getVal('i1-content'), i1d: getVal('i1-deadline'), i2p: getVal('i2-point'), i2c: getVal('i2-content'), i2d: getVal('i2-deadline'), i3p: getVal('i3-point'), i3c: getVal('i3-content'), i3d: getVal('i3-deadline') },
+    log: { count: logCount, items: [] },
+    success: { date: getVal('s-date'), deal: getVal('s-deal'), what: getVal('s-what'), why: getVal('s-why'), how: getVal('s-how') },
+    failure: { date: getVal('f-date'), deal: getVal('f-deal'), what: getVal('f-what'), why1: getVal('f-why1'), why2: getVal('f-why2'), why3: getVal('f-why3'), why4: getVal('f-why4'), why5: getVal('f-why5'), root: getVal('f-root'), fix: getVal('f-fix') },
+    skill: { scores: {...skillScores}, target: getVal('sk-target'), reason: getVal('sk-reason'), action: getVal('sk-action') },
+    monthly: { month: getVal('mn-month'), theme: getVal('mn-theme'), meetingsG: getVal('mn-meetings-g'), meetingsR: getVal('mn-meetings-r'), ordersG: getVal('mn-orders-g'), ordersR: getVal('mn-orders-r'), newG: getVal('mn-new-g'), newR: getVal('mn-new-r'), noaction: getVal('mn-noaction') },
+    weekly: { start: getVal('w-start'), end: getVal('w-end'), learning: getVal('w-learning'), next: getVal('w-next'), oneword: getVal('w-oneword'), checks: weeklyCheckItems.map((_, i) => getVal('wc-' + i)) },
+    calendar: {}
+  };
+  for (let d = 1; d <= 31; d++) {
+    const el = document.getElementById('cal-' + d);
+    if (el && el.value) data.calendar[d] = el.value;
+  }
+  for (let i = 1; i <= logCount; i++) {
+    data.log.items.push({ action: getVal('log-action-' + i), memo: getVal('log-memo-' + i) });
+  }
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch(e) {}
+  showToast('保存しました ✓');
+}
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); } catch(e) { return null; }
+}
+
+function loadAll() {
+  const data = loadData();
+  if (!data) return;
+  if (data.morning) { setVal('m-date', data.morning.date); setVal('m-action', data.morning.action); setVal('m-memo', data.morning.memo); }
+  if (data.before) { setVal('b-company', data.before.company); setVal('b-place', data.before.place); setVal('b-decision', data.before.decision); setVal('b-goal', data.before.goal); setVal('b-budget', data.before.budget); setVal('b-comp', data.before.comp); setVal('b-flow', data.before.flow); setVal('b-concern', data.before.concern); setVal('b-future', data.before.future); setVal('b-qa', data.before.qa); setVal('b-next', data.before.next); }
+  if (data.review) { setVal('r-company', data.review.company); setVal('r-date', data.review.date); setVal('r-fact', data.review.fact); setVal('r-notice', data.review.notice); setVal('r-improve', data.review.improve); }
+  if (data.goal) { setVal('g-goal', data.goal.goal); setVal('g-reason', data.goal.reason); setVal('g-action', data.goal.action); setVal('g-deadline', data.goal.deadline); }
+  if (data.improve) { setVal('i1-point', data.improve.i1p); setVal('i1-content', data.improve.i1c); setVal('i1-deadline', data.improve.i1d); setVal('i2-point', data.improve.i2p); setVal('i2-content', data.improve.i2c); setVal('i2-deadline', data.improve.i2d); setVal('i3-point', data.improve.i3p); setVal('i3-content', data.improve.i3c); setVal('i3-deadline', data.improve.i3d); }
+  if (data.log && data.log.items) {
+    data.log.items.forEach((item) => {
+      addLogItem();
+      setVal('log-action-' + logCount, item.action);
+      setVal('log-memo-' + logCount, item.memo);
+    });
+  }
+  if (data.success) { setVal('s-date', data.success.date); setVal('s-deal', data.success.deal); setVal('s-what', data.success.what); setVal('s-why', data.success.why); setVal('s-how', data.success.how); }
+  if (data.failure) { setVal('f-date', data.failure.date); setVal('f-deal', data.failure.deal); setVal('f-what', data.failure.what); setVal('f-why1', data.failure.why1); setVal('f-why2', data.failure.why2); setVal('f-why3', data.failure.why3); setVal('f-why4', data.failure.why4); setVal('f-why5', data.failure.why5); setVal('f-root', data.failure.root); setVal('f-fix', data.failure.fix); }
+  if (data.skill) { if (data.skill.scores) Object.assign(skillScores, data.skill.scores); buildSkillStars(); setVal('sk-target', data.skill.target); setVal('sk-reason', data.skill.reason); setVal('sk-action', data.skill.action); }
+  if (data.monthly) { setVal('mn-month', data.monthly.month); setVal('mn-theme', data.monthly.theme); setVal('mn-meetings-g', data.monthly.meetingsG); setVal('mn-meetings-r', data.monthly.meetingsR); setVal('mn-orders-g', data.monthly.ordersG); setVal('mn-orders-r', data.monthly.ordersR); setVal('mn-new-g', data.monthly.newG); setVal('mn-new-r', data.monthly.newR); setVal('mn-noaction', data.monthly.noaction); }
+  if (data.weekly) { setVal('w-start', data.weekly.start); setVal('w-end', data.weekly.end); setVal('w-learning', data.weekly.learning); setVal('w-next', data.weekly.next); setVal('w-oneword', data.weekly.oneword); if (data.weekly.checks) data.weekly.checks.forEach((v, i) => setVal('wc-' + i, v)); }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// 月間カレンダーの月変更を監視
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'mn-month' && e.target.value) {
+    const [y, m] = e.target.value.split('-').map(Number);
+    buildCalendar(y, m);
+  }
+});
+
+// 自動保存（30秒）
+setInterval(saveAll, 30000);
+
+// 初期化
+function init() {
+  buildSkillStars();
+  buildWeeklyChecks();
+  const now = new Date();
+  buildCalendar(now.getFullYear(), now.getMonth() + 1);
+  if (logCount === 0) addLogItem();
+  loadAll();
+  showPanel('home');
+}
+
+init();
+</script>
+</body>
+</html>
