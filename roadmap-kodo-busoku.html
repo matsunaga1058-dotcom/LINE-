@@ -38,12 +38,18 @@ body {
 .cover {
   background: var(--navy);
   width: 100%;
-  padding: 72px 32px 64px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   min-height: 100svh;
+}
+
+.cover-content {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 72px 32px 64px;
 }
 
 .cover::before {
@@ -123,12 +129,20 @@ body {
 /* ━━━━━━━━━━━━━━━━━━━
    コンテンツセクション共通
 ━━━━━━━━━━━━━━━━━━━ */
+
+/* 外枠: 画面幅いっぱいに背景を広げる */
 .section {
   background: var(--cream);
   width: 100%;
-  padding: 52px 28px 64px;
   position: relative;
   border-top: 4px solid var(--cream-dark);
+}
+
+/* 内側: コンテンツ幅を制限して中央寄せ */
+.section-content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 52px 28px 64px;
 }
 
 .section:first-of-type { border-top: none; }
@@ -507,8 +521,13 @@ body {
 .final-section {
   background: var(--navy);
   width: 100%;
-  padding: 56px 28px 72px;
   position: relative;
+}
+
+.final-content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px 28px 72px;
 }
 
 .final-section::before {
@@ -607,6 +626,11 @@ body {
 .divider-band {
   background: var(--navy);
   width: 100%;
+}
+
+.divider-band-inner {
+  max-width: 640px;
+  margin: 0 auto;
   padding: 14px 28px;
   display: flex;
   justify-content: space-between;
@@ -632,460 +656,502 @@ body {
 
 <!-- ═══════════════ 表紙 ═══════════════ -->
 <div class="cover">
-  <div class="cover-eyebrow">SALESBREAK ｜ 特別診断レポート</div>
-  <div class="cover-title">売れる行動改善<br>ロードマップ</div>
-  <div class="cover-rule"></div>
-  <div class="cover-diag-label">診断結果</div>
-  <div class="cover-diag-type">行動不足型</div>
-  <div class="cover-message">
-    考える時間より、<br>動く時間を増やす。<br><br>営業15年で学んだ<br>再現性のある改善ステップを公開。
+  <div class="cover-content">
+    <div class="cover-eyebrow">SALESBREAK ｜ 特別診断レポート</div>
+    <div class="cover-title">売れる行動改善<br>ロードマップ</div>
+    <div class="cover-rule"></div>
+    <div class="cover-diag-label">診断結果</div>
+    <div class="cover-diag-type">行動不足型</div>
+    <div class="cover-message">
+      考える時間より、<br>動く時間を増やす。<br><br>営業15年で学んだ<br>再現性のある改善ステップを公開。
+    </div>
+    <div class="cover-footer">SALESBREAK &nbsp;／&nbsp; COVER</div>
   </div>
-  <div class="cover-footer">SALESBREAK &nbsp;／&nbsp; COVER</div>
 </div>
 
 <!-- ═══════════════ P1 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P1</span>
+  </div>
 </div>
 
 <div class="section">
-  <div class="section-eyebrow">DIAGNOSIS ｜ あなたの診断結果</div>
-  <div class="tag">行動不足型営業</div>
-  <div class="section-title">成果が出ない原因は<br>能力不足ではありません</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">DIAGNOSIS ｜ あなたの診断結果</div>
+    <div class="tag">行動不足型営業</div>
+    <div class="section-title">成果が出ない原因は<br>能力不足ではありません</div>
+    <div class="section-rule"></div>
 
-  <div class="text-block body-text">
-    <span class="strong">行動不足です。</span>
-  </div>
-  <div class="text-block body-text">
-    知識はある。やるべきことも分かっている。しかし、行動できていない。
-  </div>
-  <div class="text-block body-text">
-    <span class="strong">そこが課題です。</span>
-  </div>
-  <div class="text-block body-text">
-    頭の中にある「やろう」が、体の行動に変わっていない状態です。これは意志の弱さではなく、行動の仕組みがまだ整っていないだけです。
-  </div>
+    <div class="text-block body-text">
+      <span class="strong">行動不足です。</span>
+    </div>
+    <div class="text-block body-text">
+      知識はある。やるべきことも分かっている。しかし、行動できていない。
+    </div>
+    <div class="text-block body-text">
+      <span class="strong">そこが課題です。</span>
+    </div>
+    <div class="text-block body-text">
+      頭の中にある「やろう」が、体の行動に変わっていない状態です。これは意志の弱さではなく、行動の仕組みがまだ整っていないだけです。
+    </div>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      頭で分かっていることと、体が動くことは別物です。<br>
-      このロードマップは「分かる」を「動ける」に変えるための、30日間の実践プログラムです。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        頭で分かっていることと、体が動くことは別物です。<br>
+        このロードマップは「分かる」を「動ける」に変えるための、30日間の実践プログラムです。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P2 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P2</span>
+  </div>
 </div>
 
 <div class="section">
-  <div class="section-eyebrow">CHARACTERISTICS ｜ このタイプの特徴</div>
-  <div class="section-title">行動不足型に見られる<br>5つの特徴</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">CHARACTERISTICS ｜ このタイプの特徴</div>
+    <div class="section-title">行動不足型に見られる<br>5つの特徴</div>
+    <div class="section-rule"></div>
 
-  <ul class="check-list">
-    <li>
-      <span class="check-icon">✓</span>
-      <div class="check-content">
-        <div class="check-main">完璧になってから動こうとする</div>
-        <div class="check-sub">「もう少し準備してから」が口癖になっている</div>
-      </div>
-    </li>
-    <li>
-      <span class="check-icon">✓</span>
-      <div class="check-content">
-        <div class="check-main">失敗を避けたい</div>
-        <div class="check-sub">うまくいかないことへの恐れが行動を止めている</div>
-      </div>
-    </li>
-    <li>
-      <span class="check-icon">✓</span>
-      <div class="check-content">
-        <div class="check-main">情報収集ばかりしている</div>
-        <div class="check-sub">学ぶことで動いている気になっている</div>
-      </div>
-    </li>
-    <li>
-      <span class="check-icon">✓</span>
-      <div class="check-content">
-        <div class="check-main">準備して満足してしまう</div>
-        <div class="check-sub">資料を作ること自体が目的になっている</div>
-      </div>
-    </li>
-    <li>
-      <span class="check-icon">✓</span>
-      <div class="check-content">
-        <div class="check-main">自信がついてから動こうとする</div>
-        <div class="check-sub">自信は行動の後にしか来ないことを知らない</div>
-      </div>
-    </li>
-  </ul>
+    <ul class="check-list">
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">完璧になってから動こうとする</div>
+          <div class="check-sub">「もう少し準備してから」が口癖になっている</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">失敗を避けたい</div>
+          <div class="check-sub">うまくいかないことへの恐れが行動を止めている</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">情報収集ばかりしている</div>
+          <div class="check-sub">学ぶことで動いている気になっている</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">準備して満足してしまう</div>
+          <div class="check-sub">資料を作ること自体が目的になっている</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">自信がついてから動こうとする</div>
+          <div class="check-sub">自信は行動の後にしか来ないことを知らない</div>
+        </div>
+      </li>
+    </ul>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      一つでも当てはまったなら、性格の問題ではありません。行動の「順番」が逆になっているだけです。<br><br>
-      自信は、行動の後についてきます。行動の前には来ません。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        一つでも当てはまったなら、性格の問題ではありません。行動の「順番」が逆になっているだけです。<br><br>
+        自信は、行動の後についてきます。行動の前には来ません。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P3 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P3</span>
+  </div>
 </div>
 
 <div class="section">
-  <div class="section-eyebrow">RISK ｜ 放置するとどうなるか</div>
-  <div class="section-title">行動しないことが生む<br>静かな悪循環</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">RISK ｜ 放置するとどうなるか</div>
+    <div class="section-title">行動しないことが生む<br>静かな悪循環</div>
+    <div class="section-rule"></div>
 
-  <div class="flow-list">
-    <div class="flow-item">
-      <div class="flow-num">1</div>
-      <div class="flow-text">行動しない</div>
+    <div class="flow-list">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div class="flow-text">行動しない</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div class="flow-text">経験が増えない</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div class="flow-text">成果が出ない</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div class="flow-text">成功体験が積み上がらない</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">5</div>
+        <div class="flow-text">自信を失う</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">6</div>
+        <div class="flow-text">挑戦できなくなる</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">7</div>
+        <div class="flow-text">成長が止まる</div>
+      </div>
     </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-item">
-      <div class="flow-num">2</div>
-      <div class="flow-text">経験が増えない</div>
-    </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-item">
-      <div class="flow-num">3</div>
-      <div class="flow-text">成果が出ない</div>
-    </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-item">
-      <div class="flow-num">4</div>
-      <div class="flow-text">成功体験が積み上がらない</div>
-    </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-item">
-      <div class="flow-num">5</div>
-      <div class="flow-text">自信を失う</div>
-    </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-item">
-      <div class="flow-num">6</div>
-      <div class="flow-text">挑戦できなくなる</div>
-    </div>
-    <div class="flow-arrow">↓</div>
-    <div class="flow-item">
-      <div class="flow-num">7</div>
-      <div class="flow-text">成長が止まる</div>
-    </div>
-  </div>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      この流れは一度始まると、自然には止まりません。止めるには、どこかで強制的に「行動」を差し込む必要があります。それが、このロードマップの役割です。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        この流れは一度始まると、自然には止まりません。止めるには、どこかで強制的に「行動」を差し込む必要があります。それが、このロードマップの役割です。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P4 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P4</span>
+  </div>
 </div>
 
 <div class="section">
-  <div class="section-eyebrow">STORY ｜ 私も同じでした</div>
-  <div class="section-title">才能ではなく<br>習慣が変わっただけ</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">STORY ｜ 私も同じでした</div>
+    <div class="section-title">才能ではなく<br>習慣が変わっただけ</div>
+    <div class="section-rule"></div>
 
-  <div class="text-block body-text">
-    新人時代、全く成果が出ませんでした。同期は受注する。私は受注できない。上司から叱責を受ける毎日でした。
-  </div>
-  <div class="text-block body-text">
-    営業が怖くなり、一度この世界から離れました。
-  </div>
-  <div class="text-block body-text">
-    <span class="strong">でも、変わったのは才能ではありません。考え方と行動習慣でした。</span>
-  </div>
-  <div class="text-block body-text">
-    失敗しない方法を探すのではなく、行動しながら学ぶ。完璧を目指すのではなく、まず動く。その積み重ねが、結果を変えました。
-  </div>
-  <div class="text-block body-text">
-    最初の1件を動かすのが、すべての始まりです。うまくやる必要はない。ただ、動く。それだけでいい。
-  </div>
+    <div class="text-block body-text">
+      新人時代、全く成果が出ませんでした。同期は受注する。私は受注できない。上司から叱責を受ける毎日でした。
+    </div>
+    <div class="text-block body-text">
+      営業が怖くなり、一度この世界から離れました。
+    </div>
+    <div class="text-block body-text">
+      <span class="strong">でも、変わったのは才能ではありません。考え方と行動習慣でした。</span>
+    </div>
+    <div class="text-block body-text">
+      失敗しない方法を探すのではなく、行動しながら学ぶ。完璧を目指すのではなく、まず動く。その積み重ねが、結果を変えました。
+    </div>
+    <div class="text-block body-text">
+      最初の1件を動かすのが、すべての始まりです。うまくやる必要はない。ただ、動く。それだけでいい。
+    </div>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      15年経った今でも、完璧に準備できてから動いたことは一度もありません。動きながら整えてきただけです。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        15年経った今でも、完璧に準備できてから動いたことは一度もありません。動きながら整えてきただけです。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P5 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P5</span>
+  </div>
 </div>
 
 <div class="section">
-  <div class="section-eyebrow">30 DAYS THEME ｜ 30日改善テーマ</div>
-  <div class="section-title">30日間のテーマ</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">30 DAYS THEME ｜ 30日改善テーマ</div>
+    <div class="section-title">30日間のテーマ</div>
+    <div class="section-rule"></div>
 
-  <div class="theme-block">
-    <div class="theme-en">30 DAYS ACTION THEME</div>
-    <div class="theme-main">考える前に、動く</div>
-  </div>
+    <div class="theme-block">
+      <div class="theme-en">30 DAYS ACTION THEME</div>
+      <div class="theme-main">考える前に、動く</div>
+    </div>
 
-  <div class="text-block body-text">
-    行動不足型は、気合いで変わらない。小さな行動習慣で変わる。
-  </div>
-  <div class="text-block body-text">
-    これから4週間、1つずつ行動のハードルを下げていきます。<span class="strong">難しいことは何もしません。「今日もやった」を積み重ねるだけです。</span>
-  </div>
+    <div class="text-block body-text">
+      行動不足型は、気合いで変わらない。小さな行動習慣で変わる。
+    </div>
+    <div class="text-block body-text">
+      これから4週間、1つずつ行動のハードルを下げていきます。<span class="strong">難しいことは何もしません。「今日もやった」を積み重ねるだけです。</span>
+    </div>
 
-  <div class="week-grid">
-    <div class="week-card">
-      <div class="week-card-num">WEEK 1</div>
-      <div class="week-card-title">ハードルを<br>下げる</div>
-    </div>
-    <div class="week-card">
-      <div class="week-card-num">WEEK 2</div>
-      <div class="week-card-title">振り返りを<br>習慣化</div>
-    </div>
-    <div class="week-card">
-      <div class="week-card-num">WEEK 3</div>
-      <div class="week-card-title">行動量を<br>増やす</div>
-    </div>
-    <div class="week-card">
-      <div class="week-card-num">WEEK 4</div>
-      <div class="week-card-title">行動を<br>見える化</div>
+    <div class="week-grid">
+      <div class="week-card">
+        <div class="week-card-num">WEEK 1</div>
+        <div class="week-card-title">ハードルを<br>下げる</div>
+      </div>
+      <div class="week-card">
+        <div class="week-card-num">WEEK 2</div>
+        <div class="week-card-title">振り返りを<br>習慣化</div>
+      </div>
+      <div class="week-card">
+        <div class="week-card-num">WEEK 3</div>
+        <div class="week-card-title">行動量を<br>増やす</div>
+      </div>
+      <div class="week-card">
+        <div class="week-card-num">WEEK 4</div>
+        <div class="week-card-title">行動を<br>見える化</div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P6 WEEK1 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P6</span>
+  </div>
 </div>
 
 <div class="section week-section">
-  <div class="section-eyebrow">STEP 1 OF 4</div>
-  <div class="step-bar">
-    <div class="step-pip active"></div>
-    <div class="step-pip"></div>
-    <div class="step-pip"></div>
-    <div class="step-pip"></div>
-  </div>
-  <div class="week-badge">WEEK 1</div>
-  <div class="section-title">行動のハードルを<br>下げる</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 1 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip active"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+    </div>
+    <div class="week-badge">WEEK 1</div>
+    <div class="section-title">行動のハードルを<br>下げる</div>
+    <div class="section-rule"></div>
 
-  <div class="task-card">
-    <div class="task-card-label">毎日やること（3つだけ）</div>
-    <ul class="task-list">
-      <li>顧客へ1件連絡する</li>
-      <li>メールを1件送る</li>
-      <li>商談を1件振り返る</li>
-    </ul>
-  </div>
+    <div class="task-card">
+      <div class="task-card-label">毎日やること（3つだけ）</div>
+      <ul class="task-list">
+        <li>顧客へ1件連絡する</li>
+        <li>メールを1件送る</li>
+        <li>商談を1件振り返る</li>
+      </ul>
+    </div>
 
-  <div class="purpose-badge">
-    <span class="purpose-label">目的</span>
-    <span class="purpose-text">動くことを当たり前にする</span>
-  </div>
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">動くことを当たり前にする</span>
+    </div>
 
-  <div class="text-block body-text">
-    最初の1週間は「量」も「質」も関係ない。動いた実績をつくることだけに集中する。
-  </div>
-  <div class="text-block body-text">
-    「今日もやった」の積み重ねが、来週の自分を変える。
-  </div>
+    <div class="text-block body-text">
+      最初の1週間は「量」も「質」も関係ない。動いた実績をつくることだけに集中する。
+    </div>
+    <div class="text-block body-text">
+      「今日もやった」の積み重ねが、来週の自分を変える。
+    </div>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      「うまくやる」必要はありません。「やる」ことだけに集中してください。質を気にすると、また手が止まります。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        「うまくやる」必要はありません。「やる」ことだけに集中してください。質を気にすると、また手が止まります。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P7 WEEK2 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P7</span>
+  </div>
 </div>
 
 <div class="section week-section">
-  <div class="section-eyebrow">STEP 2 OF 4</div>
-  <div class="step-bar">
-    <div class="step-pip"></div>
-    <div class="step-pip active"></div>
-    <div class="step-pip"></div>
-    <div class="step-pip"></div>
-  </div>
-  <div class="week-badge">WEEK 2</div>
-  <div class="section-title">振り返りを<br>習慣化する</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 2 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip"></div>
+      <div class="step-pip active"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+    </div>
+    <div class="week-badge">WEEK 2</div>
+    <div class="section-title">振り返りを<br>習慣化する</div>
+    <div class="section-rule"></div>
 
-  <div class="task-card">
-    <div class="task-card-label">商談後3分でやること</div>
-    <ul class="task-list">
-      <li>良かったこと（1つだけ）</li>
-      <li>改善点（1つだけ）</li>
-      <li>次回やること（1つだけ）</li>
-    </ul>
-  </div>
+    <div class="task-card">
+      <div class="task-card-label">商談後3分でやること</div>
+      <ul class="task-list">
+        <li>良かったこと（1つだけ）</li>
+        <li>改善点（1つだけ）</li>
+        <li>次回やること（1つだけ）</li>
+      </ul>
+    </div>
 
-  <div class="purpose-badge">
-    <span class="purpose-label">目的</span>
-    <span class="purpose-text">経験を学びに変える</span>
-  </div>
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">経験を学びに変える</span>
+    </div>
 
-  <div class="text-block body-text">
-    行動するだけでは経験にならない。振り返ることで初めて、経験が「学び」に変わる。
-  </div>
-  <div class="text-block body-text">
-    3分でいい。スマホのメモでいい。続けることが最優先。
-  </div>
+    <div class="text-block body-text">
+      行動するだけでは経験にならない。振り返ることで初めて、経験が「学び」に変わる。
+    </div>
+    <div class="text-block body-text">
+      3分でいい。スマホのメモでいい。続けることが最優先。
+    </div>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      振り返りがないと、同じ失敗を何度も繰り返します。形より「続けること」を優先してください。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        振り返りがないと、同じ失敗を何度も繰り返します。形より「続けること」を優先してください。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P8 WEEK3 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P8</span>
+  </div>
 </div>
 
 <div class="section week-section">
-  <div class="section-eyebrow">STEP 3 OF 4</div>
-  <div class="step-bar">
-    <div class="step-pip"></div>
-    <div class="step-pip"></div>
-    <div class="step-pip active"></div>
-    <div class="step-pip"></div>
-  </div>
-  <div class="week-badge">WEEK 3</div>
-  <div class="section-title">行動量を増やす</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 3 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip active"></div>
+      <div class="step-pip"></div>
+    </div>
+    <div class="week-badge">WEEK 3</div>
+    <div class="section-title">行動量を増やす</div>
+    <div class="section-rule"></div>
 
-  <div class="task-card">
-    <div class="task-card-label">毎日やること</div>
-    <ul class="task-list">
-      <li>顧客接触 3件（Week1の3倍）</li>
-      <li>提案 1件</li>
-      <li>フォロー 1件</li>
-    </ul>
-  </div>
+    <div class="task-card">
+      <div class="task-card-label">毎日やること</div>
+      <ul class="task-list">
+        <li>顧客接触 3件（Week1の3倍）</li>
+        <li>提案 1件</li>
+        <li>フォロー 1件</li>
+      </ul>
+    </div>
 
-  <div class="purpose-badge">
-    <span class="purpose-label">目的</span>
-    <span class="purpose-text">量を増やす。質は後からついてくる</span>
-  </div>
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">量を増やす。質は後からついてくる</span>
+    </div>
 
-  <div class="text-block body-text">
-    Week1・2で「動く習慣」はできた。Week3は、その量を増やすだけでいい。
-  </div>
-  <div class="text-block body-text">
-    この段階で「質」を求めると、また動けなくなる。質は、Week1・2の振り返りが自動で上げてくれる。
-  </div>
+    <div class="text-block body-text">
+      Week1・2で「動く習慣」はできた。Week3は、その量を増やすだけでいい。
+    </div>
+    <div class="text-block body-text">
+      この段階で「質」を求めると、また動けなくなる。質は、Week1・2の振り返りが自動で上げてくれる。
+    </div>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      経験値は量から生まれます。まずは数をこなすことに集中してください。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        経験値は量から生まれます。まずは数をこなすことに集中してください。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P9 WEEK4 ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P9</span>
+  </div>
 </div>
 
 <div class="section week-section">
-  <div class="section-eyebrow">STEP 4 OF 4</div>
-  <div class="step-bar">
-    <div class="step-pip"></div>
-    <div class="step-pip"></div>
-    <div class="step-pip"></div>
-    <div class="step-pip active"></div>
-  </div>
-  <div class="week-badge">WEEK 4</div>
-  <div class="section-title">行動を見える化する</div>
-  <div class="section-rule"></div>
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 4 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip active"></div>
+    </div>
+    <div class="week-badge">WEEK 4</div>
+    <div class="section-title">行動を見える化する</div>
+    <div class="section-rule"></div>
 
-  <div class="task-card">
-    <div class="task-card-label">毎日記録すること</div>
-    <ul class="record-list">
-      <li>顧客接触<span class="record-count">___件</span></li>
-      <li>提案<span class="record-count">___件</span></li>
-      <li>振り返り<span class="record-count">___分</span></li>
-      <li>フォロー<span class="record-count">___件</span></li>
-    </ul>
-  </div>
+    <div class="task-card">
+      <div class="task-card-label">毎日記録すること</div>
+      <ul class="record-list">
+        <li>顧客接触<span class="record-count">___件</span></li>
+        <li>提案<span class="record-count">___件</span></li>
+        <li>振り返り<span class="record-count">___分</span></li>
+        <li>フォロー<span class="record-count">___件</span></li>
+      </ul>
+    </div>
 
-  <div class="purpose-badge">
-    <span class="purpose-label">目的</span>
-    <span class="purpose-text">数字で管理する。感覚で管理しない</span>
-  </div>
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">数字で管理する。感覚で管理しない</span>
+    </div>
 
-  <div class="text-block body-text">
-    「今日は頑張った気がする」では、成長を判断できない。数字にして初めて、自分の行動量が見えてくる。
-  </div>
-  <div class="text-block body-text">
-    Week4を終えた頃、30日前の自分とは明らかに違う動き方ができているはずです。
-  </div>
+    <div class="text-block body-text">
+      「今日は頑張った気がする」では、成長を判断できない。数字にして初めて、自分の行動量が見えてくる。
+    </div>
+    <div class="text-block body-text">
+      Week4を終えた頃、30日前の自分とは明らかに違う動き方ができているはずです。
+    </div>
 
-  <div class="point-box">
-    <div class="point-label">POINT</div>
-    <div class="point-text">
-      チェックの数が、あなたの行動量を客観的に教えてくれます。記録が習慣になれば、成長も習慣になります。
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        チェックの数が、あなたの行動量を客観的に教えてくれます。記録が習慣になれば、成長も習慣になります。
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════ P10 まとめ ═══════════════ -->
 <div class="divider-band">
+  <div class="divider-band-inner">
   <span class="divider-brand">SALESBREAK</span>
   <span class="divider-page">P10</span>
+  </div>
 </div>
 
 <div class="final-section">
-  <div class="final-eyebrow">SUMMARY ｜ まとめ</div>
-  <div class="final-title">明日からやること</div>
-  <div class="final-rule"></div>
+  <div class="final-content">
+    <div class="final-eyebrow">SUMMARY ｜ まとめ</div>
+    <div class="final-title">明日からやること</div>
+    <div class="final-rule"></div>
 
-  <ul class="final-check-list">
-    <li>顧客へ1件連絡する</li>
-    <li>商談後3分、振り返りをする</li>
-    <li>行動記録をつける</li>
-  </ul>
+    <ul class="final-check-list">
+      <li>顧客へ1件連絡する</li>
+      <li>商談後3分、振り返りをする</li>
+      <li>行動記録をつける</li>
+    </ul>
 
-  <div class="closing-main">
-    営業は才能ではない。<br>習慣で変わる。
+    <div class="closing-main">
+      営業は才能ではない。<br>習慣で変わる。
+    </div>
+
+    <div class="closing-body">
+      小さな行動が未来を変える。<br><br>
+      このページを閉じた後、何か1つだけ今日中に行動してください。<br>その1件が、30日後のあなたを変えます。<br><br>
+      あなたの営業人生が、今日から変わることを信じています。
+    </div>
+
+    <div class="closing-sig">— まっつん（SALESBREAK）</div>
   </div>
-
-  <div class="closing-body">
-    小さな行動が未来を変える。<br><br>
-    このページを閉じた後、何か1つだけ今日中に行動してください。<br>その1件が、30日後のあなたを変えます。<br><br>
-    あなたの営業人生が、今日から変わることを信じています。
-  </div>
-
-  <div class="closing-sig">— まっつん（SALESBREAK）</div>
 </div>
 
 </body>
