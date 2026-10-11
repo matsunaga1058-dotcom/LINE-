@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>売れる行動改善ロードマップ｜SALESBREAK</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #1c2733;
+  --gold: #c9a24b;
+  --gold-light: #e8c96a;
+  --cream: #f6f3ec;
+  --cream-dark: #ede9e0;
+  --text: #2b2b28;
+  --text-mid: #4a4a44;
+  --text-soft: #7a7a70;
+  --border: #d8d0bf;
+  --white: #ffffff;
+}
+
+html { background: var(--navy); }
+
+body {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Times New Roman", serif;
+  color: var(--text);
+  background: var(--navy);
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   表紙
+━━━━━━━━━━━━━━━━━━━ */
+.cover {
+  background: var(--navy);
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100svh;
+}
+
+.cover-content {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 72px 32px 64px;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 20px;
+  width: 28px; height: 28px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 24px; right: 20px;
+  width: 28px; height: 28px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+}
+
+.cover-eyebrow {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.cover-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.4;
+  margin-bottom: 28px;
+  letter-spacing: 0.02em;
+}
+
+.cover-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 28px;
+}
+
+.cover-diag-label {
+  display: inline-block;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 5px 14px;
+  margin-bottom: 12px;
+}
+
+.cover-diag-type {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+  margin-bottom: 32px;
+}
+
+.cover-message {
+  font-size: 16px;
+  line-height: 2.0;
+  color: #c8c2b2;
+}
+
+.cover-footer {
+  margin-top: 48px;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: #5a5448;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   コンテンツセクション共通
+━━━━━━━━━━━━━━━━━━━ */
+.section {
+  background: var(--cream);
+  width: 100%;
+  position: relative;
+  border-top: 4px solid var(--cream-dark);
+}
+
+.section-content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 52px 28px 64px;
+}
+
+.section-eyebrow {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.5;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.section-rule {
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+  margin: 16px 0 20px;
+}
+
+.body-text {
+  font-size: 15px;
+  line-height: 2.0;
+  color: var(--text-mid);
+}
+
+.body-text + .body-text { margin-top: 12px; }
+
+.text-block { margin-bottom: 16px; }
+.text-block:last-child { margin-bottom: 0; }
+
+.strong { font-weight: 700; color: var(--navy); }
+
+/* タグ */
+.tag {
+  display: inline-block;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+  background: var(--navy);
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+
+/* POINT ボックス */
+.point-box {
+  background: var(--white);
+  border-left: 3px solid var(--gold);
+  padding: 18px 20px;
+  margin-top: 24px;
+}
+
+.point-label {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.point-text {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--text-mid);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   チェックリスト
+━━━━━━━━━━━━━━━━━━━ */
+.check-list {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.check-list li {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.check-list li:last-child { margin-bottom: 0; }
+
+.check-icon {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.check-content { flex: 1; }
+
+.check-main {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.5;
+  margin-bottom: 3px;
+}
+
+.check-sub {
+  font-size: 12px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   悪循環フロー
+━━━━━━━━━━━━━━━━━━━ */
+.flow-list { margin: 20px 0; }
+
+.flow-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.flow-num {
+  width: 28px;
+  height: 28px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.flow-text {
+  font-size: 15px;
+  color: var(--navy);
+  font-weight: 500;
+  line-height: 1.4;
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--white);
+  border-radius: 2px;
+}
+
+.flow-arrow {
+  text-align: center;
+  padding: 2px 0 2px 42px;
+  color: var(--gold);
+  font-size: 18px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   テーマブロック (P5)
+━━━━━━━━━━━━━━━━━━━ */
+.theme-block {
+  background: var(--navy);
+  padding: 36px 24px;
+  margin: 24px 0;
+  text-align: center;
+  position: relative;
+}
+
+.theme-block::before {
+  content: '';
+  position: absolute;
+  top: 12px; left: 12px;
+  width: 16px; height: 16px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.theme-block::after {
+  content: '';
+  position: absolute;
+  bottom: 12px; right: 12px;
+  width: 16px; height: 16px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.theme-en {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: #6a5f4a;
+  margin-bottom: 14px;
+}
+
+.theme-main {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+/* 週グリッド */
+.week-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.week-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.week-card-num {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.week-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   WEEKセクション
+━━━━━━━━━━━━━━━━━━━ */
+.week-section { background: var(--cream); }
+
+.step-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.step-pip {
+  height: 3px;
+  flex: 1;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.step-pip.active { background: var(--gold); }
+
+.week-badge {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+/* タスクカード */
+.task-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 20px 20px 16px;
+  margin: 20px 0;
+}
+
+.task-card-label {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-soft);
+  margin-bottom: 12px;
+}
+
+.task-list { list-style: none; }
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ede9e0;
+  font-size: 15px;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.task-list li:last-child { border-bottom: none; }
+
+.task-list li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* チェックボックスリスト（WEEK4） */
+.record-list { list-style: none; }
+
+.record-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ede9e0;
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.record-list li:last-child { border-bottom: none; }
+
+.record-list li::before {
+  content: '□';
+  color: var(--navy);
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.record-count {
+  margin-left: auto;
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 11px;
+  color: var(--border);
+  letter-spacing: 0.05em;
+}
+
+/* 目的バッジ */
+.purpose-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--cream-dark);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.purpose-label {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.purpose-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.4;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   まとめページ
+━━━━━━━━━━━━━━━━━━━ */
+.final-section {
+  background: var(--navy);
+  width: 100%;
+  position: relative;
+}
+
+.final-content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px 28px 72px;
+}
+
+.final-section::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 20px;
+  width: 24px; height: 24px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.final-section::after {
+  content: '';
+  position: absolute;
+  bottom: 24px; right: 20px;
+  width: 24px; height: 24px;
+  border-bottom: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  opacity: 0.5;
+}
+
+.final-eyebrow {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.final-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.final-rule {
+  width: 32px;
+  height: 2px;
+  background: var(--gold);
+  margin: 16px 0 20px;
+}
+
+.final-check-list { list-style: none; margin-bottom: 36px; }
+
+.final-check-list li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #2e3d4e;
+  font-size: 16px;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.final-check-list li:first-child { border-top: 1px solid #2e3d4e; }
+
+.final-check-list li::before {
+  content: '✓';
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.closing-main {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  border-left: 3px solid var(--gold);
+  padding-left: 18px;
+}
+
+.closing-body {
+  font-size: 14px;
+  line-height: 2.0;
+  color: #9a9080;
+  margin-bottom: 32px;
+}
+
+.closing-sig {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: #6a5f4a;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━
+   区切り帯
+━━━━━━━━━━━━━━━━━━━ */
+.divider-band {
+  background: var(--navy);
+  width: 100%;
+}
+
+.divider-band-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divider-brand {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: #7a6e5e;
+}
+
+.divider-page {
+  font-family: "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #7a6e5e;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ 表紙 ═══════════════ -->
+<div class="cover">
+  <div class="cover-content">
+    <div class="cover-eyebrow">SALESBREAK ｜ 特別診断レポート</div>
+    <div class="cover-title">売れる行動改善<br>ロードマップ</div>
+    <div class="cover-rule"></div>
+    <div class="cover-diag-label">診断結果</div>
+    <div class="cover-diag-type">自信不足型</div>
+    <div class="cover-message">
+      自信は、準備から生まれない。<br>動いた数だけ、育っていく。
+    </div>
+    <div class="cover-footer">SALESBREAK &nbsp;／&nbsp; COVER</div>
+  </div>
+</div>
+
+<!-- ═══════════════ P1 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P1</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-content">
+    <div class="section-eyebrow">DIAGNOSIS ｜ あなたの診断結果</div>
+    <div class="tag">自信不足型営業</div>
+    <div class="section-title">「自分には無理かも」<br>と感じていませんか</div>
+    <div class="section-rule"></div>
+
+    <div class="text-block body-text">
+      <span class="strong">「もっと準備してから」が口癖になっています。</span>
+    </div>
+    <div class="text-block body-text">
+      提案する前に「断られたらどうしよう」と考える。商談の前に「自分では力不足かも」と不安になる。知識はあるのに、一歩踏み出せない——そんな状態ではないですか。
+    </div>
+    <div class="text-block body-text">
+      <span class="strong">自信のなさは、行動を止める。そして、動かないと経験が積めない。経験がないと、また自信が持てない。</span>
+    </div>
+    <div class="text-block body-text">
+      このループから抜け出すには、完璧な準備を待つのではなく「小さく動くこと」しかありません。
+    </div>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        自信は「動いた後」についてくるものです。<br>
+        このロードマップは「動きながら自信をつける」ための、30日間の実践プログラムです。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P2 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P2</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-content">
+    <div class="section-eyebrow">CHARACTERISTICS ｜ このタイプの特徴</div>
+    <div class="section-title">自信不足型に見られる<br>5つの特徴</div>
+    <div class="section-rule"></div>
+
+    <ul class="check-list">
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">提案前に「断られるかも」と考えてしまう</div>
+          <div class="check-sub">結果を先読みして、動く前に気持ちが沈んでしまう</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">「もっと勉強してから」を繰り返す</div>
+          <div class="check-sub">準備に時間をかけすぎて、肝心の行動が後回しになる</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">強引に売ることへの抵抗感が強い</div>
+          <div class="check-sub">「押しつけているのでは」という罪悪感で踏み込めない</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">自分の提案に確信が持てない</div>
+          <div class="check-sub">「これで本当に合っているか」と商談中に揺らいでしまう</div>
+        </div>
+      </li>
+      <li>
+        <span class="check-icon">✓</span>
+        <div class="check-content">
+          <div class="check-main">うまくいっても「たまたまだ」と思ってしまう</div>
+          <div class="check-sub">成功体験を自分の実力として受け取れない</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        これは「能力の問題」ではありません。自信は先天的なものではなく、行動と経験の積み重ねで育つものです。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P3 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P3</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-content">
+    <div class="section-eyebrow">RISK ｜ 放置するとどうなるか</div>
+    <div class="section-title">自信のなさを<br>放置すると起きること</div>
+    <div class="section-rule"></div>
+
+    <div class="flow-list">
+      <div class="flow-item">
+        <div class="flow-num">1</div>
+        <div class="flow-text">提案に踏み込めない</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">2</div>
+        <div class="flow-text">成約が取れない</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">3</div>
+        <div class="flow-text">「やっぱり自分には無理だ」と確信する</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">4</div>
+        <div class="flow-text">さらに慎重になり、行動が減る</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">5</div>
+        <div class="flow-text">経験が積めず、成長が止まる</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">6</div>
+        <div class="flow-text">営業が怖くなる</div>
+      </div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-item">
+        <div class="flow-num">7</div>
+        <div class="flow-text">仕事全体がつらくなる</div>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        自信のなさは、放置すると悪化します。「動かない」ことで失われる経験は、取り戻せません。今の「少しの勇気」が、未来の自分を大きく変えます。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P4 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P4</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-content">
+    <div class="section-eyebrow">STORY ｜ 私も同じでした</div>
+    <div class="section-title">私が「自信」を<br>手に入れた方法</div>
+    <div class="section-rule"></div>
+
+    <div class="text-block body-text">
+      ※以下は例文です。後から実体験に置き換えます※
+    </div>
+    <div class="text-block body-text">
+      入社して間もない頃、私はいつも「もう少し準備してから」と思っていました。商品知識をもっと覚えてから、トーク練習をもっとしてから、自信がついてから動こう——そうやって、ずっと動けずにいた。
+    </div>
+    <div class="text-block body-text">
+      転機になったのは、上司に「完璧じゃなくていいから、まず10件当たってみろ」と言われたことでした。恐る恐る動いてみると、断られることもあったけれど、思ったより怖くなかった。それどころか「こう聞いたら反応が良かった」「この順番で話すと伝わりやすい」という発見が次々と出てきた。
+    </div>
+    <div class="text-block body-text">
+      準備の中だけでは絶対に得られなかった感覚でした。自信というのは、動く前に湧いてくるものじゃない。動いた数だけ、少しずつ積み上がっていくものだと、そのとき初めて分かりました。
+    </div>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        完璧な準備を待っていたら、永遠に動けません。「60点の自分」で動き始めた人が、結果的に一番成長します。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P5 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P5</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-content">
+    <div class="section-eyebrow">30 DAYS THEME ｜ 30日改善テーマ</div>
+    <div class="section-title">30日間のテーマ</div>
+    <div class="section-rule"></div>
+
+    <div class="theme-block">
+      <div class="theme-en">30 DAYS ACTION THEME</div>
+      <div class="theme-main">動いた数が、<br>自信になる。</div>
+    </div>
+
+    <div class="text-block body-text">
+      自信不足型は、考えすぎることで動けなくなっています。「うまくやろう」より「まず動こう」に切り替えることが、30日間のテーマです。
+    </div>
+    <div class="text-block body-text">
+      <span class="strong">質より量。完璧より継続。この30日間は、動き続けることだけを目標にします。</span>
+    </div>
+
+    <div class="week-grid">
+      <div class="week-card">
+        <div class="week-card-num">WEEK 1</div>
+        <div class="week-card-title">小さく動く<br>習慣をつける</div>
+      </div>
+      <div class="week-card">
+        <div class="week-card-num">WEEK 2</div>
+        <div class="week-card-title">失敗から<br>学ぶ</div>
+      </div>
+      <div class="week-card">
+        <div class="week-card-num">WEEK 3</div>
+        <div class="week-card-title">成功体験を<br>記録する</div>
+      </div>
+      <div class="week-card">
+        <div class="week-card-num">WEEK 4</div>
+        <div class="week-card-title">自分の型を<br>見つける</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P6 WEEK1 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P6</span>
+  </div>
+</div>
+
+<div class="section week-section">
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 1 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip active"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+    </div>
+    <div class="week-badge">WEEK 1</div>
+    <div class="section-title">小さく動く習慣を<br>つける</div>
+    <div class="section-rule"></div>
+
+    <div class="task-card">
+      <div class="task-card-label">毎日やること（3つだけ）</div>
+      <ul class="task-list">
+        <li>1日1件、声をかける（結果は問わない）</li>
+        <li>「動けた」こと自体を◯として記録する</li>
+        <li>断られても「情報収集できた」と捉え直す</li>
+      </ul>
+    </div>
+
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">「動くこと」のハードルを下げる</span>
+    </div>
+
+    <div class="text-block body-text">
+      最初の1週間は、成果を求めない。1件でも声をかけられたなら、その日は100点です。
+    </div>
+    <div class="text-block body-text">
+      断られることへの恐怖は、断られる回数を重ねることでしか薄れません。まず1件。それだけでいい。
+    </div>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        「完璧にやろう」は禁止です。今週は「動いた」事実だけを積み上げてください。その積み重ねが、来週の自分を楽にします。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P7 WEEK2 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P7</span>
+  </div>
+</div>
+
+<div class="section week-section">
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 2 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip"></div>
+      <div class="step-pip active"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+    </div>
+    <div class="week-badge">WEEK 2</div>
+    <div class="section-title">失敗から<br>学ぶ習慣をつける</div>
+    <div class="section-rule"></div>
+
+    <div class="task-card">
+      <div class="task-card-label">毎日やること</div>
+      <ul class="task-list">
+        <li>断られた理由を1つ書き出す</li>
+        <li>「次はこうしよう」を1行だけ書く</li>
+        <li>昨日より1つだけ改善して動く</li>
+      </ul>
+    </div>
+
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">失敗を「材料」に変える</span>
+    </div>
+
+    <div class="text-block body-text">
+      断られることを恐れる必要はありません。断られた理由は、次の提案を磨くための情報です。
+    </div>
+    <div class="text-block body-text">
+      「うまくいかなかった」ではなく「こう変えれば次はうまくいく」という視点に切り替える。それが、自信のある営業マンと自信のない営業マンの一番の違いです。
+    </div>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        失敗を記録すると、「失敗から学んだ回数」が見えてきます。その数が増えるほど、自分の成長が実感できます。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P8 WEEK3 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P8</span>
+  </div>
+</div>
+
+<div class="section week-section">
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 3 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip active"></div>
+      <div class="step-pip"></div>
+    </div>
+    <div class="week-badge">WEEK 3</div>
+    <div class="section-title">成功体験を<br>しっかり記録する</div>
+    <div class="section-rule"></div>
+
+    <div class="task-card">
+      <div class="task-card-label">毎日やること</div>
+      <ul class="task-list">
+        <li>今日「うまくいったこと」を必ず1つ探す</li>
+        <li>それを自分の言葉で書き留める</li>
+        <li>「自分がやったから」とはっきり認める</li>
+      </ul>
+    </div>
+
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">成功を「自分のもの」として受け取る</span>
+    </div>
+
+    <div class="text-block body-text">
+      自信不足型の人は、うまくいっても「たまたまだ」と思ってしまいます。でも、成功には必ず理由があります。その理由を自分の行動と結びつけることが大切です。
+    </div>
+    <div class="text-block body-text">
+      「今日、あのお客様が笑ってくれた。あの話の切り出し方が良かったからだ」——この一行が、自信の土台になります。
+    </div>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        成功体験は探さないと見つかりません。でも、探す癖がつくと、毎日必ず見つかります。その積み重ねが、揺るがない自信になります。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P9 WEEK4 ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P9</span>
+  </div>
+</div>
+
+<div class="section week-section">
+  <div class="section-content">
+    <div class="section-eyebrow">STEP 4 OF 4</div>
+    <div class="step-bar">
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip"></div>
+      <div class="step-pip active"></div>
+    </div>
+    <div class="week-badge">WEEK 4</div>
+    <div class="section-title">自分の型を<br>見つける</div>
+    <div class="section-rule"></div>
+
+    <div class="task-card">
+      <div class="task-card-label">毎日記録すること</div>
+      <ul class="record-list">
+        <li>声をかけた件数<span class="record-count">___件</span></li>
+        <li>うまくいったと感じた場面<span class="record-count">___個</span></li>
+        <li>自分らしくできた瞬間<span class="record-count">___個</span></li>
+        <li>もう一度やりたい行動<span class="record-count">___個</span></li>
+      </ul>
+    </div>
+
+    <div class="purpose-badge">
+      <span class="purpose-label">目的</span>
+      <span class="purpose-text">「自分に合った売り方」を見つける</span>
+    </div>
+
+    <div class="text-block body-text">
+      4週間動いてきた中で、「これは自分に合っている」という感覚が出てきているはずです。それが、あなた自身の営業スタイルの原型です。
+    </div>
+    <div class="text-block body-text">
+      誰かの真似でなく、自分の言葉で動けたとき——そのときの手応えが、本物の自信になります。
+    </div>
+
+    <div class="point-box">
+      <div class="point-label">POINT</div>
+      <div class="point-text">
+        自信は「誰かと比べること」では生まれません。「昨日の自分より1つ動けた」という積み重ねの先に生まれるものです。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ P10 まとめ ═══════════════ -->
+<div class="divider-band">
+  <div class="divider-band-inner">
+    <span class="divider-brand">SALESBREAK</span>
+    <span class="divider-page">P10</span>
+  </div>
+</div>
+
+<div class="final-section">
+  <div class="final-content">
+    <div class="final-eyebrow">SUMMARY ｜ まとめ</div>
+    <div class="final-title">明日からやること</div>
+    <div class="final-rule"></div>
+
+    <ul class="final-check-list">
+      <li>今日、1件だけ声をかける</li>
+      <li>うまくいったことを1つ書き留める</li>
+      <li>断られても「学んだ」と記録する</li>
+    </ul>
+
+    <div class="closing-main">
+      準備が整うのを<br>待つな。動きながら、<br>整えていけ。
+    </div>
+
+    <div class="closing-body">
+      自信は、動く前には湧いてきません。<br><br>
+      1件動いて、また1件動いて——その繰り返しの先に、気づけば「自分はできる」という感覚が育っています。<br><br>
+      今日の1件が、30日後のあなたを変えます。まず動いてみてください。
+    </div>
+
+    <div class="closing-sig">— まっつん（SALESBREAK）</div>
+  </div>
+</div>
+
+</body>
+</html>
